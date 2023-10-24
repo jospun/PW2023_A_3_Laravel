@@ -127,6 +127,20 @@
         .carousel-inner {
             transition: transform 0.5s ease;
         }
+
+        .modal-dialog {
+            max-width: 980em; /* Set your desired width here */
+            width: 90%; /* Adjust the width as needed */
+            max-height: 900em; /* Set your desired height here */
+            height: 80%; /* Adjust the height as needed */
+        }
+        .mT{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+        }
+        
     </style>
 </head>
 
@@ -282,7 +296,7 @@
                 <div class="carousel-inner" role="listbox">
                     <div class="carousel-item active">
                         <div class="col-lg-3 col-md-4 col-6">
-                            <div class="card">
+                            <div class="card" data-bs-toggle="modal" data-bs-target="#myModal">
                                 <div class="card-img">
                                     <img src="{{ asset('images/bajuWota.png') }}" class="img-fluid">
                                 </div>
@@ -387,54 +401,37 @@
         </div>
     </div>
 
-    <div class="modal fade" id="modalDetail" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true"   >
         <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLongTitle"><strong>Detail Tiket</strong></h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
+            <div class="modal-content"> 
                 <div class="modal-body">
-                    <div class="col">
-                        <div class="container shadow-sm desc-detailImg" style="text-align: center;">
-                            <img src="https://i.pinimg.com/736x/52/b3/6f/52b36f810dd737b1e8c81edb152c14d4.jpg" alt="Gambar">
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <div class="row">
+                        <div class="col-md-4 col-sm-12">
+                            <img src="{{ asset('images/bajuWota.png') }}" alt="Your Image" class="img-fluid">
                         </div>
-                        <div class="container shadow-sm m-4">
-                            <table class="table" style="border: none;">
-                                <tr>
-                                    <th width="30%">Nama konser</th>
-                                    <td width="2%">:</td>
-                                    <td>Noah The Band</td>
-                                </tr>
-
-                                <tr>
-                                    <th width="30%">Tanggal Konser</th>
-                                    <td width="2%">:</td>
-                                    <td>30 September 2023</td>
-                                </tr>
-
-                                <tr>
-                                    <th width="30%">Tanggal Pendaftaran</th>
-                                    <td width="2%">:</td>
-                                    <td>28 September 2023</td>
-                                </tr>
-
-                                <tr>
-                                    <th width="30%">Status Membayar</th>
-                                    <td width="2%">:</td>
-                                    <td>Lunas</td>
-                                </tr>
-                            </table>
+                        <div class="col-md-8 col-sm-12">
+                            <h2>Baju WOTA</h2>
+                            <h3>Harga: Rp 120.000</h3>
                         </div>
                     </div>
-
-
-
+                    <span class="d-flex justify-content-end">
+                        <button class="btn btn-primary" data-bs-target="#exampleModalToggle2" data-bs-toggle="modal" data-bs-dismiss="modal">Bayar</button>
+                    </span>
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="exampleModalToggle2" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="mT m-5"> 
+                        <img src="{{ asset('images/done.png') }}" class="img-fluid" style="max-width: 15%; max-height:15%"/> 
+                        
+                    </div>
+                    <span style="display: flex; justify-content:center"><h1 class="mt-2">Pembayaran Berhasil!</h1></span>                
                 </div>
             </div>
         </div>
