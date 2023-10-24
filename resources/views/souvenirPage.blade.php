@@ -130,9 +130,9 @@
 
         .modal-dialog {
             max-width: 980em; /* Set your desired width here */
-            width: 90%; /* Adjust the width as needed */
+            width: 70%; /* Adjust the width as needed */
             max-height: 900em; /* Set your desired height here */
-            height: 80%; /* Adjust the height as needed */
+            height: 60%; /* Adjust the height as needed */
         }
         .modal-dialog-bayar {
             max-width: 400em; /* Set your desired width here */
@@ -318,7 +318,7 @@
                     </div>
                     <div class="carousel-item">
                         <div class="col-lg-3 col-md-4 col-6">
-                            <div class="card">
+                            <div class="card" data-bs-toggle="modal" data-bs-target="#myModal">
                                 <div class="card-img">
                                     <img src="{{ asset('images/bajuWota.png') }}" class="img-fluid">
                                 </div>
@@ -334,7 +334,7 @@
                     </div>
                     <div class="carousel-item">
                         <div class="col-lg-3 col-md-4 col-6">
-                            <div class="card">
+                            <div class="card" data-bs-toggle="modal" data-bs-target="#myModal">
                                 <div class="card-img">
                                     <img src="{{ asset('images/shirt.png') }}" class="img-fluid" >
                                 </div>
@@ -350,7 +350,7 @@
                     </div>
                     <div class="carousel-item">
                         <div class="col-lg-3 col-md-4 col-6">
-                            <div class="card">
+                            <div class="card" data-bs-toggle="modal" data-bs-target="#myModal">
                                 <div class="card-img">
                                     <img src="{{ asset('images/bajuWota.png') }}" class="img-fluid">
                                 </div>
@@ -366,7 +366,7 @@
                     </div>
                     <div class="carousel-item">
                         <div class="col-lg-3 col-md-4 col-6">
-                            <div class="card">
+                            <div class="card" data-bs-toggle="modal" data-bs-target="#myModal">
                                 <div class="card-img">
                                     <img src="{{ asset('images/bajuWota.png') }}" class="img-fluid">
                                 </div>
@@ -382,7 +382,7 @@
                     </div>
                     <div class="carousel-item">
                         <div class="col-lg-3 col-md-4 col-6">
-                            <div class="card">
+                            <div class="card" data-bs-toggle="modal" data-bs-target="#myModal">
                                 <div class="card-img">
                                     <img src="{{ asset('images/shirt.png') }}" class="img-fluid">
                                 </div>
@@ -416,9 +416,23 @@
                         <div class="col-md-4 col-sm-12">
                             <img src="{{ asset('images/bajuWota.png') }}" alt="Your Image" class="img-fluid">
                         </div>
-                        <div class="col-md-8 col-sm-12">
-                            <h2>Baju WOTA</h2>
-                            <h3>Harga: Rp 120.000</h3>
+                        <div class="col-md-8 col-sm-12 mt-3">
+                            <h3 style="font-weight: bolder">Baju WOTA</h3>
+                            <h5>Harga : Rp 120.000</h5>
+                            <h5>QTY : 
+                                <select name="total" id="total">
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                              </select>
+                            </h5>
+                            <h5>
+                                Total : Rp XXX.XXX
+                            </h5>
+                            <h5>Alamat Lengkap: </h5>
+                            <input class="form-control"> 
                         </div>
                     </div>
                     <span class="d-flex justify-content-end">
