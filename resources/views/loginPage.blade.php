@@ -85,6 +85,11 @@
                             <input type="password" placeholder="Password" class="form-control" id="exampleInputPassword1"  style="background-color:#eee">
                         </div>
                         
+                        <div class="d-flex align-items-center justify-content-between">
+                            <div class="d-flex align-items-center"><input name="" type="checkbox" value="" /> <span class="pl-2 font-weight-bold">Remember Me</span></div>
+                            <div><a href="send" data-toggle="modal" data-target="#sendEmail" >Forget Password?</a></div>
+                        </div>
+
                         <div class="pb-3">
                             <a class="btn w-100 font-weight-bold mt-2" style="background-color: #49D6A9; color: #fff" href="{{ url('profile') }}">Login</a>
                         </div>
@@ -99,5 +104,29 @@
             </div>
         </div>
     </div>
+
+    <div class="modal fade" id="sendEmail" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h6 class="modal-title" id="exampleModalLongTitle"><strong>Password Recovery</strong></h6>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="ml-2 mr-2 mb-3"><input type="Email" id="emailInput" name="email" placeholder="Masukkan Email yang Anda daftarkan" style="border: none; width: 100%;"></div>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" style="width: 100%;">Send Email</button>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/js/bootstrap.min.js"></script>
+
 </body>
 </html>
