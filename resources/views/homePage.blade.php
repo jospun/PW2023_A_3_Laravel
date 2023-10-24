@@ -270,36 +270,36 @@
         <section id="souvenir">
           <div class="container" data-aos="fade-up">
             <div class="section-header">
-              <h3 class="section-title">Souvenir</h3>
+              <span class="d-flex justify-content-center"><a href="{{ url('souvenir') }}" class="section-title">Souvenir</a></span>
               <p class="section-description">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque</p>
             </div>
             <div class="scrollable-x">
-              <div class="col d-flex col-lg-12">
-                <div class="col-lg-3 col-md-6">
+              <div class="col d-flex col-lg-12 col-sm-12">
+                <div class="col-lg-3 col-md-6 col-sm-12">
                   <div class="member" data-aos="fade-up" data-aos-delay="100">
                     <div class="pic"><img src="{{ asset('images/shirt.png') }}" alt=""></div>
                   </div>
                 </div>
       
-                <div class="col-lg-3 col-md-6">
+                <div class="col-lg-3 col-md-6 col-sm-12">
                   <div class="member" data-aos="fade-up" data-aos-delay="200">
                     <div class="pic"><img src="{{ asset('images/shirt.png') }}" alt=""></div>
                   </div>
                 </div>
       
-                <div class="col-lg-3 col-md-6">
+                <div class="col-lg-3 col-md-6 col-sm-12">
                   <div class="member" data-aos="fade-up" data-aos-delay="300">
                     <div class="pic"><img src="{{ asset('images/shirt.png') }}" alt=""></div>
                   </div>
                 </div>
 
-                <div class="col-lg-3 col-md-6">
+                <div class="col-lg-3 col-md-6 col-sm-12">
                   <div class="member" data-aos="fade-up" data-aos-delay="300">
                     <div class="pic"><img src="{{ asset('images/shirt.png') }}" alt=""></div>
                   </div>
                 </div>
       
-                <div class="col-lg-3 col-md-6">
+                <div class="col-lg-3 col-md-6 col-sm-12">
                   <div class="member" data-aos="fade-up" data-aos-delay="400">
                     <div class="pic"><img src="{{ asset('images/shirt.png') }}" alt=""></div>
                     

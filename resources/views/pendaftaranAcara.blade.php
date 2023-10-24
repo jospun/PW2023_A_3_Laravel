@@ -59,7 +59,7 @@
             align-items: center;
             justify-content: space-between;
             font-family: "Poppins", sans-serif;
-            color: #fff;
+            color: #cccccc;
             font-size: 14px;
             padding: 0 4px;
             white-space: nowrap;

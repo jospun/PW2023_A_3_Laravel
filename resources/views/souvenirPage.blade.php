@@ -60,7 +60,7 @@
             align-items: center;
             justify-content: space-between;
             font-family: "Poppins", sans-serif;
-            color: #fff;
+            color: #cccccc;
             font-size: 14px;
             padding: 0 4px;
             white-space: nowrap;
@@ -133,6 +133,12 @@
             width: 90%; /* Adjust the width as needed */
             max-height: 900em; /* Set your desired height here */
             height: 80%; /* Adjust the height as needed */
+        }
+        .modal-dialog-bayar {
+            max-width: 400em; /* Set your desired width here */
+            width: 60%; /* Adjust the width as needed */
+            max-height: 300em; /* Set your desired height here */
+            height: 20%; /* Adjust the height as needed */
         }
         .mT{
             display: flex;
@@ -424,11 +430,11 @@
     </div>
 
     <div class="modal fade" id="exampleModalToggle2" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2" tabindex="-1">
-        <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-bayar">
             <div class="modal-content">
                 <div class="modal-body">
-                    <div class="mT m-5"> 
-                        <img src="{{ asset('images/done.png') }}" class="img-fluid" style="max-width: 15%; max-height:15%"/> 
+                    <div class="mT m-4"> 
+                        <img src="{{ asset('images/done.png') }}" class="img-fluid" style="max-width: 20%; max-height:20%"/> 
                         
                     </div>
                     <span style="display: flex; justify-content:center"><h1 class="mt-2">Pembayaran Berhasil!</h1></span>                
