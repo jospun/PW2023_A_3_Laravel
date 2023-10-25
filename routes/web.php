@@ -50,3 +50,11 @@ Route::get('/acara', function () {
 Route::get('/souvenir', function () {
     return view('souvenirPage');
 });
+
+Route::get('/adminac', function () {
+    return view('adminAcaraPage');
+});
+
+Route::get('/adminsv', function () {
+    return view('souvenirAdmin');
+});

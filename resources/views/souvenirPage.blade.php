@@ -130,9 +130,9 @@
 
         .modal-dialog {
             max-width: 980em; /* Set your desired width here */
-            width: 70%; /* Adjust the width as needed */
+            width: 60%; /* Adjust the width as needed */
             max-height: 900em; /* Set your desired height here */
-            height: 60%; /* Adjust the height as needed */
+            height: 50%; /* Adjust the height as needed */
         }
         .modal-dialog-bayar {
             max-width: 400em; /* Set your desired width here */
@@ -161,9 +161,6 @@
            <nav id="navbar" class="navbar">
             <ul>
               <li><a class="nav-link scrollto" href="{{ url('home') }}">Home</a></li>
-              <li><a class="nav-link scrollto" href="{{ url('home') }}">About</a></li>
-              <li><a class="nav-link scrollto" href="{{ url('home') }}">Feautured Event</a></li>
-              <li><a class="nav-link scrollto active" href="{{ url('home') }}">Souvenir</a></li>
               <li class="dropdown"><a href="#"><span>Event</span> <i class="bi bi-chevron-down"></i></a>
                 <ul>
                   <li><a href="#iu">IU - Golden Hour</a></li>
@@ -173,7 +170,7 @@
                   <li><a href="{{ url('acara') }}">JKT-48</a></li>
                 </ul>
               </li>
-              <li><a class="nav-link scrollto" href="{{ url('home') }}">Contact</a></li>
+              <li><a class="nav-link scrollto active" href="{{ url('home') }}">Souvenir</a></li>
             </ul>
             <i class="fa fa-list mobile-nav-toggle"><img src="https://i.pinimg.com/originals/26/9d/d1/269dd16fa1f5ff51accd09e7e1602267.png" style="width: 30px; height:30px;"/></i>
           </nav><!-- .navbar --> 
@@ -190,7 +187,7 @@
                 <div class="carousel-inner" role="listbox">
                     <div class="carousel-item active">
                         <div class="col-lg-3 col-md-4 col-6">
-                            <div class="card">
+                            <div class="card" data-bs-toggle="modal" data-bs-target="#myModal">
                                 <div class="card-img">
                                     <img src="{{ asset('images/bajuWota.png') }}" class="img-fluid">
                                 </div>
@@ -206,7 +203,7 @@
                     </div>
                     <div class="carousel-item">
                         <div class="col-lg-3 col-md-4 col-6">
-                            <div class="card">
+                            <div class="card" data-bs-toggle="modal" data-bs-target="#myModal">
                                 <div class="card-img">
                                     <img src="{{ asset('images/bajuWota.png') }}" class="img-fluid">
                                 </div>
@@ -222,7 +219,7 @@
                     </div>
                     <div class="carousel-item">
                         <div class="col-lg-3 col-md-4 col-6">
-                            <div class="card">
+                            <div class="card" data-bs-toggle="modal" data-bs-target="#myModal">
                                 <div class="card-img">
                                     <img src="{{ asset('images/shirt.png') }}" class="img-fluid" >
                                 </div>
@@ -238,7 +235,7 @@
                     </div>
                     <div class="carousel-item">
                         <div class="col-lg-3 col-md-4 col-6">
-                            <div class="card">
+                            <div class="card" data-bs-toggle="modal" data-bs-target="#myModal">
                                 <div class="card-img">
                                     <img src="{{ asset('images/bajuWota.png') }}" class="img-fluid">
                                 </div>
@@ -254,7 +251,7 @@
                     </div>
                     <div class="carousel-item">
                         <div class="col-lg-3 col-md-4 col-6">
-                            <div class="card">
+                            <div class="card" data-bs-toggle="modal" data-bs-target="#myModal">
                                 <div class="card-img">
                                     <img src="{{ asset('images/bajuWota.png') }}" class="img-fluid">
                                 </div>
@@ -270,7 +267,7 @@
                     </div>
                     <div class="carousel-item">
                         <div class="col-lg-3 col-md-4 col-6">
-                            <div class="card">
+                            <div class="card" data-bs-toggle="modal" data-bs-target="#myModal">
                                 <div class="card-img">
                                     <img src="{{ asset('images/shirt.png') }}" class="img-fluid">
                                 </div>
@@ -420,7 +417,7 @@
                             <h3 style="font-weight: bolder">Baju WOTA</h3>
                             <h5>Harga : Rp 120.000</h5>
                             <h5>QTY : 
-                                <select name="total" id="total">
+                                <select name="total" id="total" style="max-width: 50px">
                                 <option value="1">1</option>
                                 <option value="2">2</option>
                                 <option value="3">3</option>
@@ -432,7 +429,7 @@
                                 Total : Rp XXX.XXX
                             </h5>
                             <h5>Alamat Lengkap: </h5>
-                            <input class="form-control"> 
+                            <input class="form-control col-7" placeholder="Jalanin Aja Dulu Nomor 1 Kasihan, Bantul"> 
                         </div>
                     </div>
                     <span class="d-flex justify-content-end">

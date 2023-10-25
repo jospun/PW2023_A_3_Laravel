@@ -79,10 +79,10 @@
                 <div class="form-style">
                     <form>
                         <div class="form-group pb-3">
-                            <input type="email" placeholder="Email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"  style="background-color:#eee">
+                            <input type="email" placeholder="Email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"  style="background-color:#eee" required>
                         </div>
                         <div class="form-group pb-3">
-                            <input type="password" placeholder="Password" class="form-control" id="exampleInputPassword1"  style="background-color:#eee">
+                            <input type="password" placeholder="Password" class="form-control" id="exampleInputPassword1"  style="background-color:#eee" required>
                         </div>
                         
                         <div class="d-flex align-items-center justify-content-between">
@@ -91,12 +91,12 @@
                         </div>
 
                         <div class="pb-3">
-                            <a class="btn w-100 font-weight-bold mt-2" style="background-color: #49D6A9; color: #fff" href="{{ url('profile') }}">Login</a>
+                            <a class="btn w-100 font-weight-bold mt-2" style="background-color: #49D6A9; color: #fff" href="#" onclick="login()">Login</a>
                         </div>
                     </form>
                     <div class="sideline">OR</div>
                     <div>
-                        <button type="submit" class="btn btn-danger w-100 font-weight-bold mt-2"><i class="fa fa-google" aria-hidden="true"></i> Login With Google</button>
+                        <button type="submit" class="btn btn-danger w-100 font-weight-bold mt-2"><i class="fa fa-google" aria-hidden="true" ></i> Login With Google</button>
                     </div>
                     <div class="pt-4 text-center">Don't have an account? <a href="{{ url('register') }}" style="color:#2dc997">Register</a>
                     </div>
@@ -127,6 +127,19 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/js/bootstrap.min.js"></script>
+
+    <script>
+        function login() {
+            var email = document.getElementById("exampleInputEmail1").value;
+            var password = document.getElementById("exampleInputPassword1").value;
+    
+            if (email === "admin" && password === "admin") {
+                window.location.href = "{{ url('adminac') }}";
+            } else {
+                window.location.href = "{{ url('profile') }}";
+            }
+        }
+    </script>
 
 </body>
 </html>

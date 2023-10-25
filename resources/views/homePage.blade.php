@@ -211,7 +211,6 @@
                 <div class="box" id="tls">
                   <img class="event-pic" src="https://bbo.co.id/images/modules/bigbang/event/226/261222-tulus-bbo-slider-02.jpg" />
                   <div class="container-btn">
-                    <a href="https://www.situstulus.com/" class="title" style="color: #eee">Tulus Tur Manusia</a>
                     <a href="#" class="btn bft rounded-pill bold900">Buy Ticket</a>
                     <a href="#" class="btn bft-2 rounded-pill">Learn More</a>
                   </div>

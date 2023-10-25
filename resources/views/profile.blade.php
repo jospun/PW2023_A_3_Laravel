@@ -12,12 +12,84 @@
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/js/bootstrap.min.js"></script>
 
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Poppins:300,400,500,700" rel="stylesheet">
+    <!-- Bootstrap CSS (from CDN) -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons (from CDN) -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.18.0/font/bootstrap-icons.css" rel="stylesheet">
+    <!-- AOS (from CDN) -->
+    <link href="https://cdn.jsdelivr.net/npm/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <!-- Lightbox (from CDN) -->
+    <link href="https://cdn.jsdelivr.net/npm/glightbox@1.2.3/dist/css/glightbox.min.css" rel="stylesheet">
+    <!-- Swiper (from CDN) -->
+    <link href="https://unpkg.com/swiper@6.8.5/dist/css/swiper.min.css" rel="stylesheet">
+    <!-- Your Main CSS File -->
+
+    <link href="{{ asset('images/style.css') }}" rel="stylesheet">
+
     @vite('resources\css\style3.css')
+
+    <style>
+        #header {
+            height: 60px;
+            transition: all 0.5s;
+            z-index: 997;
+            background: rgba(52, 59, 64);
+        }
+
+        #header.header-transparent {
+            background: rgba(52, 59, 64);  
+        }
+
+        .navbar a,
+        .navbar a:focus {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-family: "Poppins", sans-serif;
+            color: #cccccc;
+            font-size: 14px;
+            padding: 0 4px;
+            white-space: nowrap;
+            transition: 0.3s;
+            letter-spacing: 0.4px;
+            position: relative;
+            text-transform: uppercase;
+        }
+    </style>
 
 </head>
 
 <body>
-    <div class="student-profile py-4">
+    <div class="navbar">
+        <header id="header" class="fixed-top d-flex align-items-center header-transparent">
+            <div class="container d-flex justify-content-between align-items-center">
+        
+            <div id="logo">
+                <a style="text-decoration: none" href="{{ url('home') }}">CAJ</a>
+            </div>
+            <!-- Off-Canvas Navbar -->
+            <nav id="navbar" class="navbar">
+                <ul>
+                <li><a class="nav-link scrollto" href="{{ url('home') }}">Home</a></li>
+                <li class="dropdown"><a href="#"><span>Event</span> <i class="bi bi-chevron-down"></i></a>
+                    <ul>
+                      <li><a href="#iu">IU - Golden Hour</a></li>
+                      <li><a href="#cld">Coldplay - Music of the Sphere</a></li>
+                      <li><a href="#tls">Tulus - Tur Manusia 2023</a></li>
+                      <li><a href="#ipes">Informatics Festival 11</a></li>
+                      <li><a href="{{ url('acara') }}">JKT-48</a></li>
+                    </ul>
+                </li>
+                <li><a class="nav-link scrollto" href="{{ url('souvenir') }}">Souvenir</a></li>
+                <li><a class="nav-link scrollto active" href="">User</a></li>
+                </ul>
+                <i class="fa fa-list mobile-nav-toggle"><img src="https://i.pinimg.com/originals/26/9d/d1/269dd16fa1f5ff51accd09e7e1602267.png" style="width: 30px; height:30px;"/></i>
+            </nav><!-- .navbar --> 
+            </div>
+        </header>
+    </div>
+    <div class="student-profile py-4 mt-5">
         <div class="container">
             <div class="row">
                 <div class="col-lg-4">

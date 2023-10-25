@@ -82,11 +82,8 @@
            <nav id="navbar" class="navbar">
             <ul>
               <li><a class="nav-link scrollto" href="{{ url('home') }}">Home</a></li>
-              <li><a class="nav-link scrollto" href="{{ url('home') }}">About</a></li>
-              <li><a class="nav-link scrollto" href="{{ url('home') }}">Feautured Event</a></li>
-              <li><a class="nav-link scrollto" href="{{ url('home') }}">Souvenir</a></li>
+              <li><a class="nav-link scrollto" href="{{ url('souvenir') }}">Souvenir</a></li>
               <li><a class="nav-link scrollto active" href="#">JKT-48</a></li>
-              <li><a class="nav-link scrollto" href="{{ url('home') }}">Contact</a></li>
             </ul>
             <i class="fa fa-list mobile-nav-toggle"><img src="https://i.pinimg.com/originals/26/9d/d1/269dd16fa1f5ff51accd09e7e1602267.png" style="width: 30px; height:30px;"/></i>
           </nav><!-- .navbar --> 

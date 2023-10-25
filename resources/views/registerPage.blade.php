@@ -139,23 +139,23 @@
                 <div class="form-style">
                     <form>
                         <div class="form-group pb-2">
-                            <input type="email" placeholder="Email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                            <input type="email" placeholder="Email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" required>
                         </div>
                         
                         <div class="form-group pb-2">
-                            <input type="name" placeholder="Name" class="form-control" id="inputName">
+                            <input type="name" placeholder="Name" class="form-control" id="inputName" required>
                         </div>
 
                         <div class="form-group pb-2">
-                            <input type="noTelp" placeholder="Phone Number" class="form-control" id="inputNo">
+                            <input type="noTelp" placeholder="Phone Number" class="form-control" id="inputNo" required>
                         </div>
 
                         <div class="form-group pb-2">
-                            <input type="password" placeholder="Password" class="form-control" id="exampleInputPassword1">
+                            <input type="password" placeholder="Password" class="form-control" id="exampleInputPassword1" required>
                         </div>
 
                         <div class="form-group pb-2">
-                            <input type="confirmPass" placeholder="Confirm Password" class="form-control" id="inputConfirmPass">
+                            <input type="confirmPass" placeholder="Confirm Password" class="form-control" id="inputConfirmPass" required>
                         </div>
                         
                         <div class="pb-2">
