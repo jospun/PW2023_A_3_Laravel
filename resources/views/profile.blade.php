@@ -64,10 +64,6 @@
     <div class="navbar">
         <header id="header" class="fixed-top d-flex align-items-center header-transparent">
             <div class="container d-flex justify-content-between align-items-center">
-        
-            <div id="logo">
-                <a style="text-decoration: none" href="{{ url('home') }}">CAJ</a>
-            </div>
             <!-- Off-Canvas Navbar -->
             <nav id="navbar" class="navbar">
                 <ul>
