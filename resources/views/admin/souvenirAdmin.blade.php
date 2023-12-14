@@ -1,34 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Souvenir Admin</title>
-
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Poppins:300,400,500,700" rel="stylesheet">
-    <!-- Bootstrap CSS (from CDN) -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Bootstrap Icons (from CDN) -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.18.0/font/bootstrap-icons.css" rel="stylesheet">
-    <!-- AOS (from CDN) -->
-    <link href="https://cdn.jsdelivr.net/npm/aos@2.3.1/dist/aos.css" rel="stylesheet">
-    <!-- Lightbox (from CDN) -->
-    <link href="https://cdn.jsdelivr.net/npm/glightbox@1.2.3/dist/css/glightbox.min.css" rel="stylesheet">
-    <!-- Swiper (from CDN) -->
-    <link href="https://unpkg.com/swiper@6.8.5/dist/css/swiper.min.css" rel="stylesheet">
-    <!-- Your Main CSS File -->
-
-    <link href="{{ asset('images/style.css') }}" rel="stylesheet">
+@extends('navbar/sidebarAdmin')
+@section('content')
 
     <style>
-        #isi{
-            margin-top: 60px; 
-            margin-bottom: 30px;
-            padding: 10px;
-            padding-top: 0px;
-            width: 1120px;
-        }
-
         #container-foto{
             max-width: 1120px;
             max-height: 230px;
@@ -100,64 +73,24 @@
             width: 60%;
             height: 100%;
         }
-
-        #header {
-            height: 60px;
-            transition: all 0.5s;
-            z-index: 997;
-            background: rgba(52, 59, 64);
-        }
-
-        #header.header-transparent {
-            background: rgba(52, 59, 64);  
-        }
-
-        .navbar a,
-        .navbar a:focus {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            font-family: "Poppins", sans-serif;
-            color: #cccccc;
-            font-size: 14px;
-            padding: 0 4px;
-            white-space: nowrap;
-            transition: 0.3s;
-            letter-spacing: 0.4px;
-            position: relative;
-            text-transform: uppercase;
+        ol, ul{
+            margin-left: 0px;
+            padding-left: 0px;
         }
     </style>
-    
-
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
     <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
     
-</head>
-<body>
-        <div class="navbar">
-            <header id="header" class="fixed-top d-flex align-items-center header-transparent">
-                <div class="container d-flex justify-content-between align-items-center">
-            
-                <div id="logo">
-                    <a style="text-decoration: none" href="{{ url('home') }}">CAJ</a>
-                </div>
-                <!-- Off-Canvas Navbar -->
-                <nav id="navbar" class="navbar">
-                    <ul>
-                    <li><a class="nav-link scrollto" href="#">Home</a></li>
-                    <li><a class="nav-link scrollto active" href="#">Souvenir</a></li>
-                    <li><a class="nav-link scrollto" href="{{ url('adminac') }}">Acara</a></li>
-                    </ul>
-                    <i class="fa fa-list mobile-nav-toggle"><img src="https://i.pinimg.com/originals/26/9d/d1/269dd16fa1f5ff51accd09e7e1602267.png" style="width: 30px; height:30px;"/></i>
-                </nav><!-- .navbar --> 
-                </div>
-            </header>
-        </div>
 
     <div>
-        <div class="container border rounded" id="isi">
+        <nav>
+            <div class="sidebar-button">
+            <i class="bx bx-menu sidebarBtn"></i>
+            <span class="dashboard">Dashboard</span>
+            </div>
+        </nav>
+
+        <div class="container border rounded " id="isi">
             <div class="row" style="width: auto;">
                 <div class="container" id="container-foto">
                         <img src=" {{ asset('images/event.jpg') }} " alt="event" class="rounded">
@@ -196,32 +129,6 @@
                         </div>
                 </div>
             </div>
-
-            <div class="row p-5 pt-0">
-                <div class="card" name="user">
-                        <div class="row" style="display: flex; justify-content: left;">
-                            <div class="col-4">
-                                <img class="img-here" src=" {{ asset('images/bajuWota.png') }}" alt="kaos">
-                            </div>
-                            <div class="col-7">
-                                <p>
-                                    <strong>Nama Souvenir : Kaos Merah</strong> 
-                                    <br> <strong>Harga : Rp. 999.999,99</strong>
-                                    <br> <strong>Stock : 500</strong>
-                                </p>
-                            </div>
-                            <div class="col-1 d-flex justify-content-end align-items-end">
-                                <a href="#" class="mx-2" id="editButton" data-bs-toggle="modal" data-bs-target="#editSouvenirModal">
-                                    <box-icon type='solid' name='edit-alt' id="editSouvenir"></box-icon>
-                                </a>
-                                <a href="#" id="removeButton" data-bs-toggle="modal" data-bs-target="#hapusSouvenirModal">
-                                    <box-icon name='trash' id="removeSouvenir"></box-icon>
-                                </a>
-                            </div>
-                        </div>
-                </div>
-            </div>
-            
         </div>
 
         <!-- hapusSouvenir -->
@@ -297,7 +204,5 @@
             </div>
             </div>
         </div>
-        </div>
-
-</body>
-</html>
+    </div>
+@endsection

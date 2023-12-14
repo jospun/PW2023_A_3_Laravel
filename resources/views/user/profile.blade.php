@@ -61,7 +61,6 @@
 </head>
 
 <body>
-    <div class="navbar">
         <header id="header" class="fixed-top d-flex align-items-center header-transparent">
             <div class="container d-flex justify-content-between align-items-center">
             <!-- Off-Canvas Navbar -->
@@ -84,7 +83,6 @@
             </nav><!-- .navbar --> 
             </div>
         </header>
-    </div>
     <div class="student-profile py-4 mt-5">
         <div class="container">
             <div class="row">

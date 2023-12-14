@@ -17,6 +17,14 @@ Route::get('/', function () {
     return view('homePage');
 });
 
+Route::get('/nav1', function () {
+    return view('navbar/navbarHome');
+});
+
+Route::get('/nav2', function () {
+    return view('navbar/navbarUser');
+});
+
 Route::get('/home', function () {
     return view('homePage');
 });
@@ -39,22 +47,31 @@ Route::get('/profile', function () {
         'nomorTelepon' => '0895 4111 38466'
     ];
 
-    return view('profile', $data);
+    return view('user/profile', $data);
 });
 
 
 Route::get('/acara', function () {
-    return view('pendaftaranAcara');
+    return view('user/pendaftaranAcara');
 });
 
 Route::get('/souvenir', function () {
-    return view('souvenirPage');
+    return view('user/souvenirPage');
 });
 
+Route::get('/adminnav', function () {
+    return view('navbar/sidebarAdmin');
+});
+
+Route::get('/admin', function () {
+    return view('admin/adminHomePage');
+});
+
+
 Route::get('/adminac', function () {
-    return view('adminAcaraPage');
+    return view('admin/adminAcaraPage');
 });
 
 Route::get('/adminsv', function () {
-    return view('souvenirAdmin');
+    return view('admin/souvenirAdmin');
 });

@@ -1,74 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/js/bootstrap.min.js"></script>
-
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Poppins:300,400,500,700" rel="stylesheet">
-    <!-- Bootstrap CSS (from CDN) -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css" integrity="sha384-r4NyP46KrjDleawBgD5tp8Y7UzmLA05oM1iAEQ17CSuDqnUK2+k9luXQOfXJCJ4I" crossorigin="anonymous">
-    <!-- Bootstrap Icons (from CDN) -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.18.0/font/bootstrap-icons.css" rel="stylesheet">
-    <!-- AOS (from CDN) -->
-    <link href="https://cdn.jsdelivr.net/npm/aos@2.3.1/dist/aos.css" rel="stylesheet">
-    <!-- Lightbox (from CDN) -->
-    <link href="https://cdn.jsdelivr.net/npm/glightbox@1.2.3/dist/css/glightbox.min.css" rel="stylesheet">
-    <!-- Swiper (from CDN) -->
-    <link href="https://unpkg.com/swiper@6.8.5/dist/css/swiper.min.css" rel="stylesheet">
-    <!-- Your Main CSS File -->
-
-
-    @vite('resources\css\style2.css')
-    <!-- NODE JS
-    NPM INSTALL
-    NPM RUN DEV
-    PHP ARTISAN SERVE -->
-
-    <link href="{{ asset('images/style.css') }}" rel="stylesheet">
-
-    <title>PP</title>
-
-    <style>
+@extends('navbar/navbarUser')
+@section('content')
+ 
+ <style>
         /* Media untuk menghilangkan button dan baru memunculkannya ketika layar mengecil
         Klo taroh di css, ntah kenapa gk work */
-        @media (min-width: 768px) {
-            .buy-ticket-btn {
-                display: none;
-            }
-        }
-
-        #header {
-            height: 60px;
-            transition: all 0.5s;
-            z-index: 997;
-            background: rgba(52, 59, 64);
-        }
-
-        #header.header-transparent {
-            background: rgba(52, 59, 64);  
-        }
-
-        .navbar a,
-        .navbar a:focus {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            font-family: "Poppins", sans-serif;
-            color: #cccccc;
-            font-size: 14px;
-            padding: 0 4px;
-            white-space: nowrap;
-            transition: 0.3s;
-            letter-spacing: 0.4px;
-            position: relative;
-            text-transform: uppercase;
-        }
+       
         @media (max-width: 767px) {
             .carousel-inner .carousel-item > div {
                 display: none;
@@ -148,9 +84,8 @@
         }
         
     </style>
-</head>
 
-<body>
+
     <header id="header" class="fixed-top d-flex align-items-center header-transparent">
         <div class="container d-flex justify-content-between align-items-center">
     
@@ -185,6 +120,7 @@
             </div>
             <div id="souvenirCarousel" class="carousel slide m-0 mt-2" data-bs-ride="carousel" style="border: 1px solid margin-top:0">
                 <div class="carousel-inner" role="listbox">
+                    {{-- @forelse($souvenirs as $souvenir) --}}
                     <div class="carousel-item active">
                         <div class="col-lg-3 col-md-4 col-6">
                             <div class="card" data-bs-toggle="modal" data-bs-target="#myModal">
@@ -201,86 +137,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="carousel-item">
-                        <div class="col-lg-3 col-md-4 col-6">
-                            <div class="card" data-bs-toggle="modal" data-bs-target="#myModal">
-                                <div class="card-img">
-                                    <img src="{{ asset('images/bajuWota.png') }}" class="img-fluid">
-                                </div>
-                                <div class="card-title mt-3 mb-0">
-                                   Baju Wota
-                                </div>
-                                <div class="card-description" style="text-align: center">
-                                    <p style="margin: 0">Harga: Rp 120.000</p>
-                                    <p style="margin: 0">Stok: 120</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="carousel-item">
-                        <div class="col-lg-3 col-md-4 col-6">
-                            <div class="card" data-bs-toggle="modal" data-bs-target="#myModal">
-                                <div class="card-img">
-                                    <img src="{{ asset('images/shirt.png') }}" class="img-fluid" >
-                                </div>
-                                <div class="card-title mt-3 mb-0">
-                                   Baju Wota
-                                </div>
-                                <div class="card-description" style="text-align: center">
-                                    <p style="margin: 0">Harga: Rp 120.000</p>
-                                    <p style="margin: 0">Stok: 120</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="carousel-item">
-                        <div class="col-lg-3 col-md-4 col-6">
-                            <div class="card" data-bs-toggle="modal" data-bs-target="#myModal">
-                                <div class="card-img">
-                                    <img src="{{ asset('images/bajuWota.png') }}" class="img-fluid">
-                                </div>
-                                <div class="card-title mt-3 mb-0">
-                                   Baju Wota
-                                </div>
-                                <div class="card-description" style="text-align: center">
-                                    <p style="margin: 0">Harga: Rp 120.000</p>
-                                    <p style="margin: 0">Stok: 120</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="carousel-item">
-                        <div class="col-lg-3 col-md-4 col-6">
-                            <div class="card" data-bs-toggle="modal" data-bs-target="#myModal">
-                                <div class="card-img">
-                                    <img src="{{ asset('images/bajuWota.png') }}" class="img-fluid">
-                                </div>
-                                <div class="card-title mt-3 mb-0">
-                                   Baju Wota
-                                </div>
-                                <div class="card-description" style="text-align: center">
-                                    <p style="margin: 0">Harga: Rp 120.000</p>
-                                    <p style="margin: 0">Stok: 120</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="carousel-item">
-                        <div class="col-lg-3 col-md-4 col-6">
-                            <div class="card" data-bs-toggle="modal" data-bs-target="#myModal">
-                                <div class="card-img">
-                                    <img src="{{ asset('images/shirt.png') }}" class="img-fluid">
-                                </div>
-                                <div class="card-title mt-3 mb-0">
-                                   Baju Wota
-                                </div>
-                                <div class="card-description" style="text-align: center">
-                                    <p style="margin: 0">Harga: Rp 120.000</p>
-                                    <p style="margin: 0">Stok: 120</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    {{-- @endforelse --}}
                 </div>
                 <a class="carousel-control-prev bg-transparent w-aut" href="#souvenirCarousel" role="button" data-bs-slide="prev">
                     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -472,16 +329,7 @@
         })
     </script>
 
-    <script src="{{ asset('vendor/purecounter_vanilla.js') }}"></script>
-    <script src="{{ asset('vendor/aos/aos.js') }}"></script>
-    <script src="{{ asset('vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
-    <script src="{{ asset('vendor/glightbox/js/glightbox.min.js') }}"></script>
-    <script src="{{ asset('vendor/isotope-layout/isotope.pkgd.min.js') }}"></script>
-    <script src="{{ asset('vendor/swiper/swiper-bundle.min.js') }}"></script>
-    <script src="{{ asset('vendor/php-email-form/validate.js') }}"></script>
     <script src='https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js'></script>
     <script src='https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js'></script>
-    <script src="{{ asset('images/main.js') }}"></script>
-</body>
 
-</html>
+    @endsection

@@ -70,12 +70,19 @@
         <video autoplay muted loop id="video-bg" class="video-background">
             <source src="{{ asset('video/bg.mp4') }}" type="video/mp4">
         </video>
-        <div class="row m-5 no-gutters shadow-lg">
+        <div class="row m-5 no-gutters shadow-lg ">
             <div class="col-md-6 d-none d-md-block">
                 <img src="{{ asset('images/lg.png') }}" class="img-fluid" style="min-height:100%;"/>
             </div>
             <div class="col-md-6 p-5" style="background-color: #eee">
                 <h3 class="p-2" style="text-align: center">LOGIN</h3>
+
+                {{-- @if (session('error'))
+                <div class="alert alert-danger">
+                    <b>Oops!</b> {{ session('error') }}
+                </div>
+                @endif --}}
+
                 <div class="form-style">
                     <form>
                         <div class="form-group pb-3">

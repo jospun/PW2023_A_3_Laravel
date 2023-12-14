@@ -136,7 +136,13 @@
                 
                 
                 <div class="sideline mt-2">or use email to register</div>  
+
                 <div class="form-style">
+                    {{-- @if (session('message'))
+                    <div class="alert alert-success">
+                        {{ session('message') }}
+                    </div>
+                    @endif --}}
                     <form>
                         <div class="form-group pb-2">
                             <input type="email" placeholder="Email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" required>
