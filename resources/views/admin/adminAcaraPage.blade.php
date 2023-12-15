@@ -1,6 +1,6 @@
 @extends('navbar/sidebarAdmin')
 @section('content')
-
+import
     <style>
         #editEvent{
             width: 30px;
@@ -138,7 +138,7 @@
         <span class="dashboard">Dashboard</span>
         </div>
     </nav>
-        @forelse($events as $event)
+        @forelse($acara as $ac)
         <div class="container border p-3 rounded" id="isi">
             <div class="row p-2">
                 <div class="col">
@@ -151,13 +151,13 @@
                 <div class="col">
                     <div class="row">
                         <div class="col mr 3">
-                            <h2>$event->nama</h2>
+                            <h2>{{ $ac->nama_acara }}</h2>
                         </div>
                         <div class="col">
-                            <a href="#" id="editButton" data-bs-toggle="modal" data-bs-target="#tambahEventModal">
+                            <a href="#" id="editButton" data-bs-toggle="modal" data-bs-target="#editEventModal" data-acara-id="{{ $ac->id }}">
                                 <box-icon type='solid' name='edit-alt' id="editEvent"></box-icon>
                             </a>
-                            <a href="#" id="removeButton" data-bs-toggle="modal" data-bs-target="#hapusEventModal">
+                            <a href="#" id="removeButton" data-bs-toggle="modal" data-bs-target="#hapusEventModal" data-acara-id="{{ $ac->id }}">
                                 <box-icon name='trash' id="removeEvent"></box-icon>
                             </a>
                         </div>
@@ -169,11 +169,15 @@
             <hr class="mt-0">
 
             <div class="row">
-                <p class="m-0">$event->transaksi->jumlah</p> 
+                <?php
+                    $pendaftaran = \App\Models\Pendaftaran::all();
+                    $pendaftaranFiltered = $pendaftaran->where('id_acara','=', $ac->id);
+                    $totalPdft = $pendaftaranFiltered->count();
+                ?>
+                <p class="m-0">Total Pendaftar: {{ $totalPdft }}</p> 
                 <div class="scrollable" id="userContainer">
                     <div class="row">
-                        {{-- nanti pakai count disini --}}
-                        @forelse($pendaftaran as $trans)
+                        @forelse($pendaftaranFiltered as $pdft)
                         <div class="col-md-3 col-sm-6 mb-4">
                             <div class="card" name="user">
                                 <div class="row">
@@ -183,8 +187,8 @@
                                         </div>
                                         <div class="col-6">
                                             <p>
-                                                <strong>$transaksi->namaUser</strong> 
-                                                <br> <strong>Status : $transkasi->status</strong>
+                                                <strong>{{ $pdft->id_user }}</strong> 
+                                                <br> <strong>Status : {{ $pdft->status }}</strong>
                                             </p>
                                         </div>
                                         <div class="col-2 d-flex justify-content-center align-items-center">
@@ -212,8 +216,8 @@
             <div class="row">
 
                 <div class="col mt-3">
-                    <p>Harga Ticket : $event->biaya
-                       <br> Tanggal : $event->tanggal
+                    <p>Harga Ticket : {{ $ac->biaya }}
+                       <br> Tanggal : {{ $ac->tanggal_mulai }} - {{ $ac->tanggal_tutup }}
                     </p>
                 </div>
                 <div class="col text-end">
@@ -242,87 +246,163 @@
     </div>
 
 
-    <!-- Modal -->
+    <!-- Modal Tambah Event -->
     <div class="modal fade" id="tambahEventModal" tabindex="-1" aria-labelledby="tambahEventModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
+        <div class="modal-dialog modal-lg">
+        
+        <form id="Event" action="{{ route('adminac.store') }}" method="POST" enctype="multipart/form-data">
+        @csrf
         <div class="modal-content">
-        <div class="modal-header">
-            <h5 class="modal-title" id="editModalLabel">Tambah Event</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            <div class="modal-header">
+                <h5 class="modal-title" id="editModalLabel">Tambah Event</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+                <div class="modal-body">
+            
+                    <div class="row p-2">
+                        <label for="namaEvent" class="col-sm-2 col-form-label">Nama Event</label>
+                        <div class="col-sm-10">
+                            <input required type="text" class="form-control" id="inputEvent" name="nama_acara" value="{{ old('nama_acara') }}">
+                        </div>
+
+                        
+                    </div>
+
+                    <div class="row p-2">
+                        <label for="deskripsi" class="col-sm-2 col-form-label">Deskripsi</label>
+                        <div class="col-sm-10">
+                            <textarea required type="text" class="form-control" id="inputDeskripsi" name="deskripsiEvent"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="row p-2">
+                        <label for="hargaTicket" class="col-sm-2 col-form-label">Harga Ticket</label>
+                        <div class="col-sm-10">
+                            <input required class="form-control" type="number" name="biaya" id="biaya" placeholder="Rp." value="{{  old('biaya') }}"> 
+                        </div>
+                    </div>
+
+                    <div class="row p-2">
+                        <label for="tanggalMulai" class="col-sm-2 col-form-label">Tanggal Mulai</label>
+                        <div class="col-sm-10">
+                            <input required class="form-control" type="date" name="tanggal_mulai" id="startDate" value="{{ old('tanggal_mulai') }}">
+                        </div>
+                    </div>
+
+                    <div class="row p-2">
+                        <label for="tanggalSelesai" class="col-sm-2 col-form-label">Tanggal Selesai</label>
+                        <div class="col-sm-10">
+                            <input required class="form-control" type="date" name="tanggal_tutup" id="endDate" value="{{ old('tanggal_tutup') }}">
+                        </div>
+                    </div>
+
+                    <div class="row p-2">
+                        <label for="inputFile" class="col-sm-2 col-form-label">Masukkan Foto/Video </label>
+                        <div class="col-sm-10">
+                            <input class="form-control" id="inputFile" type="file" accept=".jpg,.jpeg,.png,.mov,.mp4" name="asset"/>
+                        </div>
+                    </div>
+
+                </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary" data-bs-dismiss="modal" type="submit">Save changes</button>
+            </div>
         </div>
-        <div class="modal-body">
-            <form id="Event">
-
-                <div class="row p-2">
-                    <label for="namaEvent" class="col-sm-2 col-form-label">Nama Event</label>
-                    <div class="col-sm-10">
-                        <input required type="text" class="form-control" id="inputEvent" name="namaEvent">
-                    </div>
-
-                    
-                </div>
-
-                <div class="row p-2">
-                    <label for="deskripsi" class="col-sm-2 col-form-label">Deskripsi</label>
-                    <div class="col-sm-10">
-                        <textarea required type="text" class="form-control" id="inputDeskripsi" name="deskripsiEvent"></textarea>
-                    </div>
-                </div>
-
-                <div class="row p-2">
-                    <label for="hargaTicket" class="col-sm-2 col-form-label">Harga Ticket</label>
-                    <div class="col-sm-10">
-                        <input required class="form-control" type="number" name="hargaEvent" id="inputHarga" placeholder="Rp."> 
-                    </div>
-                </div>
-
-                <div class="row p-2">
-                    <label for="tanggalMulai" class="col-sm-2 col-form-label">Tanggal Mulai</label>
-                    <div class="col-sm-10">
-                        <input required class="form-control" type="date" name="tglMulai" id="startDate">
-                    </div>
-                </div>
-
-                <div class="row p-2">
-                    <label for="tanggalSelesai" class="col-sm-2 col-form-label">Tanggal Selesai</label>
-                    <div class="col-sm-10">
-                        <input required class="form-control" type="date" name="tglSelesai" id="endDate">
-                    </div>
-                </div>
-
-                <div class="row p-2">
-                    <label for="inputFile" class="col-sm-2 col-form-label">Masukkan Foto/Video </label>
-                    <div class="col-sm-10">
-                        <input class="form-control" id="inputFile" type="file" accept=".jpg,.jpeg,.png,.mov,.mp4" name="asset"/>
-                    </div>
-                </div>
-
-            </form>
+        </form>
         </div>
-        <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Save changes</button>
-        </div>
-        </div>
+    </div>
+
+
+    <!-- Modal Edit Event -->
+    <div class="modal fade" id="editEventModal" tabindex="-1" aria-labelledby="editEventModalLabel" aria-hidden="true" enctype="multipart/form-data">
+        <div class="modal-dialog modal-lg">    
+            <form id="editEventForm" method="POST" action="{{ route('adminac.update', 'id_acara') }}">
+            @csrf
+            @method('PUT')
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editModalLabel">Edit Event</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                    <div class="modal-body">
+                
+                        <div class="row p-2">
+                            <label for="namaEvent" class="col-sm-2 col-form-label">Nama Event</label>
+                            <div class="col-sm-10">
+                                <input required type="text" class="form-control" id="inputEvent" name="nama_acara" value="{{ old('nama_acara', $ac->nama_acara) }}">
+                            </div>
+    
+                            
+                        </div>
+    
+                        <div class="row p-2">
+                            <label for="deskripsi" class="col-sm-2 col-form-label">Deskripsi</label>
+                            <div class="col-sm-10">
+                                <textarea required type="text" class="form-control" id="inputDeskripsi" name="deskripsiEvent"></textarea>
+                            </div>
+                        </div>
+    
+                        <div class="row p-2">
+                            <label for="hargaTicket" class="col-sm-2 col-form-label">Harga Ticket</label>
+                            <div class="col-sm-10">
+                                <input required class="form-control" type="number" name="biaya" id="biaya" placeholder="Rp." value="{{  old('biaya', $ac->biaya) }}"> 
+                            </div>
+                        </div>
+    
+                        <div class="row p-2">
+                            <label for="tanggalMulai" class="col-sm-2 col-form-label">Tanggal Mulai</label>
+                            <div class="col-sm-10">
+                                <input required class="form-control" type="date" name="tanggal_mulai" id="startDate" value="{{ old('tanggal_mulai',  $ac->tanggal_mulai ) }}">
+                            </div>
+                        </div>
+    
+                        <div class="row p-2">
+                            <label for="tanggalSelesai" class="col-sm-2 col-form-label">Tanggal Selesai</label>
+                            <div class="col-sm-10">
+                                <input required class="form-control" type="date" name="tanggal_tutup" id="endDate" value="{{ old('tanggal_tutup',  $ac->tanggal_tutup ) }}">
+                            </div>
+                        </div>
+    
+                        <div class="row p-2">
+                            <label for="inputFile" class="col-sm-2 col-form-label">Masukkan Foto/Video </label>
+                            <div class="col-sm-10">
+                                <input class="form-control" id="inputFile" type="file" accept=".jpg,.jpeg,.png,.mov,.mp4" name="asset"/>
+                            </div>
+                        </div>
+    
+                    </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary" data-bs-dismiss="modal" type="submit">Save changes</button>
+                </div>
+            </div>
+        </form>
     </div>
     </div>
 
-
+    {{-- Modal Hapus Event --}}
     <div class="modal fade" id="hapusEventModal" tabindex="-1" aria-labelledby="hapusEventModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-        <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Yakin Ingin Menghapus Event?</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
-            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Yakin</button>
-        </div>
-        </div>
-    </div>
+        <form id="hapusEventForm" method="POST" action="{{ route('adminac.destroy', 'id_acara') }}">
+            @csrf
+            @method('DELETE')
+            <div class="modal-dialog">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Yakin Ingin Menghapus Event?</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                <button type="submit" class="btn btn-danger" data-bs-dismiss="modal">Yakin</button>
+            </div>
+            </div>
+            </div>
+        </form>
     </div>
 
+
+    <!-- Modal Hapus User-->
     <div class="modal fade" id="hapusUserModal" tabindex="-1" aria-labelledby="hapusUserModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -337,5 +417,29 @@
         </div>
     </div>
     </div>
+    
+
+    <script>
+        var myModal = document.getElementById('hapusEventModal');
+        myModal.addEventListener('show.bs.modal', function (event) {
+            var button = event.relatedTarget;
+            var acaraId = button.getAttribute('data-acara-id');
+            var form = myModal.querySelector('#hapusEventForm');
+            var action = form.getAttribute('action').replace('id_acara', acaraId);
+            form.setAttribute('action', action);
+        });
+    </script>
+
+    <script>
+        var myModal = document.getElementById('editEventModal');
+        myModal.addEventListener('show.bs.modal', function (event) {
+            var button = event.relatedTarget;
+            var acaraId = button.getAttribute('data-acara-id');
+            var form = myModal.querySelector('#editEventForm');
+            var action = form.getAttribute('action').replace('id_acara', acaraId);
+            form.setAttribute('action', action);
+        });
+    </script>
+    
 
 @endsection

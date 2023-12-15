@@ -3,6 +3,13 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+
+use App\Models\Acara;
+use App\Models\Detail_trans;
+use App\Models\Gueststar;
+use App\Models\Pendaftaran;
+use App\Models\Souvenir;
+use App\Models\Transaksi;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -12,11 +19,16 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // \App\Models\User::factory(10)->create();
+        // php artisan db:seed
 
-        // \App\Models\User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
+        $this->call([
+            UserSeeder::class,
+            GueststarSeeder::class,
+            AcaraSeeder::class,
+            PendaftaranSeeder::class,
+            SouvenirSeeder::class,
+            TransaksiSeeder::class,
+            DetailTransSeeder::class,
+        ]);
     }
 }

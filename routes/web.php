@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Api\AcaraController;
+use App\Http\Controllers\Api\PendaftaranController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -67,7 +69,6 @@ Route::get('/admin', function () {
     return view('admin/adminHomePage');
 });
 
-
 Route::get('/adminac', function () {
     return view('admin/adminAcaraPage');
 });
@@ -75,3 +76,5 @@ Route::get('/adminac', function () {
 Route::get('/adminsv', function () {
     return view('admin/souvenirAdmin');
 });
+
+Route::resource('adminac', AcaraController::class);
