@@ -17,24 +17,26 @@
         <span class="logo_name">CAJ Admin</span>
       </div>
       <ul class="nav-links">
-        <li>
-          <a href="#">
+        <li class="{{ Request::is('admin') ? 'active' : '' }}">
+          <a href="{{ url('admin') }}">
             <i class="bx bx-grid-alt"></i>
             <span class="links_name">Dashboard</span>
           </a>
         </li>
-        <li>
+        <li class="{{ Request::is('adminac') ? 'active' : '' }}">
           <a href="{{ url('adminac') }}">
             <i class="bx bx-box"></i>
             <span class="links_name">Event</span>
           </a>
         </li>
-        <li>
-          <a href="#">
+        <li class="{{ Request::is('adminsv') ? 'active' : '' }}">
+          <a href="{{ url('adminsv') }}">
             <i class="bx bx-list-ul"></i>
             <span class="links_name">Souvenir</span>
           </a>
         </li>
+        <!-- dan seterusnya -->
+        
         <li>
           <a href="#">
             <i class="bx bx-pie-chart-alt-2"></i>
@@ -55,6 +57,7 @@
         </li>
       </ul>
     </div>
+    
     <section class="home-section">
       @yield('content')
     </section>

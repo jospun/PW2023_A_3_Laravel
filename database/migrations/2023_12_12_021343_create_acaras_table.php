@@ -14,9 +14,11 @@ return new class extends Migration
         Schema::create('acaras', function (Blueprint $table) {
             $table->id();
             $table->string('nama_acara');
+            $table->longText('deskripsi');
             $table->date('tanggal_mulai');
             $table->date('tanggal_tutup');
             $table->double('biaya');
+            $table->string('poster');
             $table->timestamps();
         });
     }

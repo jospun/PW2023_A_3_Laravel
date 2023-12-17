@@ -1,6 +1,6 @@
 @extends('navbar/sidebarAdmin')
 @section('content')
-import
+
     <style>
         #editEvent{
             width: 30px;
@@ -132,10 +132,10 @@ import
 
 
     
-    <nav>
+    <nav style="position:relative">
         <div class="sidebar-button">
         <i class="bx bx-menu sidebarBtn"></i>
-        <span class="dashboard">Dashboard</span>
+        <span class="dashboard">Event</span>
         </div>
     </nav>
         @forelse($acara as $ac)
@@ -316,7 +316,7 @@ import
 
     <!-- Modal Edit Event -->
     <div class="modal fade" id="editEventModal" tabindex="-1" aria-labelledby="editEventModalLabel" aria-hidden="true" enctype="multipart/form-data">
-        <div class="modal-dialog modal-lg">    
+        <div class="modal-dialog modal-lg">
             <form id="editEventForm" method="POST" action="{{ route('adminac.update', 'id_acara') }}">
             @csrf
             @method('PUT')
@@ -420,22 +420,23 @@ import
     
 
     <script>
-        var myModal = document.getElementById('hapusEventModal');
+        var hapusEventModal = document.getElementById('hapusEventModal');
         myModal.addEventListener('show.bs.modal', function (event) {
             var button = event.relatedTarget;
             var acaraId = button.getAttribute('data-acara-id');
-            var form = myModal.querySelector('#hapusEventForm');
+            var form = hapusEventModal.querySelector('#hapusEventForm');
             var action = form.getAttribute('action').replace('id_acara', acaraId);
             form.setAttribute('action', action);
         });
     </script>
 
     <script>
-        var myModal = document.getElementById('editEventModal');
+        var editEventModal = document.getElementById('editEventModal');
         myModal.addEventListener('show.bs.modal', function (event) {
             var button = event.relatedTarget;
             var acaraId = button.getAttribute('data-acara-id');
-            var form = myModal.querySelector('#editEventForm');
+            console.log(acaraId);
+            var form = editEventModal.querySelector('#editEventForm');
             var action = form.getAttribute('action').replace('id_acara', acaraId);
             form.setAttribute('action', action);
         });

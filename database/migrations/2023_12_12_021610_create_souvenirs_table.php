@@ -13,12 +13,15 @@ return new class extends Migration
     {
         Schema::create('souvenirs', function (Blueprint $table) {
             $table->id();
+            $table->bigInteger('id_acara')->unsigned()->on('acaras')->onDelete('cascade');
             $table->string('nama');
             $table->double('harga');
             $table->string('deskripsi');
             $table->string('jenis');
             $table->string('gambar');
             $table->timestamps();
+
+            $table->foreign('id_acara')->references('id')->on('acaras')->onDelete('cascade');
         });
     }
 

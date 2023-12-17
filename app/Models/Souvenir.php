@@ -14,6 +14,7 @@ class Souvenir extends Model
     protected $primaryKey = 'id';
 
     protected $fillable = [
+        'id_acara',
         'nama',
         'harga',
         'deskripsi',

@@ -9,13 +9,12 @@
             padding-left: 0px;
         }
     </style>
-<nav>
-    <div class="sidebar-button">
-      <i class="bx bx-menu sidebarBtn"></i>
-      <span class="dashboard">Dashboard</span>
-    </div>
-  </nav>
-
+<nav style="position:relative">
+  <div class="sidebar-button">
+  <i class="bx bx-menu sidebarBtn"></i>
+  <span class="dashboard">Dashboard</span>
+  </div>
+</nav>
   <div class="home-content">
     <div class="overview-boxes">
       <div class="box">

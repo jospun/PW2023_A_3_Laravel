@@ -9,8 +9,11 @@
         </video>
         <div class="hero-container my-1" data-aos="zoom-in" data-aos-delay="100">
           
-          <h1>IU - Concert</h1>
-          <h2 class="mb-3">12 October 2023</h2>
+          <h1>{{ $event[0]->nama_acara }}</h1>
+          @php
+              $tanggalMulai = date('d F Y', strtotime($event[0]->tanggal_mulai));
+          @endphp
+          <h2 class="mb-3">{{ $tanggalMulai }}</h2>
           <a href="{{ url('login') }}" class="btn-get-started mb-5">Get Ticket</a>
         </div>
       </section><!-- End Hero -->

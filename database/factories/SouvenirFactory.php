@@ -17,10 +17,11 @@ class SouvenirFactory extends Factory
     public function definition(): array
     {
         return [
+            'id_acara' => \App\Models\Acara::factory(),
             'nama' => $this->faker->words(3, true),
             'harga' => $this->faker->randomFloat(2, 0, 1000),
             'deskripsi' => $this->faker->text(200),
-            'jenis' => $this->faker->randomElement(['type1', 'type2', 'type3']),
+            'jenis' => $this->faker->randomElement(['Baju', 'Gantungan Kunci', 'Hoodie']),
             'gambar' => $this->faker->imageUrl(),
         ];
     }

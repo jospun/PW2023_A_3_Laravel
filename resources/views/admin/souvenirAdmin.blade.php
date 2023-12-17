@@ -83,10 +83,10 @@
     
 
     <div>
-        <nav>
+        <nav style="position:relative">
             <div class="sidebar-button">
             <i class="bx bx-menu sidebarBtn"></i>
-            <span class="dashboard">Dashboard</span>
+            <span class="dashboard">Souvenir</span>
             </div>
         </nav>
 

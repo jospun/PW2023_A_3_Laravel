@@ -27,11 +27,6 @@ Route::get('/nav2', function () {
     return view('navbar/navbarUser');
 });
 
-Route::get('/home', function () {
-    return view('homePage');
-});
-
-
 Route::get('/login', function () {
     return view('loginPage');
 });
@@ -78,3 +73,6 @@ Route::get('/adminsv', function () {
 });
 
 Route::resource('adminac', AcaraController::class);
+Route::get('/', [AcaraController::class, 'showHome']);
+
+Route::get('nav1', [AcaraController::class, 'showNav']);

@@ -16,10 +16,19 @@ class AcaraController extends Controller
     public function index()
     {
             $acara = Acara::all();
-            
             return view('admin.adminAcaraPage', compact('acara'));
+    }
 
+    public function showHome()
+    {
+            $event = Acara::inRandomOrder()->take(5)->get();
+            return view('homePage', compact('event'));
+    }
 
+    public function showNav()
+    {
+            $event = Acara::inRandomOrder()->take(5)->get();
+            return view('navbar.navbarHome', compact('event'));
     }
 
     /**
@@ -30,9 +39,11 @@ class AcaraController extends Controller
         try{
             $validator = Validator::make($request->all(), [
                 'nama_acara' => 'required',
+                'deskripsi' => 'required',
                 'tanggal_mulai' => 'required',
                 'tanggal_tutup' => 'required',
                 'biaya' => 'required',
+                'poster' => 'required|mimes:jpeg,png',
             ]);
 
             if($validator->fails()){
@@ -42,17 +53,19 @@ class AcaraController extends Controller
                 ], 400);
             }
 
-            // $image = $request->file('image');
-            // $imageName = $image->getClientOriginalName();
-            // $destinationPath = ('images/');
-            // $image->move($destinationPath, $imageName); 
-            // $destinationPath = 'images/'.$imageName;
+            $image = $request->file('poster');
+            $imageName = $image->getClientOriginalName();
+            $destinationPath = ('images/');
+            $image->move($destinationPath, $imageName); 
+            $destinationPath = 'images/'.$imageName;
 
             Acara::create([
                 'nama_acara' => $request->nama_acara,
+                'deskripsi' => $request->deskripsi,
                 'tanggal_mulai' => $request->tanggal_mulai,
                 'tanggal_tutup' => $request->tanggal_tutup,
                 'biaya' => $request->biaya,
+                'poster' => $destinationPath,
             ]);
 
             // return response()->json([
@@ -60,15 +73,14 @@ class AcaraController extends Controller
             //     'data' => $request->all()
             // ], 200);
 
-            return back()->with('success', 'Acara Berhasil ditambahkan');
+            return redirect()->route('acara.index')->with('success', 'Acara berhasil ditambahkan');
         }catch(\Exception $e){
             // return response()->json([
             //     'message' => 'Acara gagal ditambahkan',
             //     'data' => $e->getMessage(),
             // ], 400);
 
-            return back()->with('error', 'Acara gagal ditambahkan');
-
+            return redirect()->route('acara.index')->with('error', 'Acara gagal ditambahkan');
         }
     }
 
