@@ -162,10 +162,31 @@ class PendaftaranController extends Controller
         }
     }
 
+    public function verifBayar($id)
+    {
+        try{
+            $pendaftaran = Pendaftaran::find($id);
+
+            print($pendaftaran->status);
+            $pendaftaran->status = "Lunas";
+            $pendaftaran->save();
+
+            return back()->with('success', 'Pendaftaran Berhasil diverifikasi');
+        } catch(\Exception $e){
+            // return response()->json([
+            //     'success' => false,
+            //     'message' => 'Pendaftaran Gagal Diupdate',
+            //     'data' => $e->getMessage(),
+            // ], 400);
+
+            return redirect()->back()->with('error', 'Pendaftaran Gagal Diupdate');
+        }
+    }
+
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy($id)
+    public function hapusPendaftaran($id)
     {
         try{
             $pendaftaran = Pendaftaran::find($id);
@@ -178,7 +199,7 @@ class PendaftaranController extends Controller
             //     'data' => $pendaftaran
             // ], 200);
 
-            return redirect()->back()->with('success', 'Pendaftaran Berhasil Dihapus');
+            return redirect('/adminac');
         } catch(\Exception $e){
             // return response()->json([
             //     'success' => false,
@@ -186,7 +207,7 @@ class PendaftaranController extends Controller
             //     'data' => $e->getMessage(),
             // ], 400);
 
-            return redirect()->back()->with('error', 'Pendaftaran Gagal Dihapus');
+            return back()->with('error', 'Pendaftaran Gagal Dihapus');
         }
     }
 

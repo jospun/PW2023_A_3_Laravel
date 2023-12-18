@@ -74,5 +74,6 @@ Route::get('/adminsv', function () {
 
 Route::resource('adminac', AcaraController::class);
 Route::get('/', [AcaraController::class, 'showHome']);
-
+Route::delete('adminac/pendaftaran/{id}', [PendaftaranController::class, 'hapusPendaftaran'])->name('adminac.hapusDaftar');
+Route::put('adminac/pendaftaran/{id}', [PendaftaranController::class, 'verifBayar'])->name('adminac.verifBayar');
 Route::get('nav1', [AcaraController::class, 'showNav']);

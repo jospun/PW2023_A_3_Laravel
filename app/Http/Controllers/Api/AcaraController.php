@@ -73,14 +73,14 @@ class AcaraController extends Controller
             //     'data' => $request->all()
             // ], 200);
 
-            return redirect()->route('acara.index')->with('success', 'Acara berhasil ditambahkan');
+            return back()->with('success', 'Acara Berhasil ditambahkan');
         }catch(\Exception $e){
             // return response()->json([
             //     'message' => 'Acara gagal ditambahkan',
             //     'data' => $e->getMessage(),
             // ], 400);
 
-            return redirect()->route('acara.index')->with('error', 'Acara gagal ditambahkan');
+            return back()->with('error', 'Acara gagal ditambahkan');
         }
     }
 
@@ -96,8 +96,7 @@ class AcaraController extends Controller
                 'message' => 'Fetch Acara Success',
                 'data' => $acara
             ], 200);
-
-            // return view('acara.show', compact('acara'));
+            
         } catch(\Exception $e){
             return response()->json([
                 'message' => 'Fetch Acara Failed',
@@ -106,6 +105,11 @@ class AcaraController extends Controller
 
             // return redirect()->route('acara.index')->with('error', 'Acara tidak ditemukan');
         }
+    }
+
+    public function edit($id){
+        $ac = Acara::find($id);
+        return view('admin.adminAcaraPage', compact('ac'));
     }
 
     /**
