@@ -36,6 +36,24 @@ class PendaftaranController extends Controller
         }
     }
 
+    public function showPendaftarbyAcara($id)
+    {
+        try{
+            $pendaftaran = Pendaftaran::join(
+                'acaras', 'acaras.id' ,'=', 'pendaftarans.id_acara' 
+            );
+
+            
+        } catch(\Exception $e){
+            return response()->json([
+                'message' => 'Fetch Acara Failed',
+                'data' => $e->getMessage(),
+            ], 400);
+
+            // return redirect()->route('acara.index')->with('error', 'Acara tidak ditemukan');
+        }
+    }
+    
     /**
      * Store a newly created resource in storage.
      */
@@ -160,6 +178,16 @@ class PendaftaranController extends Controller
 
             return redirect()->back()->with('error', 'Pendaftaran Gagal Diupdate');
         }
+    }
+
+    public function showHomeAdmin()
+    {
+            $event = Pendaftaran::join(
+                'users', 'users.id', '=', 'pendaftarans.id_user'
+                )->where(
+                'status' ,'=','Belum Lunas'
+            )->take(5)->get();
+            return view('admin.adminHomePage', compact('event'));
     }
 
     public function verifBayar($id)
