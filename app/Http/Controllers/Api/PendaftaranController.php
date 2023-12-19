@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use App\Models\Pendaftaran;
+use App\Models\Acara;
 use Illuminate\Support\Carbon;
 
 class PendaftaranController extends Controller
@@ -44,8 +45,8 @@ class PendaftaranController extends Controller
         try{
             $validator = Validator::make($request->all(), [
                 'id_acara' => 'required',
+                'jumlah' => 'required',
             ]);
-
 
             if($validator->fails()){
                 return response()->json([
@@ -57,25 +58,43 @@ class PendaftaranController extends Controller
                 // return redirect()->back()->with('error', 'Validasi gagal');
             }
 
+            $acara = Acara::find($request->id_acara);
+            if(!$acara){
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Acara Tidak Ditemukan',
+                    'data' => null
+                ], 400);
+            }
+
+            $subtotal = $acara->biaya * $request->jumlah;
+
             $pendaftaran = [
-                'id_user' => Auth::user()->id,
+                'id_user' => 1,
                 'id_acara' => $request->id_acara,
                 'status' => "Belum Membayar",
                 'tanggal_bayar' => Carbon::now(),
+                'jumlah' => $request->jumlah,
+                'subTotal' => $subtotal,
             ];
 
             Pendaftaran::create([
-                'id_user' => Auth::user()->id,
+                'id_user' => 1,
                 'id_acara' => $request->id_acara,
                 'status' => 'Sudah Membayar',
                 'tanggal_bayar' => Carbon::now(),
+                'jumlah' => $request->jumlah,
+                'subTotal' => $subtotal,
             ]);
 
-            return response()->json([
-                'success' => true,
-                'message' => 'Pendaftaran Berhasil Ditambahkan',
-                'data' => $pendaftaran
-            ], 200);
+            // return response()->json([
+            //     'success' => true,
+            //     'message' => 'Pendaftaran Berhasil Ditambahkan',
+            //     'data' => $pendaftaran
+            // ], 200);
+
+            $event = Acara::inRandomOrder()->take(5)->get();
+            return view('homePage', compact('event'));
 
             // return redirect()->back()->with('success', 'Pendaftaran Berhasil Ditambahkan');
         } catch(\Exception $e){

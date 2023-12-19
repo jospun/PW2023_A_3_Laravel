@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('homePage');
-});
+})->name('home');
 
 Route::get('/nav1', function () {
     return view('navbar/navbarHome');
@@ -74,6 +74,8 @@ Route::get('/adminsv', function () {
 });
 
 Route::resource('adminac', AcaraController::class);
+Route::resource('pendaftaran', PendaftaranController::class);
+
 Route::get('/', [AcaraController::class, 'showHome']);
 
 Route::get('nav1', [AcaraController::class, 'showNav']);
