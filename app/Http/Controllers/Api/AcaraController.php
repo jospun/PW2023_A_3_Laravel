@@ -26,6 +26,12 @@ class AcaraController extends Controller
             return view('homePage', compact('event'));
     }
 
+    public function showGuest()
+    {
+            $acara = Acara::all();
+            return view('admin.adminGuestPage', compact('acara'));
+    }
+
     public function showNav()
     {
             $event = Acara::inRandomOrder()->take(5)->get();
