@@ -5,16 +5,12 @@
         <div class="column-boxEvent bg-white m-2 mt-4">
             <div class="eventTitle">{{$acara->nama_acara}}</div>
             <div class="img-forEvent">
-                <img src="https://4.bp.blogspot.com/-75JWKnQiH-4/WRES2kLgGlI/AAAAAAAABGE/YE4Nh0NBfM81g_7JHPikTXoLUNe3zemngCLcB/s1600/JKT48%2BFestival%2BGreatest%2BHits.jpg.jpg" alt="Gambar">
+                <img src="{{$acara->poster}}" alt="Gambar">
             </div>
             <div class="desc-forEvent">
                 <div class="desc-performerTitle ml-5 mb-3">Deskripsi</div>
                 <p div class="ml-5 mr-5">
                     {{$acara->deskripsi}}
-                    <!-- Dengan bangga mempersembahkan JKT48 Festival Greatest Hits, acara yang telah lama dinantikan oleh jutaan penggemar setia di seluruh penjuru Indonesia. Menandai momen yang tak terlupakan dalam perjalanan gemilang JKT48, festival ini akan menghidupkan kembali kilas balik penuh nostalgia serta memamerkan karya-karya paling ikonik dari para bintang tercinta. Tidak hanya sekadar konser, acara ini juga menawarkan pengalaman interaktif yang mendalam, memungkinkan para penggemar untuk merasakan kedekatan yang lebih dekat dengan idola mereka melalui sesi tanya jawab, pertemuan penggemar, dan acara pelengkap lainnya.
-                    Para pengunjung dapat memanjakan telinga mereka dengan melodi-melodi yang memikat hati, sambil membiarkan diri terbawa oleh irama-irama yang menggugah semangat dan menghadirkan kenangan indah dari masa lalu. Dengan pertunjukan spesial dari setiap anggota JKT48, festival ini tidak hanya membangkitkan semangat masa kini tetapi juga memberikan pijakan kuat bagi masa depan gemilang dari grup idol yang telah memikat hati banyak orang.
-                    JKT48 Festival Greatest Hits juga akan menjadi kesempatan bagi para penggemar untuk mengeksplorasi lebih dalam lagi tentang perjalanan yang telah dilalui oleh para bintang idola mereka. Dengan pameran khusus yang memajang memorabilia langka, foto-foto eksklusif, dan momen-momen tak terlupakan, pengunjung dapat merasakan ikatan emosional yang erat antara para anggota dan komunitas mereka. Para penggemar juga akan diberikan kesempatan untuk mengabadikan momen tak terlupakan ini melalui berbagai area foto interaktif yang didesain khusus, sehingga mereka dapat membawa pulang kenangan abadi dari festival ini.
-                    Tunggu apalagi? Jadikanlah JKT48 Festival Greatest Hits sebagai momen berharga yang tidak hanya memenuhi hasrat musik dan hiburan Anda, tetapi juga merangkul semangat persaudaraan dan kehangatan yang telah melampaui batas-batas panggung. Segera bergabunglah dengan ribuan penggemar lainnya untuk merayakan keberagaman, semangat, dan kegembiraan dari JKT48 Festival Greatest Hits yang akan membawa Anda dalam perjalanan mengesankan melalui nostalgia dan masa depan yang penuh harapan. -->
                 </p>
             </div>
 
@@ -22,78 +18,16 @@
                 <div class="desc-performerTitle ml-5">Performer</div>
                 <div class="desc-performerMultiLine">
                     <div class="row ml-4" style="display: flex;">
+                    @foreach($performer as $perf)
                         <div class="desc-performerColumn">
                             <div class="desc-performerRow" style="display: flex;">
-                                <div class="desc-performerImg"><img src="https://jkt48.com/profile/reva_fidela.jpg?v=20230116s.jpg" alt="Gambar"></div>
+                                <div class="desc-performerImg"><img src="{{ $perf->foto }}" alt="Gambar"></div>
                                 <div class="desc-performerDisplayer">
-                                    Reva Fidela
+                                    {{ $perf->nama }}
                                 </div>
                             </div>
                         </div>
-                        <div class="desc-performerColumn">
-                            <div class="desc-performerRow" style="display: flex;">
-                                <div class="desc-performerImg"><img src="https://jkt48.com/profile/angelina_christy.jpg?v=20230116.jpg" alt="Gambar"></div>
-                                <div class="desc-performerDisplayer">
-                                    Angelina Christy
-                                </div>
-                            </div>
-                        </div>
-                        <div class="desc-performerColumn">
-                            <div class="desc-performerRow" style="display: flex;">
-                                <div class="desc-performerImg"><img src="https://jkt48.com/profile/adzana_shaliha.jpg?v=20230116.jpg" alt="Gambar"></div>
-                                <div class="desc-performerDisplayer">
-                                    Adzana Shaliha
-                                </div>
-                            </div>
-                        </div>
-                        <div class="desc-performerColumn">
-                            <div class="desc-performerRow" style="display: flex;">
-                                <div class="desc-performerImg"><img src="https://jkt48.com/profile/freya_jayawardana.jpg?v=20230116s.jpg" alt="Gambar"></div>
-                                <div class="desc-performerDisplayer">
-                                    Freya Jayawardana
-                                </div>
-                            </div>
-                        </div>
-                        <div class="desc-performerColumn">
-                            <div class="desc-performerRow" style="display: flex;">
-                                <div class="desc-performerImg"><img src="https://jkt48.com/profile/helisma_putri.jpg?v=20230116.jpg" alt="Gambar"></div>
-                                <div class="desc-performerDisplayer">
-                                    Helisma Putri
-                                </div>
-                            </div>
-                        </div>
-                        <div class="desc-performerColumn">
-                            <div class="desc-performerRow" style="display: flex;">
-                                <div class="desc-performerImg"><img src="https://jkt48.com/profile/yessica_tamara.jpg?v=20230116.jpg" alt="Gambar"></div>
-                                <div class="desc-performerDisplayer">
-                                    Yessica Tamara
-                                </div>
-                            </div>
-                        </div>
-                        <div class="desc-performerColumn">
-                            <div class="desc-performerRow" style="display: flex;">
-                                <div class="desc-performerImg"><img src="https://jkt48.com/profile/reva_fidela.jpg?v=20230116s.jpg" alt="Gambar"></div>
-                                <div class="desc-performerDisplayer">
-                                    Reva Fidela
-                                </div>
-                            </div>
-                        </div>
-                        <div class="desc-performerColumn">
-                            <div class="desc-performerRow" style="display: flex;">
-                                <div class="desc-performerImg"><img src="https://jkt48.com/profile/angelina_christy.jpg?v=20230116.jpg" alt="Gambar"></div>
-                                <div class="desc-performerDisplayer">
-                                    Angelina Christy
-                                </div>
-                            </div>
-                        </div>
-                        <div class="desc-performerColumn">
-                            <div class="desc-performerRow" style="display: flex;">
-                                <div class="desc-performerImg"><img src="https://jkt48.com/profile/adzana_shaliha.jpg?v=20230116.jpg" alt="Gambar"></div>
-                                <div class="desc-performerDisplayer">
-                                    Adzana Shaliha
-                                </div>
-                            </div>
-                        </div>
+                    @endforeach
                     </div>
                 </div>
                 <button type="button" class="btn btn-primary buy-ticket-btn m-4" data-toggle="modal" data-target="#modalKategori">
@@ -109,7 +43,7 @@
             <div class="box-categoryContent">
                 <div class="column-boxTicket">
                     <div class="box-PerContent box-PerContent2">
-                        <p class="preSaleStyle"> Pre-Sale 1 <br><strong class="preSaleStyle2">Rp 28.750</strong></p>
+                        <p class="preSaleStyle"> Sale 1 <br><strong class="preSaleStyle2">Rp {{$acara->biaya}}</strong></p>
                         <div style="margin-left: auto;">
                             <button type="button" class="btn btn-success" data-toggle="modal" data-target="#modalPembayaran">Buy Now</button>
                         </div>
@@ -118,6 +52,8 @@
             </div>
         </div>
     </div>
+
+    <!-- Modal Jumlah Tiket -->
 
     <!-- Modal 1 -->
     <div class="modal fade" id="modalKategori" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -133,19 +69,7 @@
                     <div class="box-categoryContent">
                         <div class="column-boxTicket">
                             <div class="box-PerContent box-PerContent2">
-                                <p class="preSaleStyle"> Pre-Sale 1 <br><strong class="preSaleStyle2">Rp 28.750</strong></p>
-                                <div style="margin-left: auto;">
-                                    <button type="button" class="btn btn-success" data-dismiss="modal" data-toggle="modal" data-target="#modalPembayaran">Buy Now</button>
-                                </div>
-                            </div>
-                            <div class="box-PerContent box-PerContent2">
-                                <p class="preSaleStyle"> Pre-Sale 2 <br><strong class="preSaleStyle2">Rp 29.750</strong></p>
-                                <div style="margin-left: auto;">
-                                    <button type="button" class="btn btn-success" data-dismiss="modal" data-toggle="modal" data-target="#modalPembayaran">Buy Now</button>
-                                </div>
-                            </div>
-                            <div class="box-PerContent box-PerContent2">
-                                <p class="preSaleStyle"> Pre-Sale 3 <br><strong class="preSaleStyle2">Rp 30.750</strong></p>
+                                <p class="preSaleStyle"> Pre-Sale 1 <br><strong class="preSaleStyle2">Rp {{$acara->biaya}}</strong></p>
                                 <div style="margin-left: auto;">
                                     <button type="button" class="btn btn-success" data-dismiss="modal" data-toggle="modal" data-target="#modalPembayaran">Buy Now</button>
                                 </div>
