@@ -47,10 +47,11 @@ Route::get('/profile', function () {
     return view('user/profile', $data);
 });
 
+// Route::get('/acara', function () {
+//     return view('user/pendaftaranAcara');
+// });
 
-Route::get('/acara', function () {
-    return view('user/pendaftaranAcara');
-});
+Route::get('/acara/{id}', [AcaraController::class, 'show']);
 
 Route::get('/souvenir', function () {
     return view('user/souvenirPage');

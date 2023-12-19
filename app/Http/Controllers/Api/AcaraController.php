@@ -92,19 +92,19 @@ class AcaraController extends Controller
         try{
             $acara = Acara::find($id);
 
-            return response()->json([
-                'message' => 'Fetch Acara Success',
-                'data' => $acara
-            ], 200);
+            // return response()->json([
+            //     'message' => 'Fetch Acara Success',
+            //     'data' => $acara
+            // ], 200);
 
-            // return view('acara.show', compact('acara'));
+            return view('user/pendaftaranAcara', compact('acara'));
         } catch(\Exception $e){
-            return response()->json([
-                'message' => 'Fetch Acara Failed',
-                'data' => $e->getMessage(),
-            ], 400);
+            // return response()->json([
+            //     'message' => 'Fetch Acara Failed',
+            //     'data' => $e->getMessage(),
+            // ], 400);
 
-            // return redirect()->route('acara.index')->with('error', 'Acara tidak ditemukan');
+            return redirect()->route('user/pendaftaranAcara')->with('error', 'Acara tidak ditemukan');
         }
     }
 

@@ -80,7 +80,7 @@
             <!-- Off-Canvas Navbar -->
             <nav id="navbar" class="navbar">
                 <ul>
-                    <li><a class="nav-link scrollto" href="{{ url('home') }}">Home</a></li>
+                    <li><a class="nav-link scrollto" href="{{ url('/') }}">Home</a></li>
                     <li><a class="nav-link scrollto" href="{{ url('souvenir') }}">Souvenir</a></li>
                     <li><a class="nav-link scrollto active" href="#">JKT-48</a></li>
                 </ul>
