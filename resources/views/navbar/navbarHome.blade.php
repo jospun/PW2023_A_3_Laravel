@@ -121,14 +121,14 @@
           <li class="dropdown"><a href="#"><span>Event</span> <i class="bi bi-chevron-down"></i></a>
             <ul>
               @forelse($event as $ev)
-              <li><a href="#iu">{{  $ev->nama_acara }}</a></li>
+              <li><a href="#{{ $ev->id }}">{{  $ev->nama_acara }}</a></li>
               @empty
               <li><a>Stay Tuned!</a></li>
               @endforelse
               <li><a href="{{ url('acara') }}">JKT-48</a></li>
             </ul>
           </li>
-          <li><a class="nav-link scrollto" href="#">Contact</a></li>
+          <li><a class="nav-link scrollto" href="#contact">Contact</a></li>
         </ul>
         <i class="fa fa-list mobile-nav-toggle"><img src="https://i.pinimg.com/originals/26/9d/d1/269dd16fa1f5ff51accd09e7e1602267.png" style="width: 30px; height:30px;"/></i>
       </nav><!-- .navbar --> 

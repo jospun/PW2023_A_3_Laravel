@@ -186,7 +186,7 @@ class PendaftaranController extends Controller
                 'users', 'users.id', '=', 'pendaftarans.id_user'
                 )->where(
                 'status' ,'=','Belum Lunas'
-            )->take(5)->get();
+            )->take(4)->get();
             return view('admin.adminHomePage', compact('event'));
     }
 

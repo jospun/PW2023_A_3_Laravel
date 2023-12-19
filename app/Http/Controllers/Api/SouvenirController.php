@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\Acara;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
@@ -36,6 +37,16 @@ class SouvenirController extends Controller
             return view('souvenir.index', compact('souvenir'));
         }
     }
+    
+    public function showHomeSouve()
+    {
+        try{
+            $souvenirs = Souvenir::latest()->take(5)->get();
+            return view('homePage', compact('souvenirs'));
+        } catch (\Exception $e) {
+            return view('homePage', compact('souvenirs'));
+        }
+    }
 
     /**
      * Store a newly created resource in storage.
@@ -48,7 +59,8 @@ class SouvenirController extends Controller
                 'harga' => 'required',
                 'deskripsi' => 'required',
                 'jenis' => 'required',
-                'gambar' => 'required|mimes:jpeg,png',
+                'stok' => 'required',
+                'gambar' => 'required|mimes:jpeg,png,jpg',
             ]);
 
             if ($validator->fails()) {
@@ -65,30 +77,18 @@ class SouvenirController extends Controller
             $image->move($destinationPath, $imageName); 
             $destinationPath = 'images/'.$imageName;
 
-            $souvenir = Souvenir::create([
+            Souvenir::create([
                 'nama' => $request->nama,
                 'harga' => $request->harga,
                 'deskripsi' => $request->deskripsi,
                 'jenis' => $request->jenis,
                 'gambar' => $destinationPath,
+                'stok' => $request->stok,
+                'id_acara' => $request->id_acara,
             ]);
 
-            if ($souvenir) {
-                // return response()->json([
-                //     'success' => true,
-                //     'message' => 'Souvenir Berhasil Ditambahkan!',
-                //     'data'    => $souvenir  
-                // ], 201);
-
-                return redirect()->route('souvenir.index')->with('success', 'Souvenir berhasil ditambahkan');
-            } else {
-                // return response()->json([
-                //     'success' => false,
-                //     'message' => 'Souvenir Gagal Ditambahkan!',
-                // ], 400);
-
-                return redirect()->route('souvenir.index')->with('failed', 'Souvenir gagal ditambahkan');
-            }
+            return back()->with('success', 'Souvenir Berhasil ditambahkan');
+            
         } catch (\Exception $e) {
             // return response()->json([
             //     'success' => false,
@@ -96,7 +96,7 @@ class SouvenirController extends Controller
             //     'data'    => $e->getMessage(),
             // ], 500);
 
-            return redirect()->route('souvenir.index')->with('failed', 'Souvenir gagal ditambahkan');
+            return back()->with('error', 'Acara gagal ditambahkan');
         }
     }
 
@@ -106,22 +106,19 @@ class SouvenirController extends Controller
     public function show($id)
     {
         try{
-            $souvenir = Souvenir::where('id', $id)->first();
-            // return response()->json([
-            //     'success' => true,
-            //     'message' => 'Detail Souvenir!',
-            //     'data'    => $souvenir  
-            // ], 200);
+            $souvenir = Souvenir::find($id);
+            return response()->json([
+                'success' => true,
+                'message' => 'Detail Souvenir!',
+                'data'    => $souvenir  
+            ], 200);
 
-            return view('souvenir.show', compact('souvenir'));
         } catch (\Exception $e) {
-            // return response()->json([
-            //     'success' => false,
-            //     'message' => 'Souvenir Tidak Ditemukan!',
-            //     'data'    => $e->getMessage(),
-            // ], 404);
-
-            return view('souvenir.show', compact('souvenir'));
+            return response()->json([
+                'success' => false,
+                'message' => 'Souvenir Tidak Ditemukan!',
+                'data'    => $e->getMessage(),
+            ], 404);
         }
     }
 
@@ -136,6 +133,7 @@ class SouvenirController extends Controller
                 'harga' => 'required',
                 'deskripsi' => 'required',
                 'jenis' => 'required',
+                'stok' => 'required',
             ]);
 
             if ($validator->fails()) {
@@ -146,28 +144,39 @@ class SouvenirController extends Controller
                 ], 401);
             }
 
-            $souvenir = Souvenir::where('id', $id)->update([
-                'nama' => $request->nama,
-                'harga' => $request->harga,
-                'deskripsi' => $request->deskripsi,
-                'jenis' => $request->jenis,
-            ]);
+            if($request->gambar != null) {
+                $image = $request->file('gambar');
+                $imageName = $image->getClientOriginalName();
+                $destinationPath = ('images/');
+                $image->move($destinationPath, $imageName); 
+                $destinationPath = 'images/'.$imageName;
+
+                $souvenir = Souvenir::where('id', $id)->update([
+                    'nama' => $request->nama,
+                    'harga' => $request->harga,
+                    'deskripsi' => $request->deskripsi,
+                    'jenis' => $request->jenis,
+                    'gambar' => $destinationPath,
+                    'stok' => $request->stok,
+                ]);
+            } else {
+                $souvenir = Souvenir::where('id', $id)->update([
+                    'nama' => $request->nama,
+                    'harga' => $request->harga,
+                    'deskripsi' => $request->deskripsi,
+                    'jenis' => $request->jenis,
+                    'stok' => $request->stok,
+                ]);
+            }
+
+            
 
             if ($souvenir) {
-                // return response()->json([
-                //     'success' => true,
-                //     'message' => 'Souvenir Berhasil Diupdate!',
-                //     'data'    => $souvenir  
-                // ], 201);
 
-                return redirect()->route('souvenir.index')->with('success', 'Souvenir berhasil diupdate');
+                return back()->with('success', 'Souvenir Berhasil diupdate');
             } else {
-                // return response()->json([
-                //     'success' => false,
-                //     'message' => 'Souvenir Gagal Diupdate!',
-                // ], 400);
 
-                return redirect()->route('souvenir.index')->with('failed', 'Souvenir gagal diupdate');
+                return back()->with('error', 'Souvenir gagal diupdate');
             }
         } catch (\Exception $e) {
             // return response()->json([
@@ -188,25 +197,10 @@ class SouvenirController extends Controller
         try{
             $souvenir = Souvenir::where('id', $id)->delete();
 
-            try {
-                Storage::delete($souvenir->gambar);
-            } catch (\Exception $e) {
-                return $e->getMessage();
-            }
-
-            return response()->json([
-                'success' => true,
-                'message' => 'Souvenir Berhasil Dihapus!',
-                'data'    => $souvenir  
-            ], 200);
-
+            return back()->with('success', 'Souvenir Berhasil dihapus');
             // return redirect()->route('souvenir.index')->with('success', 'Souvenir berhasil dihapus');
         } catch (\Exception $e) {
-            return response()->json([
-                'success' => false,
-                'message' => 'Souvenir Gagal Dihapus!',
-                'data'    => $e->getMessage(),
-            ], 500);
+            return back()->with('error', 'Souvenir Gagal dihapus');
 
             // return redirect()->route('souvenir.index')->with('failed', 'Souvenir gagal dihapus');
         }
