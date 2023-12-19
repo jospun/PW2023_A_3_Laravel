@@ -113,18 +113,6 @@
                             <button type="button" class="btn btn-success" data-toggle="modal" data-target="#modalPembayaran">Buy Now</button>
                         </div>
                     </div>
-                    <div class="box-PerContent box-PerContent2">
-                        <p class="preSaleStyle"> Pre-Sale 2 <br><strong class="preSaleStyle2">Rp 29.750</strong></p>
-                        <div style="margin-left: auto;">
-                            <button type="button" class="btn btn-success" data-toggle="modal" data-target="#modalPembayaran">Buy Now</button>
-                        </div>
-                    </div>
-                    <div class="box-PerContent box-PerContent2">
-                        <p class="preSaleStyle"> Pre-Sale 3 <br><strong class="preSaleStyle2">Rp 30.750</strong></p>
-                        <div style="margin-left: auto;">
-                            <button type="button" class="btn btn-success" data-toggle="modal" data-target="#modalPembayaran">Buy Now</button>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
