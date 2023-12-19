@@ -130,6 +130,14 @@
         padding-left: 0px;
     }
 
+    .my-container {
+        background-color: #0000;
+        width: 32vh;
+        height: 16vh;
+        border-radius: 8px;
+        box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.5);
+    }
+
     </style>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
     <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
@@ -181,7 +189,7 @@
             <div class="scrollable" id="userContainer">
                 <div class="row">
                 @forelse(range(1, 10) as $i)
-                    <div class="mt-2 container-sm" style="background-color: #555; width: 30vh; height: 10vh;">
+                    <div class="mt-2 mr-2 container-sm my-container">
                 
                     </div>
                 @empty
