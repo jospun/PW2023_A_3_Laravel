@@ -38,7 +38,7 @@
         }
 
         #header.header-transparent {
-            background: rgba(52, 59, 64);  
+            background: rgba(52, 59, 64);
         }
 
         .navbar a,
@@ -61,28 +61,28 @@
 </head>
 
 <body>
-        <header id="header" class="fixed-top d-flex align-items-center header-transparent">
-            <div class="container d-flex justify-content-between align-items-center">
+    <header id="header" class="fixed-top d-flex align-items-center header-transparent">
+        <div class="container d-flex justify-content-between align-items-center">
             <!-- Off-Canvas Navbar -->
             <nav id="navbar" class="navbar">
                 <ul>
-                <li><a class="nav-link scrollto" href="{{ url('home') }}">Home</a></li>
-                <li class="dropdown"><a href="#"><span>Event</span> <i class="bi bi-chevron-down"></i></a>
-                    <ul>
-                      <li><a href="#iu">IU - Golden Hour</a></li>
-                      <li><a href="#cld">Coldplay - Music of the Sphere</a></li>
-                      <li><a href="#tls">Tulus - Tur Manusia 2023</a></li>
-                      <li><a href="#ipes">Informatics Festival 11</a></li>
-                      <li><a href="{{ url('acara') }}">JKT-48</a></li>
-                    </ul>
-                </li>
-                <li><a class="nav-link scrollto" href="{{ url('souvenir') }}">Souvenir</a></li>
-                <li><a class="nav-link scrollto active" href="">User</a></li>
+                    <li><a class="nav-link scrollto" href="{{ url('/') }}">Home</a></li>
+                    <li class="dropdown"><a href="#"><span>Event</span> <i class="bi bi-chevron-down"></i></a>
+                        <ul>
+                            <li><a href="#iu">IU - Golden Hour</a></li>
+                            <li><a href="#cld">Coldplay - Music of the Sphere</a></li>
+                            <li><a href="#tls">Tulus - Tur Manusia 2023</a></li>
+                            <li><a href="#ipes">Informatics Festival 11</a></li>
+                            <li><a href="{{ url('acara') }}">JKT-48</a></li>
+                        </ul>
+                    </li>
+                    <li><a class="nav-link scrollto" href="{{ url('souvenir') }}">Souvenir</a></li>
+                    <li><a class="nav-link scrollto active" href="">User</a></li>
                 </ul>
-                <i class="fa fa-list mobile-nav-toggle"><img src="https://i.pinimg.com/originals/26/9d/d1/269dd16fa1f5ff51accd09e7e1602267.png" style="width: 30px; height:30px;"/></i>
-            </nav><!-- .navbar --> 
-            </div>
-        </header>
+                <i class="fa fa-list mobile-nav-toggle"><img src="https://i.pinimg.com/originals/26/9d/d1/269dd16fa1f5ff51accd09e7e1602267.png" style="width: 30px; height:30px;" /></i>
+            </nav><!-- .navbar -->
+        </div>
+    </header>
     <div class="student-profile py-4 mt-5">
         <div class="container">
             <div class="row">
