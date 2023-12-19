@@ -63,7 +63,7 @@
             </div>
             <div class="modal-body">
                 <label for="jumlah">Jumlah Tiket :</label>
-                <input type="number" id="jumlah" name="jumlah" min="1" required>
+                <input type="number" id="jumlah" name="jumlah" min="1" oninput="updateSubtotal()" required>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
@@ -132,6 +132,9 @@
                                             <div class="inputbox"> <input type="text" name="name" min="1" max="999" class="form-control" required="required"> <span>Tenggat Pembayaran</span> </div>
                                             <div class="inputbox"> <input type="text" name="name" min="1" max="999" class="form-control" required="required"> <span>CVV</span> </div>
                                         </div>
+
+                                        <div id="subtotal">Subtotal: $0</div>
+
                                         <div class="px-5 pay"> <button type="submit" class="btn btn-success btn-block">Pay</button> </div>
                                     </form>
                                 </div>
@@ -171,5 +174,14 @@ function copyJumlah() {
 function switchModal() {
     $('#exampleModal').modal('hide');
     $('#modalPembayaran').modal('show');
+}
+</script>
+
+<script>
+function updateSubtotal() {
+    var jumlah = document.getElementById('jumlah').value;
+    var biaya = Number("{{$acara->biaya}}");
+    var subtotal = jumlah * biaya;
+    document.getElementById('subtotal').textContent = 'Subtotal: $' + subtotal;
 }
 </script>
