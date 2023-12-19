@@ -143,7 +143,7 @@
             <div class="row p-2">
                 <div class="col">
                     <div class="container" id="container-foto" >
-                        <img src=" {{ asset('images/event2.jpg') }} " alt="event2">
+                        <img src=" {{ asset($ac->poster) }} " style="width: 100%; height: 100%" alt="event2">
                     </div>
                     
 
@@ -273,7 +273,7 @@
                     <div class="row p-2">
                         <label for="deskripsi" class="col-sm-2 col-form-label">Deskripsi</label>
                         <div class="col-sm-10">
-                            <textarea required type="text" class="form-control" id="inputDeskripsi" name="deskripsiEvent"></textarea>
+                            <textarea required type="text" class="form-control" id="inputDeskripsi" name="deskripsi" value="{{ old('deskripsi') }}"></textarea>
                         </div>
                     </div>
 
@@ -301,14 +301,14 @@
                     <div class="row p-2">
                         <label for="inputFile" class="col-sm-2 col-form-label">Masukkan Foto/Video </label>
                         <div class="col-sm-10">
-                            <input class="form-control" id="inputFile" type="file" accept=".jpg,.jpeg,.png,.mov,.mp4" name="asset"/>
+                            <input class="form-control" id="inputFile" type="file" accept=".jpg,.jpeg,.png,.mov,.mp4" name="poster" value="{{ old('poster') }}"/>
                         </div>
                     </div>
 
                 </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="submit" class="btn btn-primary" data-bs-dismiss="modal" type="submit">Save changes</button>
+                <button type="submit" class="btn btn-primary" data-bs-dismiss="modal" type="submit">Save</button>
             </div>
         </div>
         </form>
