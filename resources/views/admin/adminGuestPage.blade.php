@@ -132,10 +132,13 @@
 
     .my-container {
         background-color: #0000;
+        /* background-color: #000000; */
         width: 32vh;
         height: 16vh;
         border-radius: 8px;
         box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.5);
+        outline: 1px solid rgba(0, 0, 0, 0.5);
+        overflow: hidden;
     }
 
     </style>
@@ -181,16 +184,28 @@
 
         <div class="row">
             <?php
-            $pendaftaran = \App\Models\Gueststar::all();
-            $pendaftaranFiltered = $pendaftaran->where('id_acara', '=', $ac->id);
-            $totalPdft = $pendaftaranFiltered->count();
+            $guest = \App\Models\Gueststar::all();
+            $guestFiltered = $guest->where('id_acara', '=', $ac->id);
+            $totalGst = $guestFiltered->count();
             ?>
-            <p class="m-0">Total Performer: {{ $totalPdft }}</p>
-            <div class="scrollable" id="userContainer">
+            <p class="m-0">Total Performer: {{ $totalGst }}</p>
+            <div class="scrollable" id="userContainer" style="display: flex; justify-content: left;">
                 <div class="row">
-                @forelse(range(1, 10) as $i)
-                    <div class="mt-2 mr-2 container-sm my-container">
-                
+                @forelse($guestFiltered  as $guest)
+                    <div class="mt-2 container-sm my-container d-flex justify-content-center align-items-center position-relative">
+                        <div class="row">
+                            <div class="col-8">
+                                <img src="{{ asset($guest->foto) }}" alt="foto" style="width: 100%; height: 100%; border-radius: 8px;">
+                            </div>
+                            <div class="col-4">
+                                <p>{{ $guest->nama }}</p>
+
+                                <a class="mt-4" href="#" id="removeButtonUser" data-bs-toggle="modal" data-bs-target="#hapusUserModal">
+                                    <box-icon name='trash' id="removeUser"></box-icon>
+                                </a>
+
+                            </div>
+                        </div>
                     </div>
                 @empty
                     <p>No containers to display.</p>
