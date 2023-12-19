@@ -19,6 +19,7 @@ class Souvenir extends Model
         'harga',
         'deskripsi',
         'jenis',
+        'stok',
         'gambar',
     ];
 }

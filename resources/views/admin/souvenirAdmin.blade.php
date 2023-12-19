@@ -148,7 +148,7 @@
                         Tidak ada
                     </div>
                     @endforelse
-                <button class="btn btn-success small-button" data-bs-toggle="modal" data-bs-target="#editSouvenirModal" data-acara-id="{{ $ac->id }}">Tambah Souvenir</button>  
+                <button class="btn btn-success small-button" data-bs-toggle="modal" data-bs-target="#tambahSouvenirModal" data-souvenir-id="{{ $ac->id }}">Tambah Souvenir</button>  
                 <hr>
             </div>
         </div>
@@ -255,7 +255,6 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                            <input type="hidden" name="id_acara" id="id_acara_input" value="">
 
                             <div class="row p-2">
                                 <label for="namaSouvenir" class="col-sm-2 col-form-label">Nama Souvenir</label>
@@ -316,8 +315,9 @@
         var tambahSouvenirModal = document.getElementById('tambahSouvenirModal');
         tambahSouvenirModal.addEventListener('show.bs.modal', function (event) {
             var button = event.relatedTarget;
-            var acaraId = button.getAttribute('data-acara-id');
+            var acaraId = button.getAttribute('data-souvenir-id');
             var idAcaraInput = document.getElementById('id_acara_input');
+            console.log(acaraId);
             idAcaraInput.value = acaraId;
         });
     </script>

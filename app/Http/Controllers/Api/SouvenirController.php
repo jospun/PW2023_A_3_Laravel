@@ -60,7 +60,7 @@ class SouvenirController extends Controller
                 'deskripsi' => 'required',
                 'jenis' => 'required',
                 'stok' => 'required',
-                'gambar' => 'required|mimes:jpeg,png,jpg',
+                'gambar' => 'required|mimes:jpeg,png',
             ]);
 
             if ($validator->fails()) {
@@ -77,7 +77,7 @@ class SouvenirController extends Controller
             $image->move($destinationPath, $imageName); 
             $destinationPath = 'images/'.$imageName;
 
-            Souvenir::create([
+            $souvenir = Souvenir::create([
                 'nama' => $request->nama,
                 'harga' => $request->harga,
                 'deskripsi' => $request->deskripsi,
@@ -90,13 +90,11 @@ class SouvenirController extends Controller
             return back()->with('success', 'Souvenir Berhasil ditambahkan');
             
         } catch (\Exception $e) {
-            // return response()->json([
-            //     'success' => false,
-            //     'message' => 'Souvenir Gagal Ditambahkan!',
-            //     'data'    => $e->getMessage(),
-            // ], 500);
-
-            return back()->with('error', 'Acara gagal ditambahkan');
+            return response()->json([
+                'success' => false,
+                'message' => 'Souvenir Gagal Ditambahkan!',
+                'data'    => $e->getMessage(),
+            ], 500);
         }
     }
 

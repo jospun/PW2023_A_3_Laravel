@@ -26,6 +26,13 @@ class AcaraController extends Controller
             return view('admin.souvenirAdmin', compact('acara'));
     }
 
+    public function showAcaraSouve()
+    {
+            $acara = Acara::all();
+            return view('user.souvenirPage', compact('acara'));
+    }
+
+
 
     public function showNav()
     {

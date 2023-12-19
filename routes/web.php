@@ -22,6 +22,10 @@ Route::get('/', function () {
     return view('homePage');
 });
 
+Route::get('/home', function () {
+    return view('homePage');
+});
+
 Route::get('/nav1', function () {
     return view('navbar/navbarHome');
 });
@@ -77,6 +81,10 @@ Route::get('/adminsv', function () {
 
 Route::resource('adminac', AcaraController::class);
 Route::get('/', [HomeController::class, 'showHome']);
+Route::get('/home', [HomeController::class, 'showHome']);
+
+Route::get('souvenir',[AcaraController::class, 'showAcaraSouve']);
+
 Route::get('admin', [PendaftaranController::class, 'showHomeAdmin']);
 Route::delete('adminac/pendaftaran/{id}', [PendaftaranController::class, 'hapusPendaftaran'])->name('adminac.hapusDaftar');
 Route::put('adminac/pendaftaran/{id}', [PendaftaranController::class, 'verifBayar'])->name('adminac.verifBayar');

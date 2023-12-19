@@ -44,8 +44,8 @@
         }
         .card-img{
             width: fit-content;
-            height: auto;
-            min-height: 21em;
+            height: 50%;
+            max-height: 15em;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -86,58 +86,43 @@
     </style>
 
 
-    <header id="header" class="fixed-top d-flex align-items-center header-transparent">
-        <div class="container d-flex justify-content-between align-items-center">
     
-          <div id="logo">
-            <a href="index.html"><img src=" "alt=""></a>
-          </div>
-           <!-- Off-Canvas Navbar -->
-           <nav id="navbar" class="navbar">
-            <ul>
-              <li><a class="nav-link scrollto" href="{{ url('home') }}">Home</a></li>
-              <li class="dropdown"><a href="#"><span>Event</span> <i class="bi bi-chevron-down"></i></a>
-                <ul>
-                  <li><a href="#iu">IU - Golden Hour</a></li>
-                  <li><a href="#cld">Coldplay - Music of the Sphere</a></li>
-                  <li><a href="#tls">Tulus - Tur Manusia 2023</a></li>
-                  <li><a href="#ipes">Informatics Festival 11</a></li>
-                  <li><a href="{{ url('acara') }}">JKT-48</a></li>
-                </ul>
-              </li>
-              <li><a class="nav-link scrollto active" href="{{ url('home') }}">Souvenir</a></li>
-            </ul>
-            <i class="fa fa-list mobile-nav-toggle"><img src="https://i.pinimg.com/originals/26/9d/d1/269dd16fa1f5ff51accd09e7e1602267.png" style="width: 30px; height:30px;"/></i>
-          </nav><!-- .navbar --> 
-        </div>
-    </header>
-    
-    <div class="container text-center mt-5 pt-5">
-        <div class="row mx-auto my-auto justify-content-center">
+    <div class="container text-center mt-5 pt-5 mb-5">
+        @foreach($acara as $ac)
+        <?php
+            $souvenir = \App\Models\Souvenir::all();
+            $souvenirFilter = $souvenir->where('id_acara','=', $ac->id);
+            $totalSouve = $souvenirFilter->count(); 
+        ?>
+        @if($totalSouve > 0)
+        <div class="row mx-auto my-5 justify-content-center">
             <div style="background-color: #49D6A9; color:black">
-                <h1 class="mt-3" style="font-weight: bolder">JKT-48</h1>
-                <h4>Bergabung menjadi WOTA dengan souvenir-souvenir ini!</h4>
+                <p>{{ $totalSouve }}</p>
+                <h1 class="mt-3" style="font-weight: bolder">{{ $ac->nama_acara }}</h1>
+                <h4>{{ $ac->deskripsi }}</h4>
             </div>
             <div id="souvenirCarousel" class="carousel slide m-0 mt-2" data-bs-ride="carousel" style="border: 1px solid margin-top:0">
                 <div class="carousel-inner" role="listbox">
-                    {{-- @forelse($souvenirs as $souvenir) --}}
-                    <div class="carousel-item active">
+                    <?php $first = true; ?>
+                    <div class="row">
+                    @forelse($souvenirFilter as $souve)
                         <div class="col-lg-3 col-md-4 col-6">
                             <div class="card" data-bs-toggle="modal" data-bs-target="#myModal">
                                 <div class="card-img">
-                                    <img src="{{ asset('images/bajuWota.png') }}" class="img-fluid">
+                                    <img id="gambar" src="{{ asset($souve->gambar)}}" class="img-fluid" >
                                 </div>
                                 <div class="card-title mt-3 mb-0">
-                                   Baju Wota
+                                   {{ $souve->nama }}
                                 </div>
                                 <div class="card-description" style="text-align: center">
-                                    <p style="margin: 0">Harga: Rp 120.000</p>
-                                    <p style="margin: 0">Stok: 120</p>
+                                    <p id="harga" style="margin: 0">Harga: Rp {{ $souve->harga }}</p>
+                                    <p style="margin: 0">Stok: {{ $souve->stok }}</p>
                                 </div>
                             </div>
                         </div>
+                    @empty
+                    @endforelse
                     </div>
-                    {{-- @endforelse --}}
                 </div>
                 <a class="carousel-control-prev bg-transparent w-aut" href="#souvenirCarousel" role="button" data-bs-slide="prev">
                     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -147,118 +132,9 @@
                 </a>
             </div>
         </div>
-        <div class="row mx-auto my-auto mt-5 justify-content-center">
-            <div style="background-color: #49D6A9; color:black">
-                <h1 class="mt-3" style="font-weight: bolder">Coldplay - Music Of The Sphere</h1>
-                <h4>Bergabung menjadi Colders dengan souvenir-souvenir ini!</h4>
-            </div>
-            <div id="souvenirCarousel2" class="carousel slide m-0 mt-2" data-bs-ride="carousel">
-                <div class="carousel-inner" role="listbox">
-                    <div class="carousel-item active">
-                        <div class="col-lg-3 col-md-4 col-6">
-                            <div class="card" data-bs-toggle="modal" data-bs-target="#myModal">
-                                <div class="card-img">
-                                    <img src="{{ asset('images/bajuWota.png') }}" class="img-fluid">
-                                </div>
-                                <div class="card-title mt-3 mb-0">
-                                   Baju Wota
-                                </div>
-                                <div class="card-description" style="text-align: center">
-                                    <p style="margin: 0">Harga: Rp 120.000</p>
-                                    <p style="margin: 0">Stok: 120</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="carousel-item">
-                        <div class="col-lg-3 col-md-4 col-6">
-                            <div class="card" data-bs-toggle="modal" data-bs-target="#myModal">
-                                <div class="card-img">
-                                    <img src="{{ asset('images/bajuWota.png') }}" class="img-fluid">
-                                </div>
-                                <div class="card-title mt-3 mb-0">
-                                   Baju Wota
-                                </div>
-                                <div class="card-description" style="text-align: center">
-                                    <p style="margin: 0">Harga: Rp 120.000</p>
-                                    <p style="margin: 0">Stok: 120</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="carousel-item">
-                        <div class="col-lg-3 col-md-4 col-6">
-                            <div class="card" data-bs-toggle="modal" data-bs-target="#myModal">
-                                <div class="card-img">
-                                    <img src="{{ asset('images/shirt.png') }}" class="img-fluid" >
-                                </div>
-                                <div class="card-title mt-3 mb-0">
-                                   Baju Wota
-                                </div>
-                                <div class="card-description" style="text-align: center">
-                                    <p style="margin: 0">Harga: Rp 120.000</p>
-                                    <p style="margin: 0">Stok: 120</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="carousel-item">
-                        <div class="col-lg-3 col-md-4 col-6">
-                            <div class="card" data-bs-toggle="modal" data-bs-target="#myModal">
-                                <div class="card-img">
-                                    <img src="{{ asset('images/bajuWota.png') }}" class="img-fluid">
-                                </div>
-                                <div class="card-title mt-3 mb-0">
-                                   Baju Wota
-                                </div>
-                                <div class="card-description" style="text-align: center">
-                                    <p style="margin: 0">Harga: Rp 120.000</p>
-                                    <p style="margin: 0">Stok: 120</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="carousel-item">
-                        <div class="col-lg-3 col-md-4 col-6">
-                            <div class="card" data-bs-toggle="modal" data-bs-target="#myModal">
-                                <div class="card-img">
-                                    <img src="{{ asset('images/bajuWota.png') }}" class="img-fluid">
-                                </div>
-                                <div class="card-title mt-3 mb-0">
-                                   Baju Wota
-                                </div>
-                                <div class="card-description" style="text-align: center">
-                                    <p style="margin: 0">Harga: Rp 120.000</p>
-                                    <p style="margin: 0">Stok: 120</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="carousel-item">
-                        <div class="col-lg-3 col-md-4 col-6">
-                            <div class="card" data-bs-toggle="modal" data-bs-target="#myModal">
-                                <div class="card-img">
-                                    <img src="{{ asset('images/shirt.png') }}" class="img-fluid">
-                                </div>
-                                <div class="card-title mt-3 mb-0">
-                                   Baju Wota
-                                </div>
-                                <div class="card-description" style="text-align: center">
-                                    <p style="margin: 0">Harga: Rp 120.000</p>
-                                    <p style="margin: 0">Stok: 120</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <a class="carousel-control-prev bg-transparent w-aut" href="#souvenirCarousel2" role="button" data-bs-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                </a>
-                <a class="carousel-control-next bg-transparent w-aut" href="#souvenirCarousel2" role="button" data-bs-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                </a>
-            </div>
-        </div>
+        <hr>
+        @endif
+        @endforeach
     </div>
 
     <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true"   >
@@ -268,12 +144,12 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     <div class="row">
                         <div class="col-md-4 col-sm-12">
-                            <img src="{{ asset('images/bajuWota.png') }}" alt="Your Image" class="img-fluid">
-                        </div>
+                            <img src="{{ asset('images/bajuWota.png') }}" alt="Your Image" class="img-fluid modal-img">
+                        </div>                        
                         <div class="col-md-8 col-sm-12 mt-3">
-                            <h3 style="font-weight: bolder">Baju WOTA</h3>
-                            <h5>Harga : Rp 120.000</h5>
-                            <h5>QTY : 
+                            <h3 id="nama" style="font-weight: bolder">Baju WOTA</h3>
+                            <h5 id="harga">Harga : Rp 120.000</h5>
+                            <h5 id="qty">QTY : 
                                 <select name="total" id="total" style="max-width: 50px">
                                 <option value="1">1</option>
                                 <option value="2">2</option>
@@ -282,7 +158,7 @@
                                 <option value="5">5</option>
                               </select>
                             </h5>
-                            <h5>
+                            <h5 id="total">
                                 Total : Rp XXX.XXX
                             </h5>
                             <h5>Alamat Lengkap: </h5>
@@ -328,6 +204,37 @@
             }
         })
     </script>
+
+
+<script>
+    $(document).ready(function(){
+        $('.card').click(function(){
+            let nama = $(this).find('.card-title').text().trim();
+            let harga = $(this).find('#harga').text().trim().substring(10);
+            let gambarSrc = $(this).find('#gambar').attr('src');
+
+            console.log(harga);
+            console.log(gambarSrc);
+
+            $('#myModal .modal-body h3').text(nama);
+            $('#myModal .modal-body h5:eq(0)').text('Harga: Rp ' + harga);
+
+            $('#myModal .modal-body .modal-img').attr('src', gambarSrc);
+
+            $('#myModal .modal-body select[name="total"]').empty();
+            for(let i = 1; i <= 5; i++) {
+                $('#myModal .modal-body select[name="total"]').append(`<option value="${i}">${i}</option>`);
+            }
+
+            $('#myModal .modal-body select[name="total"]').change(function() {
+                let qty = parseInt($(this).val());
+                let total = parseFloat(harga) * qty;
+                $('#myModal .modal-body h5:eq(2)').text('Total : Rp ' + total);
+            });
+        });
+    });
+</script>
+
 
     <script src='https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js'></script>
     <script src='https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js'></script>
