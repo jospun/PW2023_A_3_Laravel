@@ -266,8 +266,6 @@
                         <div class="col-sm-10">
                             <input required type="text" class="form-control" id="inputEvent" name="nama_acara" value="{{ old('nama_acara') }}">
                         </div>
-
-                        
                     </div>
 
                     <div class="row p-2">
@@ -334,8 +332,6 @@
                             <div class="col-sm-10">
                                 <input required type="text" class="form-control" id="inputEventE" name="nama_acara" >
                             </div>
-    
-                            
                         </div>
     
                         <div class="row p-2">

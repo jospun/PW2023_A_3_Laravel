@@ -161,7 +161,6 @@
         </div>
     </div>
 </div>
-@endsection
 
 <script>
 function copyJumlah() {
@@ -185,3 +184,5 @@ function updateSubtotal() {
     document.getElementById('subtotal').textContent = 'Subtotal: $' + subtotal;
 }
 </script>
+
+@endsection

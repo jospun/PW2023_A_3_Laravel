@@ -74,6 +74,7 @@ Route::get('/adminsv', function () {
 });
 
 Route::resource('pendaftaran', PendaftaranController::class);
+Route::resource('admings', AcaraController::class);
 
 Route::get('nav1', [AcaraController::class, 'showNav']);
 Route::resource('adminac', AcaraController::class);
