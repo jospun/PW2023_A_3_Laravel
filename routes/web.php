@@ -120,3 +120,5 @@ Route::post('admings', [GueststarController::class, 'store'])->name('admings.sto
 Route::delete('admings/{id}',[GueststarController::class, 'destroy'])->name('admings.destroy');
 
 Route::get('adminuser', [UserController::class, 'fetchAllUser']);
+Route::put('adminuser/{id}',[UserController::class, 'updateUserById'])->name('adminuser.update');
+Route::delete('adminuser/{id}',[UserController::class, 'deleteUserById'])->name('adminuser.destroy');

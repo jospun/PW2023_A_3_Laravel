@@ -289,15 +289,15 @@
 </script>
 
 <script>
-document.addEventListener('DOMContentLoaded', function () {
-    var modal = document.getElementById('hapusGuestStarModal');
-    modal.addEventListener('show.bs.modal', function (event) {
-        var button = event.relatedTarget;
-        var guestStarId = button.getAttribute('data-guest-star-id');
-        var form = document.getElementById('hapusGuestStarForm');
-        form.action = '/admings/' + guestStarId;
+    document.addEventListener('DOMContentLoaded', function () {
+        var modal = document.getElementById('hapusGuestStarModal');
+        modal.addEventListener('show.bs.modal', function (event) {
+            var button = event.relatedTarget;
+            var guestStarId = button.getAttribute('data-guest-star-id');
+            var form = document.getElementById('hapusGuestStarForm');
+            form.action = '/admings/' + guestStarId;
+        });
     });
-});
 </script>
 
 @endsection
