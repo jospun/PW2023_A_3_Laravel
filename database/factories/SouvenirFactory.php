@@ -22,6 +22,7 @@ class SouvenirFactory extends Factory
             'harga' => $this->faker->randomFloat(2, 0, 1000),
             'deskripsi' => $this->faker->text(200),
             'jenis' => $this->faker->randomElement(['Baju', 'Gantungan Kunci', 'Hoodie']),
+            'stok' => $this->faker->numberBetween(0, 100),
             'gambar' => $this->faker->imageUrl(),
         ];
     }

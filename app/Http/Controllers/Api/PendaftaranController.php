@@ -87,19 +87,10 @@ class PendaftaranController extends Controller
 
             $subtotal = $acara->biaya * $request->jumlah;
 
-            $pendaftaran = [
-                'id_user' => 1,
-                'id_acara' => $request->id_acara,
-                'status' => "Belum Membayar",
-                'tanggal_bayar' => Carbon::now(),
-                'jumlah' => $request->jumlah,
-                'subTotal' => $subtotal,
-            ];
-
             Pendaftaran::create([
-                'id_user' => 1,
+                'id_user' => auth()->user()->id,
                 'id_acara' => $request->id_acara,
-                'status' => 'Sudah Membayar',
+                'status' => 'Belum Membayar',
                 'tanggal_bayar' => Carbon::now(),
                 'jumlah' => $request->jumlah,
                 'subTotal' => $subtotal,
@@ -111,8 +102,7 @@ class PendaftaranController extends Controller
             //     'data' => $pendaftaran
             // ], 200);
 
-            $event = Acara::inRandomOrder()->take(5)->get();
-            return view('homePage', compact('event'));
+            return back()->with('success', 'Pendaftaran Berhasil ditambahkan');
 
             // return redirect()->back()->with('success', 'Pendaftaran Berhasil Ditambahkan');
         } catch(\Exception $e){

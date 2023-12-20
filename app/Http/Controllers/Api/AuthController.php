@@ -48,7 +48,7 @@ class AuthController extends Controller
             'no_telp' => $request->no_telp,
             'role' => 'user',
             'verify_key' => $str,
-            'active' => -1,
+            'active' => 0,
         ]);
 
         $details = [
@@ -59,7 +59,13 @@ class AuthController extends Controller
             'url' => request()->getHttpHost() . '/register/verify/' . $str
         ];
 
-        Mail::to($request->email)->send(new MailSend($details));
+        try {
+            Mail::to($request->email)->send(new MailSend($details));
+        } catch (\Exception $e) {
+            // Tangani kesalahan di sini dan tampilkan pesan kesalahan kepada pengguna
+            return response()->json(['error' => $e->getMessage()], 500);
+        }
+        
 
         Session::flash('message', 'Link verifikasi telah dikirim ke email anda. Silahkan cek email anda untuk mengaktifkan akun.');
 
