@@ -13,9 +13,11 @@ class UserController extends Controller
     public function fetchAllUser()
     {
         $user = User::all();
-        return response()->json([
-            'message' => 'success',
-            'data' => $user
-        ]);
+        // return response()->json([
+        //     'message' => 'success',
+        //     'data' => $user
+        // ]);
+
+        return view('admin.adminUserPage', compact('user'));
     }
 }

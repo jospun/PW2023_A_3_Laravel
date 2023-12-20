@@ -52,6 +52,7 @@ class AuthController extends Controller
         ]);
 
         $details = [
+            'nama_user' => $request->nama_user,
             'username' => $request->username,
             'website' => 'FEST fest',
             'datetime' => date('Y-m-d H:i:s'),
