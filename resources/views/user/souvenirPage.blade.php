@@ -97,7 +97,6 @@
         @if($totalSouve > 0)
         <div class="row mx-auto my-5 justify-content-center">
             <div style="background-color: #49D6A9; color:black">
-                <p>{{ $totalSouve }}</p>
                 <h1 class="mt-3" style="font-weight: bolder">{{ $ac->nama_acara }}</h1>
                 <h4>{{ $ac->deskripsi }}</h4>
             </div>
@@ -107,7 +106,7 @@
                     <div class="row">
                     @forelse($souvenirFilter as $souve)
                         <div class="col-lg-3 col-md-4 col-6">
-                            <div class="card" data-bs-toggle="modal" data-bs-target="#myModal">
+                            <div class="card" data-bs-toggle="modal" data-bs-target="#myModal" data-souvenir-id = {{ $souve->id }}>
                                 <div class="card-img">
                                     <img id="gambar" src="{{ asset($souve->gambar)}}" class="img-fluid" >
                                 </div>
@@ -137,9 +136,11 @@
         @endforeach
     </div>
 
-    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true"   >
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content"> 
+                <form id="Event" action="{{ route('transaksi.store') }}" method="POST" enctype="multipart/form-data">
+                @csrf
                 <div class="modal-body">
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     <div class="row">
@@ -150,7 +151,7 @@
                             <h3 id="nama" style="font-weight: bolder">Baju WOTA</h3>
                             <h5 id="harga">Harga : Rp 120.000</h5>
                             <h5 id="qty">QTY : 
-                                <select name="total" id="total" style="max-width: 50px">
+                                <select class="form-input" name="jumlah" id="jumlah" style="max-width: 50px">
                                 <option value="1">1</option>
                                 <option value="2">2</option>
                                 <option value="3">3</option>
@@ -162,13 +163,15 @@
                                 Total : Rp XXX.XXX
                             </h5>
                             <h5>Alamat Lengkap: </h5>
-                            <input class="form-control col-7" placeholder="Jalanin Aja Dulu Nomor 1 Kasihan, Bantul"> 
+                            <input class="form-control col-7" placeholder="Jalanin Aja Dulu Nomor 1 Kasihan, Bantul" name="alamat"> 
+                            <input type="hidden" id="hiddenIdSouvenir" name="id_souvenir" value="">
                         </div>
                     </div>
                     <span class="d-flex justify-content-end">
-                        <button class="btn btn-primary" data-bs-target="#exampleModalToggle2" data-bs-toggle="modal" data-bs-dismiss="modal">Bayar</button>
+                        <button type="submit" class="btn btn-primary" data-bs-target="#exampleModalToggle2" data-bs-toggle="modal" data-bs-dismiss="modal">Bayar</button>
                     </span>
                 </div>
+            </form>
             </div>
         </div>
     </div>
@@ -205,35 +208,42 @@
         })
     </script>
 
+    <script>
+        var myModal = document.getElementById('myModal');
+        myModal.addEventListener('show.bs.modal', function (event) {
+            var button = event.relatedTarget;
+            var souveId = button.getAttribute('data-souvenir-id');
+            var idSouveInput = document.getElementById('hiddenIdSouvenir');
+            console.log(souveId);
+            idSouveInput.value = souveId;
+        });
+    </script>
 
-<script>
-    $(document).ready(function(){
-        $('.card').click(function(){
-            let nama = $(this).find('.card-title').text().trim();
-            let harga = $(this).find('#harga').text().trim().substring(10);
-            let gambarSrc = $(this).find('#gambar').attr('src');
+    <script>
+        $(document).ready(function(){
+            $('.card').click(function(){
+                let nama = $(this).find('.card-title').text().trim();
+                let harga = $(this).find('#harga').text().trim().substring(10);
+                let gambarSrc = $(this).find('#gambar').attr('src');
 
-            console.log(harga);
-            console.log(gambarSrc);
+                $('#myModal .modal-body h3').text(nama);
+                $('#myModal .modal-body h5:eq(0)').text('Harga: Rp ' + harga);
 
-            $('#myModal .modal-body h3').text(nama);
-            $('#myModal .modal-body h5:eq(0)').text('Harga: Rp ' + harga);
+                $('#myModal .modal-body .modal-img').attr('src', gambarSrc);
 
-            $('#myModal .modal-body .modal-img').attr('src', gambarSrc);
+                
+                $('#myModal .modal-body select[name="jumlah"]').change(function() {
+                    let qty = parseInt($(this).val()); // Ubah menjadi integer
+                    let harga = parseFloat($('#myModal .modal-body h5:eq(0)').text().split('Rp ')[1]); // Ambil kembali nilai harga
+                    let total = harga * qty; // Hitung total
+                    $('#myModal .modal-body h5:eq(2)').text('Total : Rp ' + total.toFixed(2)); // Tampilkan total
+                });
 
-            $('#myModal .modal-body select[name="total"]').empty();
-            for(let i = 1; i <= 5; i++) {
-                $('#myModal .modal-body select[name="total"]').append(`<option value="${i}">${i}</option>`);
-            }
+                
 
-            $('#myModal .modal-body select[name="total"]').change(function() {
-                let qty = parseInt($(this).val());
-                let total = parseFloat(harga) * qty;
-                $('#myModal .modal-body h5:eq(2)').text('Total : Rp ' + total);
             });
         });
-    });
-</script>
+    </script>
 
 
     <script src='https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js'></script>

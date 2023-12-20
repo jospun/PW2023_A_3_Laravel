@@ -54,6 +54,26 @@ class PendaftaranController extends Controller
             // return redirect()->route('acara.index')->with('error', 'Acara tidak ditemukan');
         }
     }
+
+    public function showPendaftarbyUser()
+    {
+        try{
+            $id = auth()->user()->id;
+            $pendaftarans = Pendaftaran::join(
+                'acaras', 'acaras.id' ,'=', 'pendaftarans.id_acara' 
+            )->where('id_user','=', $id)->get();
+
+
+            return view('user.profile', compact('pendaftarans'));
+        } catch(\Exception $e){
+            return response()->json([
+                'message' => 'Fetch Acara Failed',
+                'data' => $e->getMessage(),
+            ], 400);
+
+            // return redirect()->route('acara.index')->with('error', 'Acara tidak ditemukan');
+        }
+    }
     
     /**
      * Store a newly created resource in storage.

@@ -35,19 +35,19 @@
                 <div class="icon-box" data-aos="fade-up" data-aos-delay="100">
                   <div class="icon"><i class="fa fa-briefcase"><img src="{{ asset('images/email.svg') }}" style="width: 40px; height:40px;"/></i></div>
                   <h4 class="title"><a href="">Email Us</a></h4>
-                  <p class="description">Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi</p>
+                  <p class="description">Get in touch! We're here to assist you. We make communication seamless and responsive to your needs.</p>
                 </div>
     
                 <div class="icon-box" data-aos="fade-up" data-aos-delay="200">
                   <div class="icon"><i class="fa fa-card-checklist"><img src="{{ asset('images/collab.svg') }}" style="width: 50px; height:50px;"/></i></div>
                   <h4 class="title"><a href="">Develop With Us</a></h4>
-                  <p class="description">Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</p>
+                  <p class="description">Join us to craft innovative solutions! Be a part of our dynamic team, where creativity thrives.</p>
                 </div>
     
                 <div class="icon-box" data-aos="fade-up" data-aos-delay="300">
                   <div class="icon"><i class="bi bi-binoculars"><img src="{{ asset('images/fest.svg') }}" style="width: 50px; height:50px;"/></i></div>
                   <h4 class="title"><a href="">Enjoy Your Event</a></h4>
-                  <p class="description">Minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat tarad limino ata</p>
+                  <p class="description">Join us to craft innovative solutions! Be a part of our dynamic team, where creativity thrives.</p>
                 </div>
     
               </div>
