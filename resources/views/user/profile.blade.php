@@ -156,7 +156,7 @@
                                         {{ $pdft->nama_acara }}
                                     </div>
                                     <div class="desc-performerDisplayer" style="margin-left: auto;">
-                                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalDetail">
+                                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalDetail" data-id="{{ $pdft->id_acara }}">
                                             Detail
                                         </button>
                                     </div>
@@ -267,32 +267,32 @@
                 <div class="modal-body">
                     <div class="col">
                         <div class="container shadow-sm desc-detailImg" style="text-align: center;">
-                            <img src="https://i.pinimg.com/736x/52/b3/6f/52b36f810dd737b1e8c81edb152c14d4.jpg" alt="Gambar">
+                            <img     alt="Gambar" id="gambar">
                         </div>
                         <div class="container shadow-sm m-4">
                             <table class="table" style="border: none;">
                                 <tr>
                                     <th width="30%">Nama konser</th>
                                     <td width="2%">:</td>
-                                    <td>Noah The Band</td>
+                                    <td id="namaKonser"></td>
                                 </tr>
 
                                 <tr>
-                                    <th width="30%">Tanggal Konser</th>
+                                    <th width="30%">Tanggal Mulai</th>
                                     <td width="2%">:</td>
-                                    <td>30 September 2023</td>
+                                    <td id="tanggalMulai"></td>
                                 </tr>
 
                                 <tr>
-                                    <th width="30%">Tanggal Pendaftaran</th>
+                                    <th width="30%">Tanggal Tutup</th>
                                     <td width="2%">:</td>
-                                    <td>28 September 2023</td>
+                                    <td id="tanggalTutup"></td>
                                 </tr>
 
                                 <tr>
                                     <th width="30%">Status Membayar</th>
                                     <td width="2%">:</td>
-                                    <td>Lunas</td>
+                                    <td id="status"></td>
                                 </tr>
                             </table>
                         </div>
@@ -304,6 +304,31 @@
             </div>
         </div>
     </div>
+
+    <script>
+    document.querySelectorAll('.btn-primary[data-toggle="modal"]').forEach(button => {
+        button.addEventListener('click', function(event) {
+            const acaraId = this.getAttribute('data-id');
+            console.log(acaraId);
+            fetch(`profile/${acaraId}`)
+                .then(response => response.json())
+                .then(data => {
+
+                    document.getElementById('namaKonser').innerText = data.data[0].nama_acara;
+                    document.getElementById('tanggalMulai').innerText = data.data[0].tanggal_mulai;
+                    document.getElementById('tanggalTutup').innerText = data.data[0].tanggal_tutup;
+                    document.getElementById('status').innerText = data.data[0].status;
+                    document.getElementById('gambar').src = data.data[0].poster; 
+                    console.log(data);
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+        });
+    });
+
+
+    </script>
 
 </body>
 

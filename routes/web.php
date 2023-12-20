@@ -113,6 +113,8 @@ Route::get('nav1', [AcaraController::class, 'showNav']);
 Route::get('nav2', [AcaraController::class, 'showNavUser']);
 
 Route::get('profile',[PendaftaranController::class, 'showPendaftarbyUser']);
+Route::get('profile/{id}',[PendaftaranController::class, 'show']);
+
 
 Route::get('adminsv', [AcaraController::class, 'showInSouvenir']);
 Route::post('adminsv', [SouvenirController::class, 'store'])->name('adminsv.store');
