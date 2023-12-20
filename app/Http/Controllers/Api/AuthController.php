@@ -48,7 +48,7 @@ class AuthController extends Controller
             'no_telp' => $request->no_telp,
             'role' => 'user',
             'verify_key' => $str,
-            'active' => -1,
+            'active' => 0,
         ]);
 
         $details = [
