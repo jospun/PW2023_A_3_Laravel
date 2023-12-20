@@ -142,6 +142,7 @@ class AcaraController extends Controller
             // return redirect()->route('acara.index')->with('error', 'Acara tidak ditemukan');
         }
     }
+
     
 
     public function edit($id){

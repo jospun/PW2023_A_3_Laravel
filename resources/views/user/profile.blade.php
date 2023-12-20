@@ -157,7 +157,7 @@
                                         {{ $pdft->nama_acara }}
                                     </div>
                                     <div class="desc-performerDisplayer" style="margin-left: auto;">
-                                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalDetail">
+                                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalDetail" data-id="{{ $pdft->id_acara }}">
                                             Detail
                                         </button>
                                     </div>
@@ -332,6 +332,31 @@
                 </div>
             </div>
         </div>
+
+    <script>
+    document.querySelectorAll('.btn-primary[data-toggle="modal"]').forEach(button => {
+        button.addEventListener('click', function(event) {
+            const acaraId = this.getAttribute('data-id');
+            console.log(acaraId);
+            fetch(`profile/${acaraId}`)
+                .then(response => response.json())
+                .then(data => {
+
+                    document.getElementById('namaKonser').innerText = data.data[0].nama_acara;
+                    document.getElementById('tanggalMulai').innerText = data.data[0].tanggal_mulai;
+                    document.getElementById('tanggalTutup').innerText = data.data[0].tanggal_tutup;
+                    document.getElementById('status').innerText = data.data[0].status;
+                    document.getElementById('gambar').src = data.data[0].poster; 
+                    console.log(data);
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+        });
+    });
+
+
+    </script>
 
 </body>
 

@@ -110,7 +110,7 @@ class PendaftaranController extends Controller
             Pendaftaran::create([
                 'id_user' => auth()->user()->id,
                 'id_acara' => $request->id_acara,
-                'status' => 'Belum Membayar',
+                'status' => 'Belum Lunas',
                 'tanggal_bayar' => Carbon::now(),
                 'jumlah' => $request->jumlah,
                 'subTotal' => $subtotal,
@@ -142,23 +142,23 @@ class PendaftaranController extends Controller
     public function show($id)
     {
         try{
-            $pendaftaran = Pendaftaran::find($id);
+            $data = Pendaftaran::join(
+                'acaras', 'acaras.id' ,'=', 'pendaftarans.id_acara' 
+            )->where('id_acara','=',$id)->get();
 
-            // return response()->json([
-            //     'success' => true,
-            //     'message' => 'Pendaftaran Berhasil Ditemukan',
-            //     'data' => $pendaftaran
-            // ], 200);
+            return response()->json([
+                'success' => true,
+                'message' => 'Pendaftaran Berhasil Ditemukan',
+                'data' => $data
+            ], 200);
 
-            return view('pendaftaran.show', compact('pendaftaran'));
         } catch(\Exception $e){
-            // return response()->json([
-            //     'success' => false,
-            //     'message' => 'Pendaftaran Tidak Ditemukan',
-            //     'data' => $e->getMessage(),
-            // ], 400);
+            return response()->json([
+                'success' => false,
+                'message' => 'Pendaftaran Tidak Ditemukan',
+                'data' => $e->getMessage(),
+            ], 400);
 
-            return redirect()->route('pendaftaran.index')->with('error', 'Pendaftaran Tidak Ditemukan');
         }
     }
 
@@ -187,7 +187,7 @@ class PendaftaranController extends Controller
             $pendaftaran->update([
                 'id_user' => Auth::user()->id,
                 'id_acara' => $request->id_acara,
-                'status' => "Belum Membayar",
+                'status' => "Belum Lunas",
                 'tanggal_bayar' => Carbon::now(),
             ]);
 
