@@ -141,6 +141,12 @@
         margin-right: 1vh;
     }
 
+    .hover-card:hover {
+        border-color: red !important;
+        border-width: 2px !important;
+        transition: border-color 0.3s ease-in-out;
+    }
+
     </style>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
     <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
@@ -157,37 +163,30 @@
 
     <div class="container border p-3 rounded" id="isi">
         <div class="row p-2 d-flex">
-
-
             @forelse($user as $data)
-            <!-- <div class="my-container mt-2"> -->
-                <!-- <div class="row"> -->
-                    <div class="card" style="width: 18rem; margin-left: 1vh; margin-bottom: 1vh;">
-                        <!-- <img src={{$data->photo}} class="card-img-top" alt="..."> -->
-                        <div class="card-body">
-                            <h5 class="card-title">{{ $data->nama_user }}</h5>
-                            <p class="card-text">
-                                <ul style="list-style-type: none; font-size: 0.8em;">
-                                    <li>Username : {{ $data->username }}</li>
-                                    <li>Email : {{ $data->email }}</li>
-                                    <li>Phone : {{ $data->no_telp }}</li>
-                                    <li>Tgl Lahir : {{ $data->tanggal_lahir }}</li>
-                                    <li>Role : {{ $data->role }}</li>
-                                </ul>
-                            </p>
-                        </div>
-                        <div class="card-footer d-flex justify-content-end">
-                            <button type="button" class="btn btn-outline-success me-2">
-                                <i class="fa fa-edit me-1"></i>Edit
-                            </button>
-
-                            <button type="button" class="btn btn-outline-danger">
-                            <i class="fa fa-trash me-1"></i>Delete
-                            </button>
-                        </div>
+                <div class="card hover-card" style="width: 18rem; margin-left: 1vh; margin-bottom: 1vh;">
+                    <img src="https://www.dailydot.com/wp-content/uploads/e6f/5a/f28f6e32d560651bd554d677d800dc59.jpg" class="card-img-top" alt="rickroll">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ $data->nama_user }}</h5>
+                        <p class="card-text">
+                            <ul style="list-style-type: none; font-size: 0.8em;">
+                                <li>Username : {{ $data->username }}</li>
+                                <li>Email : {{ $data->email }}</li>
+                                <li>Phone : {{ $data->no_telp }}</li>
+                                <li>Tgl Lahir : {{ $data->tanggal_lahir }}</li>
+                            </ul>
+                        </p>
                     </div>
-                <!-- </div>
-            </div> -->
+                    <div class="card-footer d-flex justify-content-end">
+                        <button type="button" class="btn btn-outline-success me-2">
+                            <i class="fa fa-edit me-1"></i>Edit
+                        </button>
+
+                        <button type="button" class="btn btn-outline-danger">
+                        <i class="fa fa-trash me-1"></i>Delete
+                        </button>
+                    </div>
+                </div>
             @empty
                 <div class="alert alert-danger">
                     Tidak ada pengguna yang terdaftar
@@ -195,5 +194,26 @@
             @endforelse
         </div>
     </div>
+
+
+    <!-- MODAL DELETE GUESTSTAR
+    <div class="modal fade" id="hapusGuestStarModal" tabindex="-1" aria-labelledby="hapusGuestStarModalLabel" aria-hidden="true">
+        <form id="hapusGuestStarForm" method="POST" action="{{ route('admings.destroy', 'id_guest_star') }}">
+            @csrf
+            @method('DELETE')
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Yakin Ingin Menghapus Guest Star?</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                        <button type="submit" class="btn btn-danger" data-bs-dismiss="modal">Yakin</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div> -->
 
 @endsection
