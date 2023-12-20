@@ -398,7 +398,6 @@
         </form>
     </div>
 
-
     <!-- Modal Verif Pendaftaran -->
     <div class="modal fade" id="verifModal" tabindex="-1" aria-labelledby="verifModalLabel" aria-hidden="true">
         <form id="verifModalForm" method="POST" action="{{ route('adminac.verifBayar', 'id_user') }}">
