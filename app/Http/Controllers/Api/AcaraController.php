@@ -7,7 +7,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use App\Models\Acara;
-use Carbon\Carbon;
+use App\Models\Gueststar;
+use Carbon\Carbon;  
 
 class AcaraController extends Controller
 {
@@ -32,8 +33,12 @@ class AcaraController extends Controller
             return view('user.souvenirPage', compact('acara'));
     }
 
-
-
+    public function showGuest()
+    {
+            $acara = Acara::all();
+            return view('admin.adminGuestPage', compact('acara'));
+    }
+  
     public function showNav()
     {
         $currentDate = Carbon::now();
@@ -107,12 +112,16 @@ class AcaraController extends Controller
     {
         try{
             $acara = Acara::find($id);
+            $performer = Gueststar::where('id_acara', $id)->get();
 
-            return response()->json([
-                'message' => 'Fetch Acara Success',
-                'data' => $acara
-            ], 200);
+//             return response()->json([
+//                 'message' => 'Fetch Acara Success',
+//                 'data' => $acara
+//             ], 200);
             
+  
+        return view('user/pendaftaranAcara', compact('acara', 'performer'));
+  
         } catch(\Exception $e){
             return response()->json([
                 'message' => 'Fetch Acara Failed',
