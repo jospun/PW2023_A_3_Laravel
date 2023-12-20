@@ -32,8 +32,9 @@ class MailSend extends Mailable
         return [];
     }
 
-    public function build(){
+    public function build()
+    {
         return $this->subject('Verifikasi Akun')
-                    ->view('mailTemplate');
+            ->view('mailTemplate');
     }
 }

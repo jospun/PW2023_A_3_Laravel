@@ -1,6 +1,9 @@
 <?php
 
 use App\Http\Controllers\Api\AcaraController;
+use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Api\PendaftaranController;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Api\HomeController;
 use App\Http\Controllers\Api\PendaftaranController;
 use App\Http\Controllers\Api\SouvenirController;
@@ -39,8 +42,19 @@ Route::get('/login', function () {
     return view('loginPage');
 });
 
+Route::post('actionLogin', [AuthController::class, 'Login'])->name('login');
+
 Route::get('/register', function () {
     return view('registerPage');
+});
+
+Route::post('register/action', [AuthController::class, 'Register'])->name('register');
+Route::get('register/verify/{verify_key}', [AuthController::class, 'verify'])->name('verify');
+
+Route::get('/logout', function () {
+    Auth::logout();
+    return redirect('/home');
+    // return redirect('/login);
 });
 
 Route::get('/profile', function () {
