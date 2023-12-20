@@ -47,8 +47,9 @@ class AuthController extends Controller
             'password' => Hash::make($request->password),
             'no_telp' => $request->no_telp,
             'role' => 'user',
+            'gambar' => 'images\WhatsApp Image 2021-09-20 at 3.50.34 PM.jpeg',
             'verify_key' => $str,
-            'active' => -1,
+            'active' => 0,
         ]);
 
         $details = [
@@ -59,7 +60,13 @@ class AuthController extends Controller
             'url' => request()->getHttpHost() . '/register/verify/' . $str
         ];
 
-        Mail::to($request->email)->send(new MailSend($details));
+        try {
+            Mail::to($request->email)->send(new MailSend($details));
+        } catch (\Exception $e) {
+            // Tangani kesalahan di sini dan tampilkan pesan kesalahan kepada pengguna
+            return response()->json(['error' => $e->getMessage()], 500);
+        }
+
 
         Session::flash('message', 'Link verifikasi telah dikirim ke email anda. Silahkan cek email anda untuk mengaktifkan akun.');
 
@@ -131,6 +138,74 @@ class AuthController extends Controller
         //     'token_type' => 'Bearer',
         //     'access_token' => $token
         // ]);
+    }
+
+
+    public function update(Request $request)
+    {
+        try {
+            $user = User::find(Auth::user()->id);
+
+            if (!$user) {
+                // return response()->json([
+                //     'message' => 'failed',
+                //     'data' => 'User tidak ditemukan'
+                // ]);
+                return back()->with('failed', 'User tidak ditemukan');
+            }
+
+            $image = $request->file('gambar');
+            $imageName = $image->getClientOriginalName();
+            $destinationPath = ('images/');
+            $image->move($destinationPath, $imageName);
+            $destinationPath = 'images/' . $imageName;
+
+            $user->update([
+                'password' => $request->password,
+                'email' => $request->email,
+                'no_telp' => $request->no_telp,
+                'tanggal_lahir' => $request->tanggal_lahir,
+                'gambar' => $destinationPath,
+            ]);
+
+
+
+            $user->save();
+
+
+
+            return back()->with('success', 'User Berhasil diupdate');
+        } catch (\Exception $e) {
+            // return response()->json([
+            //     'message' => 'failed',
+            //     'data' => $e->getMessage()
+            // ]);
+            return back()->with('failed', 'User Gagal diupdate');
+        }
+    }
+
+    public function destroy()
+    {
+        $user = User::find(Auth::user()->id);
+
+        if (!$user) {
+            return response()->json([
+                'message' => 'User not found',
+            ], 404);
+        }
+
+        request()->validate([
+            'password' => 'required',
+        ]);
+
+        if (password_verify(request('password'), $user->password)) {
+            Auth::logout();
+            $user->delete();
+
+            return redirect('/');
+        } else {
+            return back()->with('error', 'Salah Password');
+        }
     }
 
     public function logout(Request $request)

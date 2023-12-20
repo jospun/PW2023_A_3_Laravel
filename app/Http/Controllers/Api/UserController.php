@@ -79,15 +79,4 @@ class UserController extends Controller
             // return back()->with('failed', 'User Gagal diupdate');
         }
     }
-
-    public function getUserByAuth()
-    {
-        $user = Auth::user();
-        // return response()->json([
-        //     'message' => 'success',
-        //     'data' => $user
-        // ]);
-
-        return view('user.userProfile', compact('user'));
-    }
 }

@@ -54,6 +54,26 @@ class PendaftaranController extends Controller
             // return redirect()->route('acara.index')->with('error', 'Acara tidak ditemukan');
         }
     }
+
+    public function showPendaftarbyUser()
+    {
+        try{
+            $id = auth()->user()->id;
+            $pendaftarans = Pendaftaran::join(
+                'acaras', 'acaras.id' ,'=', 'pendaftarans.id_acara' 
+            )->where('id_user','=', $id)->get();
+
+
+            return view('user.profile', compact('pendaftarans'));
+        } catch(\Exception $e){
+            return response()->json([
+                'message' => 'Fetch Acara Failed',
+                'data' => $e->getMessage(),
+            ], 400);
+
+            // return redirect()->route('acara.index')->with('error', 'Acara tidak ditemukan');
+        }
+    }
     
     /**
      * Store a newly created resource in storage.
@@ -87,19 +107,10 @@ class PendaftaranController extends Controller
 
             $subtotal = $acara->biaya * $request->jumlah;
 
-            $pendaftaran = [
-                'id_user' => 1,
-                'id_acara' => $request->id_acara,
-                'status' => "Belum Membayar",
-                'tanggal_bayar' => Carbon::now(),
-                'jumlah' => $request->jumlah,
-                'subTotal' => $subtotal,
-            ];
-
             Pendaftaran::create([
-                'id_user' => 1,
+                'id_user' => auth()->user()->id,
                 'id_acara' => $request->id_acara,
-                'status' => 'Sudah Membayar',
+                'status' => 'Belum Lunas',
                 'tanggal_bayar' => Carbon::now(),
                 'jumlah' => $request->jumlah,
                 'subTotal' => $subtotal,
@@ -111,8 +122,7 @@ class PendaftaranController extends Controller
             //     'data' => $pendaftaran
             // ], 200);
 
-            $event = Acara::inRandomOrder()->take(5)->get();
-            return view('homePage', compact('event'));
+            return back()->with('success', 'Pendaftaran Berhasil ditambahkan');
 
             // return redirect()->back()->with('success', 'Pendaftaran Berhasil Ditambahkan');
         } catch(\Exception $e){
@@ -132,23 +142,23 @@ class PendaftaranController extends Controller
     public function show($id)
     {
         try{
-            $pendaftaran = Pendaftaran::find($id);
+            $data = Pendaftaran::join(
+                'acaras', 'acaras.id' ,'=', 'pendaftarans.id_acara' 
+            )->where('id_acara','=',$id)->get();
 
-            // return response()->json([
-            //     'success' => true,
-            //     'message' => 'Pendaftaran Berhasil Ditemukan',
-            //     'data' => $pendaftaran
-            // ], 200);
+            return response()->json([
+                'success' => true,
+                'message' => 'Pendaftaran Berhasil Ditemukan',
+                'data' => $data
+            ], 200);
 
-            return view('pendaftaran.show', compact('pendaftaran'));
         } catch(\Exception $e){
-            // return response()->json([
-            //     'success' => false,
-            //     'message' => 'Pendaftaran Tidak Ditemukan',
-            //     'data' => $e->getMessage(),
-            // ], 400);
+            return response()->json([
+                'success' => false,
+                'message' => 'Pendaftaran Tidak Ditemukan',
+                'data' => $e->getMessage(),
+            ], 400);
 
-            return redirect()->route('pendaftaran.index')->with('error', 'Pendaftaran Tidak Ditemukan');
         }
     }
 
@@ -177,7 +187,7 @@ class PendaftaranController extends Controller
             $pendaftaran->update([
                 'id_user' => Auth::user()->id,
                 'id_acara' => $request->id_acara,
-                'status' => "Belum Membayar",
+                'status' => "Belum Lunas",
                 'tanggal_bayar' => Carbon::now(),
             ]);
 
@@ -277,64 +287,6 @@ class PendaftaranController extends Controller
         }
     }
 
-    public function showHomeAdmin()
-    {
-            $event = Pendaftaran::join(
-                'users', 'users.id', '=', 'pendaftarans.id_user'
-                )->where(
-                'status' ,'=','Belum Lunas'
-            )->take(5)->get();
-            return view('admin.adminHomePage', compact('event'));
-    }
-
-    public function verifBayar($id)
-    {
-        try{
-            $pendaftaran = Pendaftaran::find($id);
-
-            print($pendaftaran->status);
-            $pendaftaran->status = "Lunas";
-            $pendaftaran->save();
-
-            return back()->with('success', 'Pendaftaran Berhasil diverifikasi');
-        } catch(\Exception $e){
-            // return response()->json([
-            //     'success' => false,
-            //     'message' => 'Pendaftaran Gagal Diupdate',
-            //     'data' => $e->getMessage(),
-            // ], 400);
-
-            return redirect()->back()->with('error', 'Pendaftaran Gagal Diupdate');
-        }
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function hapusPendaftaran($id)
-    {
-        try{
-            $pendaftaran = Pendaftaran::find($id);
-
-            $pendaftaran->delete();
-
-            // return response()->json([
-            //     'success' => true,
-            //     'message' => 'Pendaftaran Berhasil Dihapus',
-            //     'data' => $pendaftaran
-            // ], 200);
-
-            return redirect('/adminac');
-        } catch(\Exception $e){
-            // return response()->json([
-            //     'success' => false,
-            //     'message' => 'Pendaftaran Gagal Dihapus',
-            //     'data' => $e->getMessage(),
-            // ], 400);
-
-            return back()->with('error', 'Pendaftaran Gagal Dihapus');
-        }
-    }
 
     public function getPendaftaranbyAcara($id){
         try{

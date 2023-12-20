@@ -30,6 +30,7 @@ class UserFactory extends Factory
             'password' => Hash::make('password'),
             'no_telp' => $this->faker->phoneNumber,
             'role' => $this->faker->randomElement(['admin', 'user']),
+            'gambar' => $this->faker->imageUrl(),
             'verify_key' => Str::random(32),
             'active' => $this->faker->randomElement([0, 1]),
             'email_verified_at' => now(),
