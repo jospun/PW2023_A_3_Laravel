@@ -146,6 +146,7 @@
     <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-beta1/js/bootstrap.bundle.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
     <nav style="position:relative">
         <div class="sidebar-button">
@@ -166,16 +167,23 @@
                         <div class="card-body">
                             <h5 class="card-title">{{ $data->nama_user }}</h5>
                             <p class="card-text">
-                                <ul>
+                                <ul style="list-style-type: none; font-size: 0.8em;">
                                     <li>Username : {{ $data->username }}</li>
                                     <li>Email : {{ $data->email }}</li>
+                                    <li>Phone : {{ $data->no_telp }}</li>
+                                    <li>Tgl Lahir : {{ $data->tanggal_lahir }}</li>
                                     <li>Role : {{ $data->role }}</li>
                                 </ul>
                             </p>
                         </div>
-                        <div class="card-body">
-                            <a href="#" class="card-link">Card link</a>
-                            <a href="#" class="card-link">Another link</a>
+                        <div class="card-footer d-flex justify-content-end">
+                            <button type="button" class="btn btn-outline-success me-2">
+                                <i class="fa fa-edit me-1"></i>Edit
+                            </button>
+
+                            <button type="button" class="btn btn-outline-danger">
+                            <i class="fa fa-trash me-1"></i>Delete
+                            </button>
                         </div>
                     </div>
                 <!-- </div>
