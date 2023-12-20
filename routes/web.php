@@ -2,7 +2,6 @@
 
 use App\Http\Controllers\Api\AcaraController;
 use App\Http\Controllers\Api\AuthController;
-use App\Http\Controllers\Api\PendaftaranController;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Api\HomeController;
 use App\Http\Controllers\Api\PendaftaranController;
