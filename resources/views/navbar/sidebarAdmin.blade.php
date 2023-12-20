@@ -39,19 +39,19 @@
         </li>
         <li class="{{ Request::is('admings') ? 'active' : '' }}">
           <a href="{{ url('admings') }}">
-            <i class="bx bx-list-ul"></i>
+            <i class="bx bx-star"></i>
             <span class="links_name">Guest Star</span>
+          </a>
+        </li>
+        <li class="{{ Request::is('adminuser') ? 'active' : '' }}">
+          <a href="{{ url('adminuser') }}">
+            <i class="bx bx-user"></i>
+            <span class="links_name">User Control</span>
           </a>
         </li>
 
         <!-- dan seterusnya -->
 
-        <li>
-          <a href="#">
-            <i class="bx bx-pie-chart-alt-2"></i>
-            <span class="links_name">Guest Star</span>
-          </a>
-        </li>
         <li>
           <a href="#">
             <i class="bx bx-cog"></i>
