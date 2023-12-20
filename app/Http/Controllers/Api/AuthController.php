@@ -10,6 +10,7 @@ use App\Models\User;
 use App\Mail\MailSend;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Str;
 
 class AuthController extends Controller
@@ -23,12 +24,15 @@ class AuthController extends Controller
             'nama_user' => 'required|max:60',
             'email' => 'required|email:rfc,dns|unique:users',
             'tanggal_lahir' => 'required',
-            'password' => 'required|min:3',
+            'password' => 'required|confirmed|min:3',
             'no_telp' => 'required',
         ]);
 
         if ($validate->fails()) {
-            return response(['message' => $validate->errors()->first()], 400);
+            // return response(['message' => $validate->errors()->first()], 400);
+
+            Session::flash('message', 'data tidak valid');
+            return redirect('register');
         }
 
         $registrationData['password'] = bcrypt($request->password);
@@ -47,19 +51,39 @@ class AuthController extends Controller
             'active' => -1,
         ]);
 
-        return response([
-            'message' => 'Register Success',
-            'user' => $user
-        ], 200);
+        $details = [
+            'nama_user' => $request->nama_user,
+            'username' => $request->username,
+            'website' => 'FEST fest',
+            'datetime' => date('Y-m-d H:i:s'),
+            'url' => request()->getHttpHost() . '/register/verify/' . $str
+        ];
+
+        try {
+            Mail::to($request->email)->send(new MailSend($details));
+        } catch (\Exception $e) {
+            // Tangani kesalahan di sini dan tampilkan pesan kesalahan kepada pengguna
+            return response()->json(['error' => $e->getMessage()], 500);
+        }
+        
+
+        Session::flash('message', 'Link verifikasi telah dikirim ke email anda. Silahkan cek email anda untuk mengaktifkan akun.');
+
+        return redirect('register');
+        // return response([
+        //     'message' => 'Register Success',
+        //     'user' => $user
+        // ], 200);
     }
 
-    public function verify($verify_key){
-        
+    public function verify($verify_key)
+    {
+
         $keyCheck = User::select('verify_key')
             ->where('verify_key', $verify_key)
             ->exists();
 
-        if($keyCheck){
+        if ($keyCheck) {
             $user = User::where('verify_key', $verify_key)
                 ->update([
                     'active' => 1,
@@ -83,30 +107,38 @@ class AuthController extends Controller
             'email' => 'required|email:rfc,dns',
             'password' => 'required|min:3',
         ]);
-        
+
         if ($validate->fails()) {
             return response(['message' => $validate->errors()->first()], 400);
         }
 
         if (!Auth::attempt($loginData)) {
-            return response(['message' => 'Invalid email & password match'], 401);
+            // return response(['message' => 'Invalid email & password match'], 401);
+            Session::flash('error', 'Email atau password salah');
+            return redirect('/login');
         }
 
         /** @var \App\Models\MyUserModel $user **/
         $user = Auth::user();
 
-        // if($user->active == -1){ // BERHASIL DI TEST
-        //     return response(['message' => 'Please check your email'], 401);
-        // }
+        if ($user->active) {
+            return redirect('/home');
+        } else {
+            Auth::logout();
+            Session::flash('error', 'Akun Anda belum diverifikasi. Silakan cek email Anda.');
+            return redirect('/login');
+        }
 
-        $token = $user->createToken('Authentication Token')->accessToken;
+        // $token = $user->createToken('Authentication Token')->accessToken;
 
-        return response([
-            'message' => 'Authenticated',
-            'user' => $user,
-            'token_type' => 'Bearer',
-            'access_token' => $token
-        ]);
+        // return response([
+        //     'message' => 'Authenticated',
+        //     'user' => $user,
+        //     'token_type' => 'Bearer',
+        //     'access_token' => $token
+        // ]);
+
+
     }
 
     public function logout(Request $request)

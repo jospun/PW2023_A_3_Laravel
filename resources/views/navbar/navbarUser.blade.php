@@ -22,7 +22,6 @@
     <link href="https://unpkg.com/swiper@6.8.5/dist/css/swiper.min.css" rel="stylesheet">
     <!-- Your Main CSS File -->
 
-
     @vite('resources\css\style2.css')
     <!-- NODE JS
     NPM INSTALL
@@ -50,7 +49,7 @@
         }
 
         #header.header-transparent {
-            background: rgba(52, 59, 64);  
+            background: rgba(52, 59, 64);
         }
 
         .navbar a,
@@ -74,19 +73,18 @@
 <body>
     <header id="header" class="fixed-top d-flex align-items-center header-transparent">
         <div class="container d-flex justify-content-between align-items-center">
-    
-          <div id="logo">
-            <a href="index.html"><img src=" "alt=""></a>
-          </div>
-           <!-- Off-Canvas Navbar -->
-           <nav id="navbar" class="navbar">
-            <ul>
-              <li><a class="nav-link scrollto" href="{{ url('/') }}">Home</a></li>
-              <li><a class="nav-link scrollto {{ Request::is('souvenir') ? 'active' : '' }}" href="{{ url('souvenir') }}">Souvenir</a></li>
-              <li><a class="nav-link scrollto {{ Request::is('acara') ? 'active' : '' }}" href="#">JKT-48</a></li>
-            </ul>
-            <i class="fa fa-list mobile-nav-toggle"><img src="https://i.pinimg.com/originals/26/9d/d1/269dd16fa1f5ff51accd09e7e1602267.png" style="width: 30px; height:30px;"/></i>
-          </nav><!-- .navbar --> 
+            <div id="logo">
+                <a href="index.html"><img src=" " alt=""></a>
+            </div>
+            <!-- Off-Canvas Navbar -->
+            <nav id="navbar" class="navbar">
+                <ul>
+                    <li><a class="nav-link scrollto" href="{{ url('/') }}">Home</a></li>
+                    <li><a class="nav-link scrollto" href="{{ url('souvenir') }}">Souvenir</a></li>
+                    <li><a class="nav-link scrollto active" href="#">Current Event</a></li>
+                </ul>
+                <i class="fa fa-list mobile-nav-toggle"><img src="https://i.pinimg.com/originals/26/9d/d1/269dd16fa1f5ff51accd09e7e1602267.png" style="width: 30px; height:30px;" /></i>
+            </nav><!-- .navbar -->
         </div>
     </header>
 

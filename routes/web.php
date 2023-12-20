@@ -1,9 +1,12 @@
 <?php
 
 use App\Http\Controllers\Api\AcaraController;
+use App\Http\Controllers\Api\AuthController;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Api\HomeController;
 use App\Http\Controllers\Api\PendaftaranController;
 use App\Http\Controllers\Api\SouvenirController;
+use App\Http\Controllers\Api\GueststarController;
 use App\Models\Souvenir;
 use Illuminate\Support\Facades\Route;
 
@@ -20,7 +23,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('homePage');
-});
+})->name('home');
 
 Route::get('/home', function () {
     return view('homePage');
@@ -38,8 +41,19 @@ Route::get('/login', function () {
     return view('loginPage');
 });
 
+Route::post('actionLogin', [AuthController::class, 'Login'])->name('login');
+
 Route::get('/register', function () {
     return view('registerPage');
+});
+
+Route::post('register/action', [AuthController::class, 'Register'])->name('register');
+Route::get('register/verify/{verify_key}', [AuthController::class, 'verify'])->name('verify');
+
+Route::get('/logout', function () {
+    Auth::logout();
+    return redirect('/home');
+    // return redirect('/login);
 });
 
 Route::get('/profile', function () {
@@ -54,10 +68,11 @@ Route::get('/profile', function () {
     return view('user/profile', $data);
 });
 
+// Route::get('/acara', function () {
+//     return view('user/pendaftaranAcara');
+// });
 
-Route::get('/acara', function () {
-    return view('user/pendaftaranAcara');
-});
+Route::get('/acara/{id}', [AcaraController::class, 'show']);
 
 Route::get('/souvenir', function () {
     return view('user/souvenirPage');
@@ -83,6 +98,8 @@ Route::resource('adminac', AcaraController::class);
 Route::get('/', [HomeController::class, 'showHome']);
 Route::get('/home', [HomeController::class, 'showHome']);
 
+Route::resource('pendaftaran', PendaftaranController::class);
+
 Route::get('souvenir',[AcaraController::class, 'showAcaraSouve']);
 
 Route::get('admin', [PendaftaranController::class, 'showHomeAdmin']);
@@ -94,5 +111,9 @@ Route::get('nav1', [AcaraController::class, 'showNav']);
 Route::get('adminsv', [AcaraController::class, 'showInSouvenir']);
 Route::post('adminsv', [SouvenirController::class, 'store'])->name('adminsv.store');
 Route::get('adminsv/{id}',[SouvenirController::class, 'show']);
-Route::put('adminsv/{id}',[SouvenirController::class, 'update'])->name('adminsv.update');;
-Route::delete('adminsv/{id}',[SouvenirController::class, 'destroy'])->name('adminsv.destroy');;
+Route::put('adminsv/{id}',[SouvenirController::class, 'update'])->name('adminsv.update');
+Route::delete('adminsv/{id}',[SouvenirController::class, 'destroy'])->name('adminsv.destroy');
+
+Route::get('admings', [AcaraController::class, 'showGuest']);
+Route::post('admings', [GueststarController::class, 'store'])->name('admings.store');
+Route::delete('admings/{id}',[GueststarController::class, 'destroy'])->name('admings.destroy');

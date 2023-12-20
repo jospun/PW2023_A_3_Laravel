@@ -8,7 +8,7 @@
     </head>
     <body>
         <p>
-            Halo <b>{{ $details['username'] }}</b>!
+            Halo <b>{{ $details['nama_user'] }}</b>!
         </p>
 
         <p>
@@ -23,7 +23,7 @@
             <tr>
                 <td>Username</td>
                 <td>:</td>
-                <td>{{  $details['username'] }}</td>
+                <td>{{  $details['nama_user'] }}</td>
             </tr>
             <tr>
                 <td>Website</td>

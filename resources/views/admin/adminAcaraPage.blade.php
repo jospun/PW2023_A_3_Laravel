@@ -266,8 +266,6 @@
                         <div class="col-sm-10">
                             <input required type="text" class="form-control" id="inputEvent" name="nama_acara" value="{{ old('nama_acara') }}">
                         </div>
-
-                        
                     </div>
 
                     <div class="row p-2">
@@ -315,7 +313,6 @@
         </div>
     </div>
 
-
     <!-- Modal Edit Event -->
     <div class="modal fade" id="editEventModal" tabindex="-1" aria-labelledby="editEventModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
@@ -334,14 +331,12 @@
                             <div class="col-sm-10">
                                 <input required type="text" class="form-control" id="inputEventE" name="nama_acara" >
                             </div>
-    
-                            
                         </div>
     
                         <div class="row p-2">
                             <label for="deskripsi" class="col-sm-2 col-form-label">Deskripsi</label>
                             <div class="col-sm-10">
-                                <textarea required type="text" class="form-control" id="inputDeskripsiE" name="deskripsi"></textarea>
+                                <textarea required type="text" class="form-control" id="inputDeskripsiE" name="deskripsiEvent"></textarea>
                             </div>
                         </div>
     
@@ -402,7 +397,6 @@
             </div>
         </form>
     </div>
-
 
     <!-- Modal Verif Pendaftaran -->
     <div class="modal fade" id="verifModal" tabindex="-1" aria-labelledby="verifModalLabel" aria-hidden="true">

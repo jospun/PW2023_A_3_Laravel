@@ -37,12 +37,19 @@
             <span class="links_name">Souvenir</span>
           </a>
         </li>
+        <li class="{{ Request::is('admings') ? 'active' : '' }}">
+          <a href="{{ url('admings') }}">
+            <i class="bx bx-list-ul"></i>
+            <span class="links_name">Guest Star</span>
+          </a>
+        </li>
+
         <!-- dan seterusnya -->
-        
+
         <li>
           <a href="#">
             <i class="bx bx-pie-chart-alt-2"></i>
-            <span class="links_name">Analytics</span>
+            <span class="links_name">Guest Star</span>
           </a>
         </li>
         <li>
