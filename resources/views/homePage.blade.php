@@ -67,8 +67,8 @@
             </div>
             <div class="row">
               <div class="col-lg-12 col-md-12" data-aos="zoom-in">
-                <div class="box" id="iu">
-                  <img class="event-pic" src="https://dx35vtwkllhj9.cloudfront.net/trafalgarreleasing/iu-concert-the-golden-hour/images/regions/intl/share.jpg" />
+                <div class="box" id="{{ $event[0]->id }}">
+                  <img class="event-pic" src="{{ asset($event[0]->poster) }}"  />
                   <div class="container-btn">
                     <a href="#" class="btn bft rounded-pill">Buy Ticket</a>
                     <a href="#" class="btn bft-2 rounded-pill">Learn More</a>
@@ -77,8 +77,8 @@
               </div> 
 
               <div class="col-lg-6 col-md-12" data-aos="zoom-in">
-                <div class="box" id="tls">
-                  <img class="event-pic" src="https://bbo.co.id/images/modules/bigbang/event/226/261222-tulus-bbo-slider-02.jpg" />
+                <div class="box" id="{{ $event[1]->id }}">
+                  <img class="event-pic" src={{ asset($event[1]->poster) }}/>
                   <div class="container-btn">
                     <a href="#" class="btn bft rounded-pill bold900">Buy Ticket</a>
                     <a href="#" class="btn bft-2 rounded-pill">Learn More</a>
@@ -86,8 +86,8 @@
                 </div>
               </div>
               <div class="col-lg-6 col-md-12" data-aos="zoom-in">
-                <div class="box" id="cld">
-                  <img class="event-pic" src="https://static.promediateknologi.id/crop/0x0:0x0/0x0/webp/photo/indizone/2023/05/09/8JsaJyR/daftar-song-list-music-of-the-spheres-coldplay-wajib-hapal-biar-bisa-sing-along45.jpg" />
+                <div class="box" id="{{ $event[2]->id }}">
+                  <img class="event-pic" src={{ asset($event[2]->poster) }} />
                   <div class="container-btn">
                     <a href="#" class="btn bft rounded-pill">Buy Ticket</a>
                     <a href="#" class="btn bft-2 rounded-pill">Learn More</a>
@@ -95,8 +95,8 @@
                 </div>
               </div>
               <div class="col-lg-6 col-md-12" data-aos="zoom-in">
-                <div class="box" id="bp">
-                  <img class="event-pic" src="https://4.bp.blogspot.com/-75JWKnQiH-4/WRES2kLgGlI/AAAAAAAABGE/YE4Nh0NBfM81g_7JHPikTXoLUNe3zemngCLcB/s1600/JKT48%2BFestival%2BGreatest%2BHits.jpg.jpg" />
+                <div class="box" id="{{ $event[3]->id }}">
+                  <img class="event-pic" src={{ asset($event[3]->poster) }}/>
                   <div class="container-btn">
                     <a href="{{ url('acara') }}" class="btn bft rounded-pill">Buy Ticket</a>
                     <a href="{{ url('acara') }}" class="btn bft-2 rounded-pill">Learn More</a>
@@ -105,9 +105,9 @@
               </div>
     
               <div class="col-lg-6 col-md-12" data-aos="zoom-in">
-                <div class="box" id="ipes">
+                <div class="box" id="{{ $event[4]->id }}">
                   <div class="container-btn">
-                    <img class="event-pic" src="https://i.ytimg.com/vi/CGKyOCd-__E/maxresdefault.jpg" />
+                    <img class="event-pic" src={{ asset($event[4]->poster) }}/>
                     <a href="#" class="btn bft rounded-pill">Buy Ticket</a>
                     <a href="#" class="btn bft-2 rounded-pill">Learn More</a>
                   </div>
@@ -142,15 +142,16 @@
               <p class="section-description">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque</p>
             </div>
             <div class="scrollable-x">
-              {{-- @forelse($souvenirs as $souvenir) --}}
               <div class="col d-flex col-lg-12 col-sm-12">
+                @forelse($souvenirs as $souvenir)
                 <div class="col-lg-3 col-md-6 col-sm-12">
                   <div class="member" data-aos="fade-up" data-aos-delay="100">
-                    <div class="pic"><img src="{{ asset('images/shirt.png') }}" alt=""></div>
+                    <div class="pic"><img src="{{ asset($souvenir->gambar) }}" alt=""></div>
                   </div>
                 </div>
+                @empty
+                @endforelse
               </div>
-              {{-- @endforelse --}}
             </div>
           </div>
         </section><!-- End Team Section -->

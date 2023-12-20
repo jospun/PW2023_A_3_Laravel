@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('deskripsi');
             $table->string('jenis');
             $table->string('gambar');
+            $table->integer('stok');
             $table->timestamps();
 
             $table->foreign('id_acara')->references('id')->on('acaras')->onDelete('cascade');

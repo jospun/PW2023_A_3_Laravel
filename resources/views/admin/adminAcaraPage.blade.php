@@ -314,9 +314,9 @@
     </div>
 
     <!-- Modal Edit Event -->
-    <div class="modal fade" id="editEventModal" tabindex="-1" aria-labelledby="editEventModalLabel" aria-hidden="true" enctype="multipart/form-data">
+    <div class="modal fade" id="editEventModal" tabindex="-1" aria-labelledby="editEventModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
-            <form id="editEventForm" method="POST" action="{{ route('adminac.update', 'id_acara') }}">
+            <form id="editEventForm" method="POST" action="{{ route('adminac.update', 'id_acara') }}"  enctype="multipart/form-data">
             @csrf
             @method('PUT')
             <div class="modal-content">
@@ -364,7 +364,7 @@
                         <div class="row p-2">
                             <label for="inputFile" class="col-sm-2 col-form-label">Masukkan Foto/Video </label>
                             <div class="col-sm-10">
-                                <input class="form-control" id="inputFileE" type="file" accept=".jpg,.jpeg,.png,.mov,.mp4" name="asset"/>
+                                <input class="form-control" id="inputFile" type="file" accept=".jpg,.jpeg,.png,.mov,.mp4" name="poster"/>
                             </div>
                         </div>
     
@@ -491,7 +491,6 @@
                     document.getElementById('biayaE').value = data.data.biaya;
                     document.getElementById('startDateE').value = data.data.tanggal_mulai;
                     document.getElementById('endDateE').value = data.data.tanggal_tutup;
-
                 })
                 .catch(error => {
                     console.error('Error:', error);

@@ -73,7 +73,6 @@
 <body>
     <header id="header" class="fixed-top d-flex align-items-center header-transparent">
         <div class="container d-flex justify-content-between align-items-center">
-
             <div id="logo">
                 <a href="index.html"><img src=" " alt=""></a>
             </div>

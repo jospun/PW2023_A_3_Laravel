@@ -37,6 +37,24 @@ class PendaftaranController extends Controller
         }
     }
 
+    public function showPendaftarbyAcara($id)
+    {
+        try{
+            $pendaftaran = Pendaftaran::join(
+                'acaras', 'acaras.id' ,'=', 'pendaftarans.id_acara' 
+            );
+
+            
+        } catch(\Exception $e){
+            return response()->json([
+                'message' => 'Fetch Acara Failed',
+                'data' => $e->getMessage(),
+            ], 400);
+
+            // return redirect()->route('acara.index')->with('error', 'Acara tidak ditemukan');
+        }
+    }
+    
     /**
      * Store a newly created resource in storage.
      */
@@ -181,10 +199,41 @@ class PendaftaranController extends Controller
         }
     }
 
+    public function showHomeAdmin()
+    {
+            $event = Pendaftaran::join(
+                'users', 'users.id', '=', 'pendaftarans.id_user'
+                )->where(
+                'status' ,'=','Belum Lunas'
+            )->take(4)->get();
+            return view('admin.adminHomePage', compact('event'));
+    }
+
+    public function verifBayar($id)
+    {
+        try{
+            $pendaftaran = Pendaftaran::find($id);
+
+            print($pendaftaran->status);
+            $pendaftaran->status = "Lunas";
+            $pendaftaran->save();
+
+            return back()->with('success', 'Pendaftaran Berhasil diverifikasi');
+        } catch(\Exception $e){
+            // return response()->json([
+            //     'success' => false,
+            //     'message' => 'Pendaftaran Gagal Diupdate',
+            //     'data' => $e->getMessage(),
+            // ], 400);
+
+            return redirect()->back()->with('error', 'Pendaftaran Gagal Diupdate');
+        }
+    }
+
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy($id)
+    public function hapusPendaftaran($id)
     {
         try{
             $pendaftaran = Pendaftaran::find($id);
@@ -197,7 +246,7 @@ class PendaftaranController extends Controller
             //     'data' => $pendaftaran
             // ], 200);
 
-            return redirect()->back()->with('success', 'Pendaftaran Berhasil Dihapus');
+            return redirect('/adminac');
         } catch(\Exception $e){
             // return response()->json([
             //     'success' => false,
@@ -205,7 +254,7 @@ class PendaftaranController extends Controller
             //     'data' => $e->getMessage(),
             // ], 400);
 
-            return redirect()->back()->with('error', 'Pendaftaran Gagal Dihapus');
+            return back()->with('error', 'Pendaftaran Gagal Dihapus');
         }
     }
 

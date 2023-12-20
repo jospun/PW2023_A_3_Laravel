@@ -1,7 +1,10 @@
 <?php
 
 use App\Http\Controllers\Api\AcaraController;
+use App\Http\Controllers\Api\HomeController;
 use App\Http\Controllers\Api\PendaftaranController;
+use App\Http\Controllers\Api\SouvenirController;
+use App\Models\Souvenir;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,6 +21,10 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('homePage');
 })->name('home');
+
+Route::get('/home', function () {
+    return view('homePage');
+});
 
 Route::get('/nav1', function () {
     return view('navbar/navbarHome');
@@ -73,13 +80,24 @@ Route::get('/adminsv', function () {
     return view('admin/souvenirAdmin');
 });
 
-Route::resource('pendaftaran', PendaftaranController::class);
-Route::get('admings', [AcaraController::class, 'showGuest']);
-
-Route::get('nav1', [AcaraController::class, 'showNav']);
 Route::resource('adminac', AcaraController::class);
-Route::get('/', [AcaraController::class, 'showHome']);
+Route::get('/', [HomeController::class, 'showHome']);
+Route::get('/home', [HomeController::class, 'showHome']);
+
+Route::resource('pendaftaran', PendaftaranController::class);
+
+Route::get('souvenir',[AcaraController::class, 'showAcaraSouve']);
+
 Route::get('admin', [PendaftaranController::class, 'showHomeAdmin']);
 Route::delete('adminac/pendaftaran/{id}', [PendaftaranController::class, 'hapusPendaftaran'])->name('adminac.hapusDaftar');
 Route::put('adminac/pendaftaran/{id}', [PendaftaranController::class, 'verifBayar'])->name('adminac.verifBayar');
+
 Route::get('nav1', [AcaraController::class, 'showNav']);
+
+Route::get('adminsv', [AcaraController::class, 'showInSouvenir']);
+Route::post('adminsv', [SouvenirController::class, 'store'])->name('adminsv.store');
+Route::get('adminsv/{id}',[SouvenirController::class, 'show']);
+Route::put('adminsv/{id}',[SouvenirController::class, 'update'])->name('adminsv.update');
+Route::delete('adminsv/{id}',[SouvenirController::class, 'destroy'])->name('adminsv.destroy');
+
+Route::get('admings', [AcaraController::class, 'showGuest']);

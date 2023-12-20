@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use App\Models\Acara;
 use App\Models\Gueststar;
+use Carbon\Carbon;  
 
 class AcaraController extends Controller
 {
@@ -20,10 +21,16 @@ class AcaraController extends Controller
             return view('admin.adminAcaraPage', compact('acara'));
     }
 
-    public function showHome()
+    public function showInSouvenir()
     {
-            $event = Acara::inRandomOrder()->take(5)->get();
-            return view('homePage', compact('event'));
+            $acara = Acara::all();
+            return view('admin.souvenirAdmin', compact('acara'));
+    }
+
+    public function showAcaraSouve()
+    {
+            $acara = Acara::all();
+            return view('user.souvenirPage', compact('acara'));
     }
 
     public function showGuest()
@@ -31,12 +38,19 @@ class AcaraController extends Controller
             $acara = Acara::all();
             return view('admin.adminGuestPage', compact('acara'));
     }
-
+  
     public function showNav()
     {
-            $event = Acara::inRandomOrder()->take(5)->get();
-            return view('navbar.navbarHome', compact('event'));
+        $currentDate = Carbon::now();
+        $event = Acara::where('tanggal_mulai', '>=', $currentDate)->latest()->take(5)->get();
+        if($event->count() < 5){
+            $latestEvents = Acara::latest()->take(5 - $event->count())->get();
+            $event = $event->merge($latestEvents);
+        }
+        return view('navbar.navbarHome', compact('event'));
     }
+
+
 
     /**
      * Store a newly created resource in storage.
@@ -50,7 +64,7 @@ class AcaraController extends Controller
                 'tanggal_mulai' => 'required',
                 'tanggal_tutup' => 'required',
                 'biaya' => 'required',
-                'poster' => 'required|mimes:jpeg,png',
+                'poster' => 'required|mimes:jpg,jpeg,png,mov,mp4',
             ]);
 
             if($validator->fails()){
@@ -100,12 +114,14 @@ class AcaraController extends Controller
             $acara = Acara::find($id);
             $performer = Gueststar::where('id_acara', $id)->get();
 
-            // return response()->json([
-            //     'message' => 'Fetch Acara Success',
-            //     'data' => $acara
-            // ], 200);
-
-            return view('user/pendaftaranAcara', compact('acara', 'performer'));
+//             return response()->json([
+//                 'message' => 'Fetch Acara Success',
+//                 'data' => $acara
+//             ], 200);
+            
+  
+        return view('user/pendaftaranAcara', compact('acara', 'performer'));
+  
         } catch(\Exception $e){
             return response()->json([
                 'message' => 'Fetch Acara Failed',
@@ -133,14 +149,22 @@ class AcaraController extends Controller
                 'tanggal_mulai' => 'required',
                 'tanggal_tutup' => 'required',
                 'biaya' => 'required',
+                'poster' => 'required|mimes:jpg,jpeg,png,mov,mp4',
             ]);
-
+            
+            
             if($validator->fails()){
                 return response()->json([
                     'message' => 'Validasi gagal',
                     'data' => $validator->errors()
                 ], 400);
             }
+
+            $image = $request->file('poster');
+            $imageName = $image->getClientOriginalName();
+            $destinationPath = ('images/');
+            $image->move($destinationPath, $imageName); 
+            $destinationPath = 'images/'.$imageName;
 
             $acara = Acara::find($id);
 
@@ -156,6 +180,7 @@ class AcaraController extends Controller
                 'tanggal_mulai' => $request->tanggal_mulai,
                 'tanggal_tutup' => $request->tanggal_tutup,
                 'biaya' => $request->biaya,
+                'poster' => $destinationPath,
             ]);
 
             // return response()->json([

@@ -13,8 +13,10 @@
   <body>
     <div class="sidebar">
       <div class="logo-details">
+        <a href="{{ url('home') }}" style="text-decoration: none">
         <i class="bx bxl-c-plus-plus"></i>
         <span class="logo_name">CAJ Admin</span>
+        </a>
       </div>
       <ul class="nav-links">
         <li class="{{ Request::is('admin') ? 'active' : '' }}">
