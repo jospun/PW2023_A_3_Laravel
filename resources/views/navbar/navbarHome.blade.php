@@ -143,7 +143,6 @@
             @empty
                 <li><a>Stay Tuned!</a></li>
             @endforelse
-              <li><a href="{{ url('acara') }}">JKT-48</a></li>
             </ul>
           </li>
 

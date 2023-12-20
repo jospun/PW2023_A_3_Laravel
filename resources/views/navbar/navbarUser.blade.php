@@ -79,9 +79,13 @@
             <!-- Off-Canvas Navbar -->
             <nav id="navbar" class="navbar">
                 <ul>
-                    <li><a class="nav-link scrollto" href="{{ url('/') }}">Home</a></li>
-                    <li><a class="nav-link scrollto" href="{{ url('souvenir') }}">Souvenir</a></li>
-                    <li><a class="nav-link scrollto active" href="#">Current Event</a></li>
+                    <li><a class="nav-link scrollto " href="{{ url('/') }}">Home</a></li>
+                    <li><a class="nav-link scrollto {{ Request::is('souvenir') ? 'active' : '' }}" href="{{ url('souvenir') }}">Souvenir</a></li>
+                    <li class="dropdown"><a href="#"><span>Event</span> <i class="bi bi-chevron-down"></i></a>
+                        <ul>
+                            <li><a>Stay Tuned!</a></li>
+                        </ul>
+                    </li>
                 </ul>
                 <i class="fa fa-list mobile-nav-toggle"><img src="https://i.pinimg.com/originals/26/9d/d1/269dd16fa1f5ff51accd09e7e1602267.png" style="width: 30px; height:30px;" /></i>
             </nav><!-- .navbar -->

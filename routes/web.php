@@ -4,9 +4,11 @@ use App\Http\Controllers\Api\AcaraController;
 use App\Http\Controllers\Api\AuthController;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Api\HomeController;
-use App\Http\Controllers\Api\PendaftaranController;
 use App\Http\Controllers\Api\SouvenirController;
 use App\Http\Controllers\Api\GueststarController;
+use App\Http\Controllers\Api\PendaftaranController;
+use App\Http\Controllers\Api\SouvenirinputController;
+use App\Http\Controllers\Api\UserController;
 use App\Models\Souvenir;
 use Illuminate\Support\Facades\Route;
 
@@ -102,11 +104,17 @@ Route::resource('pendaftaran', PendaftaranController::class);
 
 Route::get('souvenir', [AcaraController::class, 'showAcaraSouve']);
 
+Route::get('souvenir',[AcaraController::class, 'showAcaraSouve']);
+Route::post('souvenir', [SouvenirinputController::class, 'store'])->name('transaksi.store');
+
 Route::get('admin', [PendaftaranController::class, 'showHomeAdmin']);
 Route::delete('adminac/pendaftaran/{id}', [PendaftaranController::class, 'hapusPendaftaran'])->name('adminac.hapusDaftar');
 Route::put('adminac/pendaftaran/{id}', [PendaftaranController::class, 'verifBayar'])->name('adminac.verifBayar');
 
 Route::get('nav1', [AcaraController::class, 'showNav']);
+Route::get('nav2', [AcaraController::class, 'showNavUser']);
+
+Route::get('profile',[PendaftaranController::class, 'showPendaftarbyUser']);
 
 Route::get('adminsv', [AcaraController::class, 'showInSouvenir']);
 Route::post('adminsv', [SouvenirController::class, 'store'])->name('adminsv.store');
@@ -116,7 +124,14 @@ Route::delete('adminsv/{id}', [SouvenirController::class, 'destroy'])->name('adm
 
 Route::get('admings', [AcaraController::class, 'showGuest']);
 Route::post('admings', [GueststarController::class, 'store'])->name('admings.store');
+
 Route::delete('admings/{id}', [GueststarController::class, 'destroy'])->name('admings.destroy');
 
 Route::put('profile', [AuthController::class, 'update'])->name('user.update');
 Route::delete('user', [AuthController::class, 'destroy'])->name('user.destroy');
+
+Route::delete('admings/{id}',[GueststarController::class, 'destroy'])->name('admings.destroy');
+
+Route::get('adminuser', [UserController::class, 'fetchAllUser']);
+Route::put('adminuser/{id}',[UserController::class, 'updateUserById'])->name('adminuser.update');
+Route::delete('adminuser/{id}',[UserController::class, 'deleteUserById'])->name('adminuser.destroy');
