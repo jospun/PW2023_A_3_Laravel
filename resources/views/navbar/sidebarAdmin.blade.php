@@ -35,7 +35,7 @@
             <span class="links_name">Souvenir</span>
           </a>
         </li>
-        <li class="{{ Request::is('adminsv') ? 'active' : '' }}">
+        <li class="{{ Request::is('admings') ? 'active' : '' }}">
           <a href="{{ url('admings') }}">
             <i class="bx bx-list-ul"></i>
             <span class="links_name">Guest Star</span>

@@ -313,7 +313,6 @@
         </div>
     </div>
 
-
     <!-- Modal Edit Event -->
     <div class="modal fade" id="editEventModal" tabindex="-1" aria-labelledby="editEventModalLabel" aria-hidden="true" enctype="multipart/form-data">
         <div class="modal-dialog modal-lg">

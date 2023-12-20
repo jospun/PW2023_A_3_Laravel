@@ -221,13 +221,69 @@
     </div>
     @endforelse
 
-    <!-- TAMBAH EVENT -->
-    <div class="container d-flex justify-content-center mb-5">
-        <a href="#" class="btn rounded border" data-bs-toggle="modal" data-bs-target="#tambahEventModal">
-            <box-icon name='add-to-queue'></box-icon>
-        </a>
-    </div>
+    <!-- TAMBAH GUEST STAR -->
+    <div class="modal fade" id="tambahEventModal" tabindex="-1" aria-labelledby="tambahEventModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+        
+        <form id="Event" action="{{ route('adminac.store') }}" method="POST" enctype="multipart/form-data">
+        @csrf
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editModalLabel">Tambah Event</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+                <div class="modal-body">
+            
+                    <div class="row p-2">
+                        <label for="namaEvent" class="col-sm-2 col-form-label">Nama Event</label>
+                        <div class="col-sm-10">
+                            <input required type="text" class="form-control" id="inputEvent" name="nama_acara" value="{{ old('nama_acara') }}">
+                        </div>
+                    </div>
 
+                    <div class="row p-2">
+                        <label for="deskripsi" class="col-sm-2 col-form-label">Deskripsi</label>
+                        <div class="col-sm-10">
+                            <textarea required type="text" class="form-control" id="inputDeskripsi" name="deskripsi" value="{{ old('deskripsi') }}"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="row p-2">
+                        <label for="hargaTicket" class="col-sm-2 col-form-label">Harga Ticket</label>
+                        <div class="col-sm-10">
+                            <input required class="form-control" type="number" name="biaya" id="biaya" placeholder="Rp." value="{{  old('biaya') }}"> 
+                        </div>
+                    </div>
+
+                    <div class="row p-2">
+                        <label for="tanggalMulai" class="col-sm-2 col-form-label">Tanggal Mulai</label>
+                        <div class="col-sm-10">
+                            <input required class="form-control" type="date" name="tanggal_mulai" id="startDate" value="{{ old('tanggal_mulai') }}">
+                        </div>
+                    </div>
+
+                    <div class="row p-2">
+                        <label for="tanggalSelesai" class="col-sm-2 col-form-label">Tanggal Selesai</label>
+                        <div class="col-sm-10">
+                            <input required class="form-control" type="date" name="tanggal_tutup" id="endDate" value="{{ old('tanggal_tutup') }}">
+                        </div>
+                    </div>
+
+                    <div class="row p-2">
+                        <label for="inputFile" class="col-sm-2 col-form-label">Masukkan Foto/Video </label>
+                        <div class="col-sm-10">
+                            <input class="form-control" id="inputFile" type="file" accept=".jpg,.jpeg,.png,.mov,.mp4" name="poster" value="{{ old('poster') }}"/>
+                        </div>
+                    </div>
+
+                </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary" data-bs-dismiss="modal" type="submit">Save</button>
+            </div>
+        </div>
+        </form>
+        </div>
     </div>
 
     <script>
