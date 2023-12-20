@@ -4,6 +4,7 @@ use App\Http\Controllers\Api\AcaraController;
 use App\Http\Controllers\Api\HomeController;
 use App\Http\Controllers\Api\PendaftaranController;
 use App\Http\Controllers\Api\SouvenirController;
+use App\Http\Controllers\Api\GueststarController;
 use App\Models\Souvenir;
 use Illuminate\Support\Facades\Route;
 
@@ -101,3 +102,5 @@ Route::put('adminsv/{id}',[SouvenirController::class, 'update'])->name('adminsv.
 Route::delete('adminsv/{id}',[SouvenirController::class, 'destroy'])->name('adminsv.destroy');
 
 Route::get('admings', [AcaraController::class, 'showGuest']);
+Route::post('admings', [GueststarController::class, 'store'])->name('admings.store');
+Route::delete('admings/{id}',[GueststarController::class, 'destroy'])->name('admings.destroy');
