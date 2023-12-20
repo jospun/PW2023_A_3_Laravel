@@ -17,6 +17,8 @@ return new class extends Migration
             $table->bigInteger('id_acara')->unsigned()->on('acaras')->onDelete('cascade');
             $table->string('status');
             $table->datetime('tanggal_bayar');
+            $table->integer('jumlah');
+            $table->double('subTotal');
 
             $table->foreign('id_user')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('id_acara')->references('id')->on('acaras')->onDelete('cascade');

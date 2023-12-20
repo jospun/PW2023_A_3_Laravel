@@ -19,9 +19,11 @@ class AcaraFactory extends Factory
     {
         return [
             'nama_acara' => $this->faker->words(3, true),
-            'tanggal_mulai' => $this->faker->dateTimeBetween('-1 years', '+1 years'),
-            'tanggal_tutup' => $this->faker->dateTimeBetween('-1 years', '+1 years'),
+            'deskripsi' => $this->faker->text(100),
+            'tanggal_mulai' => $this->faker->date(),
+            'tanggal_tutup' => $this->faker->date(),
             'biaya' => $this->faker->randomFloat(2, 0, 1000),
+            'poster' => $this->faker->imageUrl(),
         ];
     }
 }

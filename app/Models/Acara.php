@@ -14,8 +14,10 @@ class Acara extends Model
 
     protected $fillable = [
         'nama_acara',
+        'deskripsi',
         'tanggal_mulai',
         'tanggal_tutup',
         'biaya',
+        'poster',
     ];
 }

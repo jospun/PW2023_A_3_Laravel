@@ -2,8 +2,6 @@
 <html>
 
 <head>
-
-  <head>
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <title>FEST fes</title>
@@ -140,13 +138,15 @@
           <li><a class="nav-link scrollto" href="#souvenir">Souvenir</a></li>
           <li class="dropdown"><a href="#"><span>Event</span> <i class="bi bi-chevron-down"></i></a>
             <ul>
-              <li><a href="#iu">IU - Golden Hour</a></li>
-              <li><a href="#cld">Coldplay - Music of the Sphere</a></li>
-              <li><a href="#tls">Tulus - Tur Manusia 2023</a></li>
-              <li><a href="#ipes">Informatics Festival 11</a></li>
+            @forelse($event as $ev)
+                <li><a href="{{ url('acara/' . $ev->id) }}">{{ $ev->nama_acara }}</a></li>
+            @empty
+                <li><a>Stay Tuned!</a></li>
+            @endforelse
               <li><a href="{{ url('acara') }}">JKT-48</a></li>
             </ul>
           </li>
+
           <li><a class="nav-link scrollto" href="#">Contact</a></li>
           @auth
           <li><a class="nav-link scrollto" href="{{ url('/profile') }}">Profile</a></li>
@@ -165,8 +165,6 @@
     @yield('content')
   </div>
 </body>
-
-
 
 <script src="{{ asset('vendor/purecounter_vanilla.js') }}"></script>
 <script src="{{ asset('vendor/aos/aos.js') }}"></script>

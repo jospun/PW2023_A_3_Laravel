@@ -18,6 +18,8 @@ class Pendaftaran extends Model
         'id_acara',
         'status',
         'tanggal_bayar',
+        'jumlah',
+        'subTotal',
     ];
 
     public function user()

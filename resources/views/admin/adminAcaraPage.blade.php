@@ -1,6 +1,6 @@
 @extends('navbar/sidebarAdmin')
 @section('content')
-import
+
     <style>
         #editEvent{
             width: 30px;
@@ -132,10 +132,10 @@ import
 
 
     
-    <nav>
+    <nav style="position:relative">
         <div class="sidebar-button">
         <i class="bx bx-menu sidebarBtn"></i>
-        <span class="dashboard">Dashboard</span>
+        <span class="dashboard">Event</span>
         </div>
     </nav>
         @forelse($acara as $ac)
@@ -143,7 +143,7 @@ import
             <div class="row p-2">
                 <div class="col">
                     <div class="container" id="container-foto" >
-                        <img src=" {{ asset('images/event2.jpg') }} " alt="event2">
+                        <img src=" {{ asset($ac->poster) }} " style="width: 100%; height: 100%" alt="event2">
                     </div>
                     
 
@@ -162,7 +162,7 @@ import
                             </a>
                         </div>
                     </div>
-                    <textarea class="form-control" name="deskripsi" id="deskripsi1" cols="30" rows="5" readonly>$event->desc</textarea>
+                    <textarea class="form-control" name="deskripsi" id="deskripsi1" cols="30" rows="5" readonly>{{ $ac->deskripsi }}</textarea>
                 </div>
                 
             </div>
@@ -191,13 +191,15 @@ import
                                                 <br> <strong>Status : {{ $pdft->status }}</strong>
                                             </p>
                                         </div>
-                                        <div class="col-2 d-flex justify-content-center align-items-center">
-                                            <a href="#" id="checkButtonUser" class="pp">
-                                                <box-icon name='check' id="checkUser1"></box-icon>
-                                            </a>
-                                        </div>
+                                        @if($pdft->status == 'Belum Lunas')
+                                            <div class="col-2 d-flex justify-content-center align-items-center">
+                                                <a href="#" id="checkButtonUser" class="pp" data-bs-toggle="modal" data-bs-target="#verifModal" data-user-id="{{ $pdft->id }}">
+                                                    <box-icon name='check' id="checkUser1"></box-icon>
+                                                </a>
+                                            </div>
+                                        @endif
                                         <div class="col-2">
-                                            <a href="#" id="removeButtonUser" data-bs-toggle="modal" data-bs-target="#hapusUserModal">
+                                            <a href="#" id="removeButtonUser" data-bs-toggle="modal" data-bs-target="#hapusUserModal" data-user-id="{{ $pdft->id }}">
                                                 <box-icon name='trash' id="removeUser"></box-icon>
                                             </a>
                                         </div>
@@ -264,14 +266,12 @@ import
                         <div class="col-sm-10">
                             <input required type="text" class="form-control" id="inputEvent" name="nama_acara" value="{{ old('nama_acara') }}">
                         </div>
-
-                        
                     </div>
 
                     <div class="row p-2">
                         <label for="deskripsi" class="col-sm-2 col-form-label">Deskripsi</label>
                         <div class="col-sm-10">
-                            <textarea required type="text" class="form-control" id="inputDeskripsi" name="deskripsiEvent"></textarea>
+                            <textarea required type="text" class="form-control" id="inputDeskripsi" name="deskripsi" value="{{ old('deskripsi') }}"></textarea>
                         </div>
                     </div>
 
@@ -299,25 +299,24 @@ import
                     <div class="row p-2">
                         <label for="inputFile" class="col-sm-2 col-form-label">Masukkan Foto/Video </label>
                         <div class="col-sm-10">
-                            <input class="form-control" id="inputFile" type="file" accept=".jpg,.jpeg,.png,.mov,.mp4" name="asset"/>
+                            <input class="form-control" id="inputFile" type="file" accept=".jpg,.jpeg,.png,.mov,.mp4" name="poster" value="{{ old('poster') }}"/>
                         </div>
                     </div>
 
                 </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="submit" class="btn btn-primary" data-bs-dismiss="modal" type="submit">Save changes</button>
+                <button type="submit" class="btn btn-primary" data-bs-dismiss="modal" type="submit">Save</button>
             </div>
         </div>
         </form>
         </div>
     </div>
 
-
     <!-- Modal Edit Event -->
-    <div class="modal fade" id="editEventModal" tabindex="-1" aria-labelledby="editEventModalLabel" aria-hidden="true" enctype="multipart/form-data">
-        <div class="modal-dialog modal-lg">    
-            <form id="editEventForm" method="POST" action="{{ route('adminac.update', 'id_acara') }}">
+    <div class="modal fade" id="editEventModal" tabindex="-1" aria-labelledby="editEventModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <form id="editEventForm" method="POST" action="{{ route('adminac.update', 'id_acara') }}"  enctype="multipart/form-data">
             @csrf
             @method('PUT')
             <div class="modal-content">
@@ -330,44 +329,42 @@ import
                         <div class="row p-2">
                             <label for="namaEvent" class="col-sm-2 col-form-label">Nama Event</label>
                             <div class="col-sm-10">
-                                <input required type="text" class="form-control" id="inputEvent" name="nama_acara" value="{{ old('nama_acara', $ac->nama_acara) }}">
+                                <input required type="text" class="form-control" id="inputEventE" name="nama_acara" >
                             </div>
-    
-                            
                         </div>
     
                         <div class="row p-2">
                             <label for="deskripsi" class="col-sm-2 col-form-label">Deskripsi</label>
                             <div class="col-sm-10">
-                                <textarea required type="text" class="form-control" id="inputDeskripsi" name="deskripsiEvent"></textarea>
+                                <textarea required type="text" class="form-control" id="inputDeskripsiE" name="deskripsiEvent"></textarea>
                             </div>
                         </div>
     
                         <div class="row p-2">
                             <label for="hargaTicket" class="col-sm-2 col-form-label">Harga Ticket</label>
                             <div class="col-sm-10">
-                                <input required class="form-control" type="number" name="biaya" id="biaya" placeholder="Rp." value="{{  old('biaya', $ac->biaya) }}"> 
+                                <input required class="form-control" type="number" name="biaya" id="biayaE" placeholder="Rp."> 
                             </div>
                         </div>
     
                         <div class="row p-2">
                             <label for="tanggalMulai" class="col-sm-2 col-form-label">Tanggal Mulai</label>
                             <div class="col-sm-10">
-                                <input required class="form-control" type="date" name="tanggal_mulai" id="startDate" value="{{ old('tanggal_mulai',  $ac->tanggal_mulai ) }}">
+                                <input required class="form-control" type="date" name="tanggal_mulai" id="startDateE">
                             </div>
                         </div>
     
                         <div class="row p-2">
                             <label for="tanggalSelesai" class="col-sm-2 col-form-label">Tanggal Selesai</label>
                             <div class="col-sm-10">
-                                <input required class="form-control" type="date" name="tanggal_tutup" id="endDate" value="{{ old('tanggal_tutup',  $ac->tanggal_tutup ) }}">
+                                <input required class="form-control" type="date" name="tanggal_tutup" id="endDateE">
                             </div>
                         </div>
     
                         <div class="row p-2">
                             <label for="inputFile" class="col-sm-2 col-form-label">Masukkan Foto/Video </label>
                             <div class="col-sm-10">
-                                <input class="form-control" id="inputFile" type="file" accept=".jpg,.jpeg,.png,.mov,.mp4" name="asset"/>
+                                <input class="form-control" id="inputFile" type="file" accept=".jpg,.jpeg,.png,.mov,.mp4" name="poster"/>
                             </div>
                         </div>
     
@@ -401,45 +398,109 @@ import
         </form>
     </div>
 
+    <!-- Modal Verif Pendaftaran -->
+    <div class="modal fade" id="verifModal" tabindex="-1" aria-labelledby="verifModalLabel" aria-hidden="true">
+        <form id="verifModalForm" method="POST" action="{{ route('adminac.verifBayar', 'id_user') }}">
+            @csrf
+            @method('PUT')
+            <div class="modal-dialog">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Apakah Anda Yakin Ingin Memverifikasi Pendaftaran?</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                <button type="submit" class="btn btn-danger" data-bs-dismiss="modal">Yakin</button>
+            </div>
+            </div>
+            </div>
+        </form>
+    </div>
+
 
     <!-- Modal Hapus User-->
     <div class="modal fade" id="hapusUserModal" tabindex="-1" aria-labelledby="hapusUserModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-        <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Yakin Ingin Menghapus User dari Event?</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <form id="hapusUserForm" method="POST" action="{{ route('adminac.hapusDaftar', 'id_user') }}">
+            @csrf
+            @method('DELETE')
+            <div class="modal-dialog">
+                <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Yakin Ingin Menghapus User dari Event?</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                    <button type="submit" class="btn btn-danger" data-bs-dismiss="modal">Yakin</button>
+                </div>
+                </div>
             </div>
-        <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
-            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Yakin</button>
-        </div>
-        </div>
-    </div>
+        </form>
     </div>
     
 
     <script>
-        var myModal = document.getElementById('hapusEventModal');
-        myModal.addEventListener('show.bs.modal', function (event) {
+        var hapusEventModal = document.getElementById('hapusEventModal');
+        hapusEventModal.addEventListener('show.bs.modal', function (event) {
             var button = event.relatedTarget;
             var acaraId = button.getAttribute('data-acara-id');
-            var form = myModal.querySelector('#hapusEventForm');
+            var form = hapusEventModal.querySelector('#hapusEventForm');
             var action = form.getAttribute('action').replace('id_acara', acaraId);
             form.setAttribute('action', action);
         });
     </script>
 
     <script>
-        var myModal = document.getElementById('editEventModal');
-        myModal.addEventListener('show.bs.modal', function (event) {
+        var verifModal = document.getElementById('verifModal');
+        verifModal.addEventListener('show.bs.modal', function (event) {
             var button = event.relatedTarget;
-            var acaraId = button.getAttribute('data-acara-id');
-            var form = myModal.querySelector('#editEventForm');
-            var action = form.getAttribute('action').replace('id_acara', acaraId);
+            var userId = button.getAttribute('data-user-id');
+            console.log(userId);
+            var form = verifModal.querySelector('#verifModalForm');
+            var action = form.getAttribute('action').replace('id_user', userId);
             form.setAttribute('action', action);
         });
     </script>
+
+    <script>
+        var hapusUserModal = document.getElementById('hapusUserModal');
+        hapusUserModal.addEventListener('show.bs.modal', function (event) {
+            var button = event.relatedTarget;
+            var userId = button.getAttribute('data-user-id');
+            console.log(userId);
+            var form = hapusUserModal.querySelector('#hapusUserForm');
+            var action = form.getAttribute('action').replace('id_user', userId);
+            form.setAttribute('action', action);
+        });
+    </script>
+
+    <script>
+        var editEventModal = document.getElementById('editEventModal');
+        editEventModal.addEventListener('show.bs.modal', function (event) {
+            var button = event.relatedTarget;
+            var acaraId = button.getAttribute('data-acara-id');
+
+            fetch('adminac/' + acaraId)
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('inputEventE').value = data.data.nama_acara;
+                    console.log(data.data.deskripsi)
+                    document.getElementById('inputDeskripsiE').value = data.data.deskripsi;
+                    document.getElementById('biayaE').value = data.data.biaya;
+                    document.getElementById('startDateE').value = data.data.tanggal_mulai;
+                    document.getElementById('endDateE').value = data.data.tanggal_tutup;
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+
+                var form = editEventModal.querySelector('#editEventForm');
+                var action = form.getAttribute('action').replace('id_acara', acaraId);
+                form.setAttribute('action', action);
+        });
+    </script>
+
     
 
 @endsection
