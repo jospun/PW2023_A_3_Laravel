@@ -10,6 +10,7 @@ use App\Models\User;
 use App\Mail\MailSend;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Str;
 
 class AuthController extends Controller
@@ -23,7 +24,7 @@ class AuthController extends Controller
             'nama_user' => 'required|max:60',
             'email' => 'required|email:rfc,dns|unique:users',
             'tanggal_lahir' => 'required',
-            'password' => 'required|min:3',
+            'password' => 'required|confirmed|min:3',
             'no_telp' => 'required',
         ]);
 
@@ -47,19 +48,31 @@ class AuthController extends Controller
             'active' => -1,
         ]);
 
+        $details = [
+            'username' => $request->username,
+            'website' => 'FEST fest',
+            'datetime' => date('Y-m-d H:i:s'),
+            'url' => request()->getHttpHost() . '/register/verify/' . $str
+        ];
+
+        Mail::to($request->email)->send(new MailSend($details));
+
+        Session::flash('message', 'Link verifikasi telah dikirim ke email anda. Silahkan cek email anda untuk mengaktifkan akun.');
+
         return response([
             'message' => 'Register Success',
             'user' => $user
         ], 200);
     }
 
-    public function verify($verify_key){
-        
+    public function verify($verify_key)
+    {
+
         $keyCheck = User::select('verify_key')
             ->where('verify_key', $verify_key)
             ->exists();
 
-        if($keyCheck){
+        if ($keyCheck) {
             $user = User::where('verify_key', $verify_key)
                 ->update([
                     'active' => 1,
@@ -83,7 +96,7 @@ class AuthController extends Controller
             'email' => 'required|email:rfc,dns',
             'password' => 'required|min:3',
         ]);
-        
+
         if ($validate->fails()) {
             return response(['message' => $validate->errors()->first()], 400);
         }
@@ -95,9 +108,9 @@ class AuthController extends Controller
         /** @var \App\Models\MyUserModel $user **/
         $user = Auth::user();
 
-        // if($user->active == -1){ // BERHASIL DI TEST
-        //     return response(['message' => 'Please check your email'], 401);
-        // }
+        if ($user->active == -1) { // BERHASIL DI TEST
+            return response(['message' => 'Please check your email'], 401);
+        }
 
         $token = $user->createToken('Authentication Token')->accessToken;
 

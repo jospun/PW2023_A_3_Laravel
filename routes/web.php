@@ -1,7 +1,9 @@
 <?php
 
 use App\Http\Controllers\Api\AcaraController;
+use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\PendaftaranController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -36,9 +38,15 @@ Route::get('/login', function () {
     return view('loginPage');
 });
 
+Route::post('actionLogin', [AuthController::class, 'Login'])->name('login');
+
 Route::get('/register', function () {
     return view('registerPage');
 });
+
+Route::post('register/action', [AuthController::class, 'Register'])->name('register');
+Route::get('register/verify/{verify_key}', [AuthController::class, 'verify'])->name('verify');
+
 
 Route::get('/profile', function () {
     $data = [
