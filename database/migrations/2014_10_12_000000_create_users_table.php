@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('password');
             $table->string('no_telp');
             $table->string('role');
+            $table->string('gambar')->nullable();
             $table->string('verify_key');
             $table->integer('active')->nullable();
             $table->timestamp('email_verified_at')->nullable();

@@ -102,6 +102,8 @@ Route::get('/home', [HomeController::class, 'showHome']);
 
 Route::resource('pendaftaran', PendaftaranController::class);
 
+Route::get('souvenir', [AcaraController::class, 'showAcaraSouve']);
+
 Route::get('souvenir',[AcaraController::class, 'showAcaraSouve']);
 Route::post('souvenir', [SouvenirinputController::class, 'store'])->name('transaksi.store');
 
@@ -116,12 +118,18 @@ Route::get('profile',[PendaftaranController::class, 'showPendaftarbyUser']);
 
 Route::get('adminsv', [AcaraController::class, 'showInSouvenir']);
 Route::post('adminsv', [SouvenirController::class, 'store'])->name('adminsv.store');
-Route::get('adminsv/{id}',[SouvenirController::class, 'show']);
-Route::put('adminsv/{id}',[SouvenirController::class, 'update'])->name('adminsv.update');
-Route::delete('adminsv/{id}',[SouvenirController::class, 'destroy'])->name('adminsv.destroy');
+Route::get('adminsv/{id}', [SouvenirController::class, 'show']);
+Route::put('adminsv/{id}', [SouvenirController::class, 'update'])->name('adminsv.update');
+Route::delete('adminsv/{id}', [SouvenirController::class, 'destroy'])->name('adminsv.destroy');
 
 Route::get('admings', [AcaraController::class, 'showGuest']);
 Route::post('admings', [GueststarController::class, 'store'])->name('admings.store');
+
+Route::delete('admings/{id}', [GueststarController::class, 'destroy'])->name('admings.destroy');
+
+Route::put('profile', [AuthController::class, 'update'])->name('user.update');
+Route::delete('user', [AuthController::class, 'destroy'])->name('user.destroy');
+
 Route::delete('admings/{id}',[GueststarController::class, 'destroy'])->name('admings.destroy');
 
 Route::get('adminuser', [UserController::class, 'fetchAllUser']);

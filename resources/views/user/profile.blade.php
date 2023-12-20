@@ -84,14 +84,15 @@
         </div>
     </header>
     <div class="student-profile py-4 mt-5">
+
         <div class="container">
             <div class="row">
                 <div class="col-lg-4">
                     <div style="height: 26px"></div>
                     <div class="card shadow-sm">
                         <div class="card-header bg-transparent text-center">
-                            <img class="profile_img" src="https://source.unsplash.com/600x300/?student" alt="student dp">
-                            <h3>Carolus Seto Arianto</h3>
+                            <img class="profile_img" src="{{Auth::user()->gambar}}" alt="student dp">
+                            <h3>{{ Auth::user()->nama_user }}</h3>
                         </div>
                     </div>
                 </div>
@@ -108,7 +109,7 @@
                                 <tr>
                                     <th width="30%">Email</th>
                                     <td width="2%">:</td>
-                                    <td>Jospun@gmail.com</td>
+                                    <td>{{Auth::user()->email}}</td>
                                 </tr>
 
                                 <tr>
@@ -120,13 +121,13 @@
                                 <tr>
                                     <th width="30%">Tanggal Lahir</th>
                                     <td width="2%">:</td>
-                                    <td>22/01/2023</td>
+                                    <td>{{Auth::user()->tanggal_lahir}}</td>
                                 </tr>
 
                                 <tr>
                                     <th width="30%">Nomor Telepon</th>
                                     <td width="2%">:</td>
-                                    <td>088444312</td>
+                                    <td>{{Auth::user()->no_telp}}</td>
                                 </tr>
                             </table>
 
@@ -184,40 +185,56 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
+
                 <div class="modal-body">
-                    <div class="card-body pt-0">
-                        <table class="table" style="border: none;">
-                            <tr>
-                                <th width="30%">Email</th>
-                                <td width="2%">:</td>
-                                <td><input type="email" id="emailInput" name="email" placeholder="Masukkan email" style="border: none;"></td>
-                            </tr>
+                    <form method="POST" action="{{ route('user.update') }}" enctype="multipart/form-data">
+                        @csrf
+                        @method('PUT')
+                        <div class="card-body pt-0">
 
-                            <tr>
-                                <th width="30%">Password</th>
-                                <td width="2%">:</td>
-                                <td><input type="password" id="passwordInput" name="password" placeholder="Masukkan password" style="border: none;"></td>
-                            </tr>
+                            <table class="table" style="border: none;">
 
-                            <tr>
-                                <th width="30%">Tanggal Lahir</th>
-                                <td width="2%">:</td>
-                                <td><input type="date" id="tanggalInput" name="tanggal" placeholder="Enter your Tanggal" style="border: none;"></td>
-                            </tr>
 
-                            <tr>
-                                <th width="30%">Nomor Telepon</th>
-                                <td width="2%">:</td>
-                                <td><input type="nomorTelepon" id="nomorTeleponInput" name="nomorTelepon" placeholder="Masukkan Nomor Telepon" style="border: none;"></td>
-                            </tr>
-                        </table>
-                    </div>
+                                <tr>
+                                    <th width="30%">Email</th>
+                                    <td width="2%">:</td>
+                                    <td><input class="form-control" type="email" id="emailInput" name="email" placeholder="Masukkan email" style="border: none;"></td>
+                                </tr>
+
+                                <tr>
+                                    <th width="30%">Password</th>
+                                    <td width="2%">:</td>
+                                    <td><input class="form-control" type="password" id="passwordInput1" name="password" placeholder="Masukkan password" style="border: none;"></td>
+                                </tr>
+
+                                <tr>
+                                    <th width="30%">Tanggal Lahir</th>
+                                    <td width="2%">:</td>
+                                    <td><input class="form-control" type="date" id="tanggalInput" name="tanggal_lahir" placeholder="Enter your Tanggal" style="border: none;"></td>
+                                </tr>
+
+                                <tr>
+                                    <th width="30%">Nomor Telepon</th>
+                                    <td width="2%">:</td>
+                                    <td><input class="form-control" type="text" id="nomorTeleponInput" name="no_telp" placeholder="Masukkan Nomor Telepon" style="border: none;"></td>
+                                </tr>
+                                <tr>
+                                    <th width="30%">Foto Profil</th>
+                                    <td width="2%">:</td>
+                                    <td><input class="form-control" type="file" id="gambarInput" name="gambar" placeholder="Masukkan Gambar" style="border: none;"></td>
+                                </tr>
+                            </table>
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary">Save Changes</button>
+                        </div>
+                    </form>
                 </div>
 
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary" data-dismiss="modal">Save changes</button>
-                </div>
+
+
             </div>
         </div>
     </div>
@@ -233,77 +250,88 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <div class="row ml-2">
-                        Konfirmasi :
-                        <div class="ml-2"><input type="konfirmasi" id="konfirmasiInput" name="konfirmasi" placeholder="Masukkan Password Anda" style="border: none;"></div>
-                    </div>
-                    <!-- <table class="table" style="border: none;">
+                    <form method="post" action="{{ route('user.destroy') }}">
+                        @csrf
+                        @method('DELETE')
+                        <div class="row ml-2">
+                            <div class="col-4">
+                                <p>
+                                    Konfirmasi :
+                                </p>
+                            </div>
+                            <div class="col-8">
+                                <div class="ml-2">
+                                    <input type="password" id="passwordInput" name="password" placeholder="Masukkan Password Anda" style="border: none;">
+                                </div>
+                            </div>
+                            <!-- <table class="table" style="border: none;">
                             <tr>
                                 <th width="30%">Konfirmasi</th>
                                 <td width="2%">:</td>
                                 <td><input type="konfirmasi" id="konfirmasiInput" name="konfirmasi" placeholder="Masukkan Password Anda" style="border: none;"></td>
                             </tr>
                         </table> -->
-                </div>
+                        </div>
 
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
-                    <button type="button" class="btn btn-danger">Hapus</button>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                            <button type="submit" class="btn btn-danger">Hapus</button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
-    </div>
 
-    <!-- Modal 3 -->
-    <div class="modal fade" id="modalDetail" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLongTitle"><strong>Detail Tiket</strong></h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <div class="col">
-                        <div class="container shadow-sm desc-detailImg" style="text-align: center;">
-                            <img src="https://i.pinimg.com/736x/52/b3/6f/52b36f810dd737b1e8c81edb152c14d4.jpg" alt="Gambar">
-                        </div>
-                        <div class="container shadow-sm m-4">
-                            <table class="table" style="border: none;">
-                                <tr>
-                                    <th width="30%">Nama konser</th>
-                                    <td width="2%">:</td>
-                                    <td>Noah The Band</td>
-                                </tr>
+        <!-- Modal 3 -->
+        <div class="modal fade" id="modalDetail" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLongTitle"><strong>Detail Tiket</strong></h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="col">
+                            <div class="container shadow-sm desc-detailImg" style="text-align: center;">
+                                <img src="https://i.pinimg.com/736x/52/b3/6f/52b36f810dd737b1e8c81edb152c14d4.jpg" alt="Gambar">
+                            </div>
+                            <div class="container shadow-sm m-4">
+                                <table class="table" style="border: none;">
+                                    <tr>
+                                        <th width="30%">Nama konser</th>
+                                        <td width="2%">:</td>
+                                        <td>Noah The Band</td>
+                                    </tr>
 
-                                <tr>
-                                    <th width="30%">Tanggal Konser</th>
-                                    <td width="2%">:</td>
-                                    <td>30 September 2023</td>
-                                </tr>
+                                    <tr>
+                                        <th width="30%">Tanggal Konser</th>
+                                        <td width="2%">:</td>
+                                        <td>30 September 2023</td>
+                                    </tr>
 
-                                <tr>
-                                    <th width="30%">Tanggal Pendaftaran</th>
-                                    <td width="2%">:</td>
-                                    <td>28 September 2023</td>
-                                </tr>
+                                    <tr>
+                                        <th width="30%">Tanggal Pendaftaran</th>
+                                        <td width="2%">:</td>
+                                        <td>28 September 2023</td>
+                                    </tr>
 
-                                <tr>
-                                    <th width="30%">Status Membayar</th>
-                                    <td width="2%">:</td>
-                                    <td>Lunas</td>
-                                </tr>
-                            </table>
+                                    <tr>
+                                        <th width="30%">Status Membayar</th>
+                                        <td width="2%">:</td>
+                                        <td>Lunas</td>
+                                    </tr>
+                                </table>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
 
 </body>
 
