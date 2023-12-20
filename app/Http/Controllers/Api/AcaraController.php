@@ -50,6 +50,17 @@ class AcaraController extends Controller
         return view('navbar.navbarHome', compact('event'));
     }
 
+    public function showNavUser()
+    {
+        $currentDate = Carbon::now();
+        $acara = Acara::where('tanggal_mulai', '>=', $currentDate)->latest()->take(5)->get();
+        if($acara->count() < 5){
+            $latestEvents = Acara::latest()->take(5 - $acara->count())->get();
+            $event = $acara->merge($latestEvents);
+        }
+        return view('navbar.navbarUser', compact('acara'));
+    }
+
 
 
     /**
