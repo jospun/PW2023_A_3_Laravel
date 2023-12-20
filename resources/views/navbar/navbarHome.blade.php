@@ -129,6 +129,11 @@
       <!-- Off-Canvas Navbar -->
       <nav id="navbar" class="navbar">
         <ul>
+          <!-- @if (Auth::check())
+          <p>User is authenticated</p>
+          @else
+          <p>User is not authenticated</p>
+          @endif -->
           <li><a class="nav-link scrollto active" href="#hero">Home</a></li>
           <li><a class="nav-link scrollto" href="#about">About</a></li>
           <li><a class="nav-link scrollto" href="#featured">Feautured Event</a></li>
@@ -143,7 +148,13 @@
             </ul>
           </li>
           <li><a class="nav-link scrollto" href="#">Contact</a></li>
-          <li><a class="nav-link scrollto" href="{{ url('login') }}">Login</a></li>
+          @auth
+          <li><a class="nav-link scrollto" href="{{ url('/profile') }}">Profile</a></li>
+          <li><a class="nav-link scrollto" href="{{ url('/logout') }}">Logout</a></li>
+          @else
+          <li><a class="nav-link scrollto" href="{{ url('/login') }}">Login</a></li>
+          @endauth
+
         </ul>
         <i class="fa fa-list mobile-nav-toggle"><img src="https://i.pinimg.com/originals/26/9d/d1/269dd16fa1f5ff51accd09e7e1602267.png" style="width: 30px; height:30px;" /></i>
       </nav><!-- .navbar -->

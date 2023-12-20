@@ -4,6 +4,7 @@
 <head>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/css/bootstrap.min.css">
     <script src="https://use.fontawesome.com/f59bcd8580.js"></script>
+    <title>FEST fes</title>
     <style>
         body {
             background: #eeeeee;
@@ -87,41 +88,41 @@
             <div class="col-md-6 p-5" style="background-color: #eee">
                 <h3 class="p-2" style="text-align: center">LOGIN</h3>
 
-                {{-- @if (session('error'))
+                @if (session('error'))
                 <div class="alert alert-danger">
                     <b>Oops!</b> {{ session('error') }}
-            </div>
-            @endif --}}
-
-            <div class="form-style">
-
-                <form id="formLogin" method="post" action="{{ route('login') }}">
-                    @csrf
-                    <div class="form-group pb-3">
-                        <input type="email" placeholder="Email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" style="background-color:#eee" name="email" required>
-                    </div>
-                    <div class="form-group pb-3">
-                        <input type="password" placeholder="Password" class="form-control" id="exampleInputPassword1" style="background-color:#eee" name="password" required>
-                    </div>
-
-                    <div class="d-flex align-items-center justify-content-between">
-                        <div class="d-flex align-items-center"><input name="" type="checkbox" value="" /> <span class="pl-2 font-weight-bold">Remember Me</span></div>
-                        <div><a href="send" data-toggle="modal" data-target="#sendEmail">Forget Password?</a></div>
-                    </div>
-
-                    <div class="pb-3">
-                        <a class="btn w-100 font-weight-bold mt-2" style="background-color: #49D6A9; color: #fff" href="#" onclick="login()">Login</a>
-                    </div>
-                </form>
-                <div class="sideline">OR</div>
-                <div>
-                    <button type="submit" class="btn btn-danger w-100 font-weight-bold mt-2"><i class="fa fa-google" aria-hidden="true"></i> Login With Google</button>
                 </div>
-                <div class="pt-4 text-center">Don't have an account? <a href="{{ url('register') }}" style="color:#2dc997">Register</a>
+                @endif
+
+                <div class="form-style">
+
+                    <form id="formLogin" method="post" action="{{ route('login') }}">
+                        @csrf
+                        <div class="form-group pb-3">
+                            <input type="email" placeholder="Email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" style="background-color:#eee" name="email" required>
+                        </div>
+                        <div class="form-group pb-3">
+                            <input type="password" placeholder="Password" class="form-control" id="exampleInputPassword1" style="background-color:#eee" name="password" required>
+                        </div>
+
+                        <div class="d-flex align-items-center justify-content-between">
+                            <div class="d-flex align-items-center"><input name="" type="checkbox" value="" /> <span class="pl-2 font-weight-bold">Remember Me</span></div>
+                            <div><a href="send" data-toggle="modal" data-target="#sendEmail">Forget Password?</a></div>
+                        </div>
+
+                        <div class="pb-3">
+                            <a class="btn w-100 font-weight-bold mt-2" style="background-color: #49D6A9; color: #fff" href="#" onclick="login()">Login</a>
+                        </div>
+                    </form>
+                    <div class="sideline">OR</div>
+                    <div>
+                        <button type="submit" class="btn btn-danger w-100 font-weight-bold mt-2"><i class="fa fa-google" aria-hidden="true"></i> Login With Google</button>
+                    </div>
+                    <div class="pt-4 text-center">Don't have an account? <a href="{{ url('register') }}" style="color:#2dc997">Register</a>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
     </div>
 
     <div class="modal fade" id="sendEmail" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">

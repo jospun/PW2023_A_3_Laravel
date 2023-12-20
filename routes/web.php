@@ -47,6 +47,11 @@ Route::get('/register', function () {
 Route::post('register/action', [AuthController::class, 'Register'])->name('register');
 Route::get('register/verify/{verify_key}', [AuthController::class, 'verify'])->name('verify');
 
+Route::get('/logout', function () {
+    Auth::logout();
+    return redirect('/home');
+    // return redirect('/login);
+});
 
 Route::get('/profile', function () {
     $data = [

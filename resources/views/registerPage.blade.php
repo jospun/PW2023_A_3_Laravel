@@ -4,6 +4,7 @@
 <head>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/css/bootstrap.min.css">
     <script src="https://use.fontawesome.com/f59bcd8580.js"></script>
+    <title>FEST fes</title>
     <style>
         body {
             background: #eeeeee;
@@ -150,98 +151,98 @@
                 <div class="sideline mt-2">or use email to register</div>
 
                 <div class="form-style">
-                    {{-- @if (session('message'))
+                    @if (session('message'))
                     <div class="alert alert-success">
                         {{ session('message') }}
-                </div>
-                @endif --}}
-
-
-                <form method="post" action="{{ route('register') }}">
-
-                    @csrf
-                    <div class="form-group pb-2">
-                        <input type="text" placeholder="Email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="email" required>
                     </div>
+                    @endif
 
-                    <div class="form-group pb-2">
-                        <input type="text" placeholder="Name" class="form-control" id="inputName" name="nama_user" required>
+
+                    <form method="post" action="{{ route('register') }}">
+
+                        @csrf
+                        <div class="form-group pb-2">
+                            <input type="text" placeholder="Email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="email" required>
+                        </div>
+
+                        <div class="form-group pb-2">
+                            <input type="text" placeholder="Name" class="form-control" id="inputName" name="nama_user" required>
+                        </div>
+
+                        <div class="form-group pb-2">
+                            <input type="number" placeholder="Phone Number" class="form-control" id="inputNo" name="no_telp" required>
+                        </div>
+
+                        <div class="form-group pb-2">
+                            <input type="text" onfocus="(this.type='date')" onblur="(this.type='text')" placeholder="Tanggal Lahir" class="form-control" id="inputTanggal" name="tanggal_lahir" required>
+                        </div>
+
+                        <div class="form-group pb-2">
+                            <input id="password" placeholder="Password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
+                        </div>
+
+                        <div class="form-group pb-2">
+                            <input id="password" placeholder="Confirm Password" type="password" class="form-control @error('password') is-invalid @enderror" name="password_confirmation" required autocomplete="current-password">
+                            @error('password')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                            @enderror
+                        </div>
+
+                        <div class="pb-2">
+                            <button type="submit" class="btn w-100 font-weight-bold mt-2 in" style="background-color: #49D6A9; color: #fff">Register</button>
+                        </div>
+                    </form>
+
+                    <div class="pt-2 text-center">Already have an account? <a href="{{ url('login') }}" style="color: #2dc997">Login</a>
                     </div>
-
-                    <div class="form-group pb-2">
-                        <input type="number" placeholder="Phone Number" class="form-control" id="inputNo" name="no_telp" required>
-                    </div>
-
-                    <div class="form-group pb-2">
-                        <input type="text" onfocus="(this.type='date')" onblur="(this.type='text')" placeholder="Tanggal Lahir" class="form-control" id="inputTanggal" name="tanggal_lahir" required>
-                    </div>
-
-                    <div class="form-group pb-2">
-                        <input id="password" placeholder="Password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
-                    </div>
-
-                    <div class="form-group pb-2">
-                        <input id="password" placeholder="Confirm Password" type="password" class="form-control @error('password') is-invalid @enderror" name="password_confirmation" required autocomplete="current-password">
-                        @error('password')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                        @enderror
-                    </div>
-
-                    <div class="pb-2">
-                        <button type="submit" class="btn w-100 font-weight-bold mt-2 in" style="background-color: #49D6A9; color: #fff">Register</button>
-                    </div>
-                </form>
-
-                <div class="pt-2 text-center">Already have an account? <a href="{{ url('login') }}" style="color: #2dc997">Login</a>
                 </div>
             </div>
-        </div>
-        <div class="col-md-5 d-none d-md-block">
-            <div id="demo" class="carousel slide" data-ride="carousel">
-                <!-- Indicators -->
-                <ol class="carousel-indicators">
-                    <li data-target="#demo" data-slide-to="0" class="indicator active">
-                    </li>
-                    <li data-target="#demo" data-slide-to="1" class="indicator">
-                    </li>
-                    <li data-target="#demo" data-slide-to="2" class="indicator">
-                    </li>
-                </ol>
-                <!-- The slideshow -->
-                <div class="carousel-inner">
-                    <div class="carousel-item active">
-                        <div class="slider-feature-card">
-                            <img src="{{ asset('images/FotoCarousel.png') }}" alt="">
+            <div class="col-md-5 d-none d-md-block">
+                <div id="demo" class="carousel slide" data-ride="carousel">
+                    <!-- Indicators -->
+                    <ol class="carousel-indicators">
+                        <li data-target="#demo" data-slide-to="0" class="indicator active">
+                        </li>
+                        <li data-target="#demo" data-slide-to="1" class="indicator">
+                        </li>
+                        <li data-target="#demo" data-slide-to="2" class="indicator">
+                        </li>
+                    </ol>
+                    <!-- The slideshow -->
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <div class="slider-feature-card">
+                                <img src="{{ asset('images/FotoCarousel.png') }}" alt="">
 
+                            </div>
                         </div>
-                    </div>
-                    <div class="carousel-item">
-                        <div class="slider-feature-card">
-                            <img src="{{ asset('images/FotoCarousel3.png') }}" alt="">
+                        <div class="carousel-item">
+                            <div class="slider-feature-card">
+                                <img src="{{ asset('images/FotoCarousel3.png') }}" alt="">
 
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <div class="slider-feature-card">
+                                <img src="{{ asset('images/FotoCarousel2.png') }}" alt="">
+                            </div>
                         </div>
                     </div>
-                    <div class="carousel-item">
-                        <div class="slider-feature-card">
-                            <img src="{{ asset('images/FotoCarousel2.png') }}" alt="">
-                        </div>
-                    </div>
+                    <a class="carousel-control-prev" href="#demo" role="button" data-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                    <a class="carousel-control-next" href="#demo" role="button" data-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Next</span>
+                    </a>
                 </div>
-                <a class="carousel-control-prev" href="#demo" role="button" data-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="sr-only">Previous</span>
-                </a>
-                <a class="carousel-control-next" href="#demo" role="button" data-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="sr-only">Next</span>
-                </a>
             </div>
+
+
         </div>
-
-
-    </div>
     </div>
 </body>
 

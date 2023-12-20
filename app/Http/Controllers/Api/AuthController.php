@@ -29,7 +29,10 @@ class AuthController extends Controller
         ]);
 
         if ($validate->fails()) {
-            return response(['message' => $validate->errors()->first()], 400);
+            // return response(['message' => $validate->errors()->first()], 400);
+
+            Session::flash('message', 'data tidak valid');
+            return redirect('register');
         }
 
         $registrationData['password'] = bcrypt($request->password);
@@ -59,10 +62,11 @@ class AuthController extends Controller
 
         Session::flash('message', 'Link verifikasi telah dikirim ke email anda. Silahkan cek email anda untuk mengaktifkan akun.');
 
-        return response([
-            'message' => 'Register Success',
-            'user' => $user
-        ], 200);
+        return redirect('register');
+        // return response([
+        //     'message' => 'Register Success',
+        //     'user' => $user
+        // ], 200);
     }
 
     public function verify($verify_key)
@@ -102,24 +106,32 @@ class AuthController extends Controller
         }
 
         if (!Auth::attempt($loginData)) {
-            return response(['message' => 'Invalid email & password match'], 401);
+            // return response(['message' => 'Invalid email & password match'], 401);
+            Session::flash('error', 'Email atau password salah');
+            return redirect('/login');
         }
 
         /** @var \App\Models\MyUserModel $user **/
         $user = Auth::user();
 
-        if ($user->active == -1) { // BERHASIL DI TEST
-            return response(['message' => 'Please check your email'], 401);
+        if ($user->active) {
+            return redirect('/home');
+        } else {
+            Auth::logout();
+            Session::flash('error', 'Akun Anda belum diverifikasi. Silakan cek email Anda.');
+            return redirect('/login');
         }
 
-        $token = $user->createToken('Authentication Token')->accessToken;
+        // $token = $user->createToken('Authentication Token')->accessToken;
 
-        return response([
-            'message' => 'Authenticated',
-            'user' => $user,
-            'token_type' => 'Bearer',
-            'access_token' => $token
-        ]);
+        // return response([
+        //     'message' => 'Authenticated',
+        //     'user' => $user,
+        //     'token_type' => 'Bearer',
+        //     'access_token' => $token
+        // ]);
+
+
     }
 
     public function logout(Request $request)
