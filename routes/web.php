@@ -4,10 +4,11 @@ use App\Http\Controllers\Api\AcaraController;
 use App\Http\Controllers\Api\AuthController;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Api\HomeController;
-use App\Http\Controllers\Api\PendaftaranController;
 use App\Http\Controllers\Api\SouvenirController;
 use App\Http\Controllers\Api\GueststarController;
+use App\Http\Controllers\Api\PendaftaranController;
 use App\Http\Controllers\Api\SouvenirinputController;
+use App\Http\Controllers\Api\UserController;
 use App\Models\Souvenir;
 use Illuminate\Support\Facades\Route;
 
@@ -122,3 +123,7 @@ Route::delete('adminsv/{id}',[SouvenirController::class, 'destroy'])->name('admi
 Route::get('admings', [AcaraController::class, 'showGuest']);
 Route::post('admings', [GueststarController::class, 'store'])->name('admings.store');
 Route::delete('admings/{id}',[GueststarController::class, 'destroy'])->name('admings.destroy');
+
+Route::get('adminuser', [UserController::class, 'fetchAllUser']);
+Route::put('adminuser/{id}',[UserController::class, 'updateUserById'])->name('adminuser.update');
+Route::delete('adminuser/{id}',[UserController::class, 'deleteUserById'])->name('adminuser.destroy');
