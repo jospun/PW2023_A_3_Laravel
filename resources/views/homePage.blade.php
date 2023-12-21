@@ -14,7 +14,11 @@
               $tanggalMulai = date('d F Y', strtotime($event[0]->tanggal_mulai));
           @endphp
           <h2 class="mb-3">{{ $tanggalMulai }}</h2>
+          @auth
+          <a href="{{ url('acara/' . $event[0]->id) }}" class="btn-get-started mb-5">Get Ticket</a>
+          @else
           <a href="{{ url('login') }}" class="btn-get-started mb-5">Get Ticket</a>
+          @endauth
         </div>
       </section><!-- End Hero -->
     
@@ -70,8 +74,8 @@
                 <div class="box" id="{{ $event[0]->id }}">
                   <img class="event-pic" src="{{ asset($event[0]->poster) }}"  />
                   <div class="container-btn">
-                    <a href="#" class="btn bft rounded-pill">Buy Ticket</a>
-                    <a href="#" class="btn bft-2 rounded-pill">Learn More</a>
+                    <a href="{{ url('acara/' . $event[0]->id) }}" class="btn bft rounded-pill">Buy Ticket</a>
+                    <a href="{{ url('acara/' . $event[0]->id) }}" class="btn bft-2 rounded-pill">Learn More</a>
                   </div>
                 </div>
               </div> 
@@ -80,8 +84,8 @@
                 <div class="box" id="{{ $event[1]->id }}">
                   <img class="event-pic" src={{ asset($event[1]->poster) }}/>
                   <div class="container-btn">
-                    <a href="#" class="btn bft rounded-pill bold900">Buy Ticket</a>
-                    <a href="#" class="btn bft-2 rounded-pill">Learn More</a>
+                    <a href="{{ url('acara/' . $event[1]->id) }}" class="btn bft rounded-pill">Buy Ticket</a>
+                    <a href="{{ url('acara/' . $event[1]->id) }}" class="btn bft-2 rounded-pill">Learn More</a>
                   </div>
                 </div>
               </div>
@@ -89,8 +93,8 @@
                 <div class="box" id="{{ $event[2]->id }}">
                   <img class="event-pic" src={{ asset($event[2]->poster) }} />
                   <div class="container-btn">
-                    <a href="#" class="btn bft rounded-pill">Buy Ticket</a>
-                    <a href="#" class="btn bft-2 rounded-pill">Learn More</a>
+                    <a href="{{ url('acara/' . $event[2]->id) }}" class="btn bft rounded-pill">Buy Ticket</a>
+                    <a href="{{ url('acara/' . $event[2]->id) }}" class="btn bft-2 rounded-pill">Learn More</a>
                   </div>
                 </div>
               </div>
@@ -98,8 +102,8 @@
                 <div class="box" id="{{ $event[3]->id }}">
                   <img class="event-pic" src={{ asset($event[3]->poster) }}/>
                   <div class="container-btn">
-                    <a href="{{ url('acara') }}" class="btn bft rounded-pill">Buy Ticket</a>
-                    <a href="{{ url('acara') }}" class="btn bft-2 rounded-pill">Learn More</a>
+                    <a href="{{ url('acara/' . $event[3]->id) }}" class="btn bft rounded-pill">Buy Ticket</a>
+                    <a href="{{ url('acara/' . $event[3]->id) }}" class="btn bft-2 rounded-pill">Learn More</a>
                   </div>
                 </div>
               </div>
@@ -108,8 +112,8 @@
                 <div class="box" id="{{ $event[4]->id }}">
                   <div class="container-btn">
                     <img class="event-pic" src={{ asset($event[4]->poster) }}/>
-                    <a href="#" class="btn bft rounded-pill">Buy Ticket</a>
-                    <a href="#" class="btn bft-2 rounded-pill">Learn More</a>
+                    <a href="{{ url('acara/' . $event[4]->id) }}" class="btn bft rounded-pill">Buy Ticket</a>
+                    <a href="{{ url('acara/' . $event[4]->id) }}" class="btn bft-2 rounded-pill">Learn More</a>
                   </div>
                 </div>
               </div>
@@ -119,6 +123,8 @@
         </section><!-- End Featured Section -->
     
         <!-- ======= Call To Action Section DONE ======= -->
+        @auth
+        @else
         <section id="call-to-action">
           <div class="container">
             <div class="row" data-aos="zoom-in">
@@ -132,7 +138,9 @@
             </div>
     
           </div>
-        </section><!-- End Call To Action Section -->
+        </section>
+        @endauth
+        <!-- End Call To Action Section -->
     
         <!-- ======= Souvenir Section ======= -->
         <section id="souvenir">

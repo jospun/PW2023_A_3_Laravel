@@ -281,6 +281,7 @@
                 </div>
             </div>
         </div>
+    </div>
 
         <!-- Modal 3 -->
         <div class="modal fade" id="modalDetail" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -295,32 +296,32 @@
                     <div class="modal-body">
                         <div class="col">
                             <div class="container shadow-sm desc-detailImg" style="text-align: center;">
-                                <img src="https://i.pinimg.com/736x/52/b3/6f/52b36f810dd737b1e8c81edb152c14d4.jpg" alt="Gambar">
+                                <img     alt="Gambar" id="gambar">
                             </div>
                             <div class="container shadow-sm m-4">
                                 <table class="table" style="border: none;">
                                     <tr>
                                         <th width="30%">Nama konser</th>
                                         <td width="2%">:</td>
-                                        <td>Noah The Band</td>
+                                        <td id="namaKonser"></td>
                                     </tr>
 
                                     <tr>
-                                        <th width="30%">Tanggal Konser</th>
+                                        <th width="30%">Tanggal Mulai</th>
                                         <td width="2%">:</td>
-                                        <td>30 September 2023</td>
+                                        <td id="tanggalMulai"></td>
                                     </tr>
 
                                     <tr>
-                                        <th width="30%">Tanggal Pendaftaran</th>
+                                        <th width="30%">Tanggal Tutup</th>
                                         <td width="2%">:</td>
-                                        <td>28 September 2023</td>
+                                        <td id="tanggalTutup"></td>
                                     </tr>
 
                                     <tr>
                                         <th width="30%">Status Membayar</th>
                                         <td width="2%">:</td>
-                                        <td>Lunas</td>
+                                        <td id="status"></td>
                                     </tr>
                                 </table>
                             </div>

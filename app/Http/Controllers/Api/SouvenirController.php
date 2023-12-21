@@ -167,13 +167,9 @@ class SouvenirController extends Controller
                 ]);
             }
 
-            
-
             if ($souvenir) {
-
                 return back()->with('success', 'Souvenir Berhasil diupdate');
             } else {
-
                 return back()->with('error', 'Souvenir gagal diupdate');
             }
         } catch (\Exception $e) {

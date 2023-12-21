@@ -32,6 +32,7 @@ class UserController extends Controller
                 //     'message' => 'failed',
                 //     'data' => 'User tidak ditemukan'
                 // ]);
+
                 return back()->with('failed', 'User tidak ditemukan');
             }
 

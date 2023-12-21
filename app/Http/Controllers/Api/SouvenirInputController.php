@@ -45,8 +45,6 @@ class SouvenirinputController extends Controller
             ], 400);
         }
 
-        
-
         $transaksi = Transaksi::create([
             'id_user' => auth()->user()->id,
             'status' => 'Sudah Membayar',

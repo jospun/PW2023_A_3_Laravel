@@ -21,6 +21,7 @@ class HomeController extends Controller
             $latestEvents = Acara::latest()->take(5 - $event->count())->get();
             $event = $event->merge($latestEvents);
         }
+
         return view('homePage', compact('event','souvenirs'));
     }
 

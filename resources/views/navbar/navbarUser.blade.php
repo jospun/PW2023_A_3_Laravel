@@ -81,7 +81,7 @@
                 <ul>
                     <li><a class="nav-link scrollto " href="{{ url('/') }}">Home</a></li>
                     <li><a class="nav-link scrollto {{ Request::is('souvenir') ? 'active' : '' }}" href="{{ url('souvenir') }}">Souvenir</a></li>
-                    <li class="dropdown"><a href="#"><span>Event</span> <i class="bi bi-chevron-down"></i></a>
+                    <li class="dropdown"><a href="#" class="nav-link scrollto {{ Request::is('acara') ? 'active' : '' }}"><span>Event</span> <i class="bi bi-chevron-down"></i></a>
                         <ul>
                             <li><a>Stay Tuned!</a></li>
                         </ul>

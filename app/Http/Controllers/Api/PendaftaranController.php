@@ -121,7 +121,6 @@ class PendaftaranController extends Controller
             //     'message' => 'Pendaftaran Berhasil Ditambahkan',
             //     'data' => $pendaftaran
             // ], 200);
-
             return back()->with('success', 'Pendaftaran Berhasil ditambahkan');
 
             // return redirect()->back()->with('success', 'Pendaftaran Berhasil Ditambahkan');
@@ -196,6 +195,7 @@ class PendaftaranController extends Controller
             //     'message' => 'Pendaftaran Berhasil Diupdate',
             //     'data' => $pendaftaran
             // ], 200);
+
 
             return redirect()->back()->with('success', 'Pendaftaran Berhasil Diupdate');
         } catch(\Exception $e){
