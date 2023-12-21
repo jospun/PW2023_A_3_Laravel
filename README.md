@@ -4,7 +4,7 @@
 <ul>
     <li>Joshua Puniwan Yahya (210711234) - Membuat CRUD Acara, Souvenir, Pendaftaran acara dan Transaksi Souvenir. Front end home page, souvenir, admin dan navbar </li>
     <li>Carolus Seto Arianto (210711186) - Back End, User Managment Admin, CRD GuestStar, transaksi pendaftaran acara (tanpa Auth) </li>
-    <li>Ayub Stefanus dau Shynora (210711186) - login, register, mail dan update profile </li>
+    <li>Ayub Stefanus dau Shynora (210711186) - login, register, mail, profile(show, update, delete) </li>
 </ul>
 
 ## Username dan Password Login:
