@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Str;
+use Toastr;
 
 class AuthController extends Controller
 {
@@ -110,12 +111,14 @@ class AuthController extends Controller
         ]);
 
         if ($validate->fails()) {
-            return response(['message' => $validate->errors()->first()], 400);
+            toastr()->warning('Email atau password salah!');
+            return back()->with('failed', 'Validasi Gagal');
         }
 
         if (!Auth::attempt($loginData)) {
             // return response(['message' => 'Invalid email & password match'], 401);
-            Session::flash('error', 'Email atau password salah');
+            toastr()->warning('Email atau password salah!');
+            // Session::flash('error', 'Email atau password salah');
             return redirect('/login');
         }
 
