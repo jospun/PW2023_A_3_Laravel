@@ -122,8 +122,8 @@ class PendaftaranController extends Controller
             //     'data' => $pendaftaran
             // ], 200);
 
-            toastr()->success('Pendaftaran berhasil ditambahkan!');
-            return back()->with('success', 'Pendaftaran Berhasil ditambahkan');
+            
+            return back()->with(toastr()->success('Pendaftaran berhasil ditambahkan!'));
 
             // return redirect()->back()->with('success', 'Pendaftaran Berhasil Ditambahkan');
         } catch(\Exception $e){
