@@ -111,7 +111,7 @@ class AuthController extends Controller
         ]);
 
         if ($validate->fails()) {
-            toastr()->warning('Email atau password salah!');
+            toastr()->error('Email atau password salah!');
             return back()->with('failed', 'Validasi Gagal');
         }
 
