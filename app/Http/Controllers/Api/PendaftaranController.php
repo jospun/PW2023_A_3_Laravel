@@ -122,8 +122,7 @@ class PendaftaranController extends Controller
             //     'data' => $pendaftaran
             // ], 200);
 
-            
-            return back()->with(toastr()->success('Pendaftaran berhasil ditambahkan!'));
+            return back()->with('success', 'Pendaftaran Berhasil ditambahkan');
 
             // return redirect()->back()->with('success', 'Pendaftaran Berhasil Ditambahkan');
         } catch(\Exception $e){
@@ -199,7 +198,6 @@ class PendaftaranController extends Controller
             //     'data' => $pendaftaran
             // ], 200);
 
-            toastr()->success('Pendaftaran berhasil diupdate!');
             return redirect()->back()->with('success', 'Pendaftaran Berhasil Diupdate');
         } catch(\Exception $e){
             // return response()->json([
@@ -208,7 +206,6 @@ class PendaftaranController extends Controller
             //     'data' => $e->getMessage(),
             // ], 400);
 
-            toastr()->error('Pendaftaran gagal diupdate!');
             return redirect()->back()->with('error', 'Pendaftaran Gagal Diupdate');
         }
     }
@@ -231,8 +228,6 @@ class PendaftaranController extends Controller
             print($pendaftaran->status);
             $pendaftaran->status = "Lunas";
             $pendaftaran->save();
-
-            toastr()->success('Pendaftaran berhasil diverifikasi!');
             return back()->with('success', 'Pendaftaran Berhasil diverifikasi');
         } catch(\Exception $e){
             // return response()->json([
@@ -241,7 +236,6 @@ class PendaftaranController extends Controller
             //     'data' => $e->getMessage(),
             // ], 400);
 
-            toastr()->error('Pendaftaran gagal diupdate!');
             return redirect()->back()->with('error', 'Pendaftaran Gagal Diupdate');
         }
     }
@@ -262,7 +256,6 @@ class PendaftaranController extends Controller
             //     'data' => $pendaftaran
             // ], 200);
 
-            toastr()->success('Berhasil menghapus pendaftaran!');
             return redirect('/adminac');
         } catch(\Exception $e){
             // return response()->json([
@@ -271,7 +264,6 @@ class PendaftaranController extends Controller
             //     'data' => $e->getMessage(),
             // ], 400);
 
-            toastr()->error('Gagal menghapus pendaftaran!');
             return back()->with('error', 'Pendaftaran Gagal Dihapus');
         }
     }
