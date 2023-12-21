@@ -30,9 +30,12 @@
                     @endforeach
                 </div>
             </div>
+            @auth
             <button type="button" class="btn btn-primary buy-ticket-btn m-4" data-toggle="modal" data-target="#modalKategori">
                 Beli Tiket
             </button>
+            @else
+            @endauth
         </div>
     </div>
 
@@ -45,7 +48,10 @@
                 <div class="box-PerContent box-PerContent2">
                     <p class="preSaleStyle"> Sale 1 <br><strong class="preSaleStyle2">Rp {{$acara->biaya}}</strong></p>
                     <div style="margin-left: auto;">
+                        @auth
                         <button type="button" class="btn btn-success" data-toggle="modal" data-target="#modalJumlah">Buy Now</button>
+                        @else
+                        @endauth
                     </div>
                 </div>
             </div>

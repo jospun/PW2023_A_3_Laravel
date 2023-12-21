@@ -59,15 +59,7 @@ Route::get('/logout', function () {
 });
 
 Route::get('/profile', function () {
-    $data = [
-        'nama' => 'Carolus Seto Arianto',
-        'email' => 'seto123121@gmail.com',
-        'tanggalLahir' => '12 Januari 2001',
-        'password' => '12345678',
-        'nomorTelepon' => '0895 4111 38466'
-    ];
-
-    return view('user/profile', $data);
+    return view('user/profile');
 });
 
 // Route::get('/acara', function () {
