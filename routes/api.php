@@ -18,8 +18,6 @@ Route::post('/register', [App\Http\Controllers\Api\AuthController::class, 'regis
 Route::post('/login', [App\Http\Controllers\Api\AuthController::class, 'login']); // Done
 Route::post('/logout', [App\Http\Controllers\Api\AuthController::class, 'logout']);
 
-
-
 Route::middleware('auth:api')->group(function () {
 
     // ACARA
@@ -42,7 +40,7 @@ Route::middleware('auth:api')->group(function () {
     // Flow Data Testing
     Route::get('/pendaftaranFetchAll', [App\Http\Controllers\Api\PendaftaranController::class, 'fetchAllPendaftaran']); // Done
 
-    // SOUVENIR (Underway)
+    // SOUVENIR
     Route::get('/souvenir', [App\Http\Controllers\Api\SouvenirController::class, 'index']); // Data Flow Done (Can catch all Souvenir Data)
     Route::post('/souvenir', [App\Http\Controllers\Api\SouvenirController::class, 'store']); // Data Flow Done (Can create new Souvenir && Store Image in Public Images)
     Route::get('/souvenir/{id}', [App\Http\Controllers\Api\SouvenirController::class, 'show']); // Data Flow Done (Can catch one Souvenir Data By Spesific ID && Show Image)
@@ -51,7 +49,21 @@ Route::middleware('auth:api')->group(function () {
 
     // Flow Data Testing
     Route::get('/souvenirFetchAll', [App\Http\Controllers\Api\SouvenirController::class, 'fetchAllSouvenir']); // Done
+
+    // TRANSAKSI
+    Route::get('/transaksi',[App\Http\Controllers\Api\TransaksiController::class,'index']); // Data Flow Done (Can catch all Transaksi Data)
+    Route::post('/transaksi',[App\Http\Controllers\Api\TransaksiController::class,'store']); // Data Flow Done (Can create Empty new Transaksi)
+    Route::get('/transaksi/{id}',[App\Http\Controllers\Api\TransaksiController::class,'show']); // Data Flow Done (Can catch one Transaksi Data By Spesific ID)
+    Route::put('/transaksi/{id}',[App\Http\Controllers\Api\TransaksiController::class,'update']); // Keknya gk guna
+    Route::delete('/transaksi/{id}',[App\Http\Controllers\Api\TransaksiController::class,'destroy']); // Data Flow Done (Can delete one Transaksi Data By Spesific ID)
+
+    // DETAIL TRANSAKSI
+    Route::get('/detailtrans',[App\Http\Controllers\Api\DetailTransController::class,'index']); // Data Flow Done (Can catch all Detail Transaksi Data)
+    Route::post('/detailtrans',[App\Http\Controllers\Api\DetailTransController::class,'store']); // Data Flow Done (Can create new Detail Transaksi)
+    Route::get('/detailtrans/{id}',[App\Http\Controllers\Api\DetailTransController::class,'show']); // Data Flow Done (Can catch one Detail Transaksi Data By Spesific ID)
+    Route::put('/detailtrans/{id}',[App\Http\Controllers\Api\DetailTransController::class,'update']); // Buat Apa Njay Update ?
+    Route::delete('/detailtrans/{id}',[App\Http\Controllers\Api\DetailTransController::class,'destroy']); // Data Flow Done (Can delete one Detail Transaksi Data By Spesific ID)
 });
 
 // Testing Fetch All User
-Route::get('/users', [App\Http\Controllers\Api\UserController::class, 'fetchAllUser']); // Done
+Route::get('/users',[App\Http\Controllers\Api\UserController::class,'fetchAllUser']); // Done
