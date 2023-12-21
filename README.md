@@ -22,3 +22,29 @@
         </ul>
     </li>
 </ul>
+
+## Bonus yang diambil:
+<ul>
+    <li> Routes API: 
+        <ul>
+            <li>
+                GET /api/souvenirFetchAll - Get all Souvenir
+            </li>
+            <li>
+                GET /api/pendaftaranFetchAll - Get all Pendaftaran
+            </li>
+            <li>
+                GET /api/acaraFetchAll - Get all Pendaftaran
+            </li>
+            <li>
+                GET /api/gueststarFetchAll - Get all Guest star
+            </li>
+            <li>
+                POST /api/register - Register user
+            </li>
+            <li>
+                POST /api/login - Login user
+            </li>
+        </ul>
+    </li>
+</ul>
