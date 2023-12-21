@@ -146,7 +146,7 @@
             </ul>
           </li>
 
-          <li><a class="nav-link scrollto" href="#">Contact</a></li>
+          <li><a class="nav-link scrollto" href="#contact">Contact</a></li>
           @auth
           <li><a class="nav-link scrollto" href="{{ url('/profile') }}">Profile</a></li>
           <li><a class="nav-link scrollto" href="{{ url('/logout') }}">Logout</a></li>

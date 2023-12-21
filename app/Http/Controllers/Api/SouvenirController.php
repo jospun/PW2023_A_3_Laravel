@@ -167,13 +167,11 @@ class SouvenirController extends Controller
                 ]);
             }
 
-            
-
             if ($souvenir) {
-
+                toastr()->success('Souvenir Berhasil diupdate!');
                 return back()->with('success', 'Souvenir Berhasil diupdate');
             } else {
-
+                toastr()->error('Souvenir gagal diupdate!');
                 return back()->with('error', 'Souvenir gagal diupdate');
             }
         } catch (\Exception $e) {
@@ -183,6 +181,7 @@ class SouvenirController extends Controller
             //     'data'    => $e->getMessage(),
             // ], 500);
 
+            toastr()->error('Souvenir gagal diupdate!');
             return redirect()->route('souvenir.index')->with('failed', 'Souvenir gagal diupdate');
         }
     }
@@ -195,9 +194,11 @@ class SouvenirController extends Controller
         try{
             $souvenir = Souvenir::where('id', $id)->delete();
 
+            toastr()->success('Souvenir Berhasil dihapus!');
             return back()->with('success', 'Souvenir Berhasil dihapus');
             // return redirect()->route('souvenir.index')->with('success', 'Souvenir berhasil dihapus');
         } catch (\Exception $e) {
+            toastr()->error('Souvenir gagal diupdate!');
             return back()->with('error', 'Souvenir Gagal dihapus');
 
             // return redirect()->route('souvenir.index')->with('failed', 'Souvenir gagal dihapus');
