@@ -4,7 +4,9 @@
 <head>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/css/bootstrap.min.css">
     <script src="https://use.fontawesome.com/f59bcd8580.js"></script>
-    <title>FEST fes</title>
+    <title>CAJ</title>
+    <link rel="icon" href="images\Export.png" type="image/x-icon">
+
     <style>
         body {
             background: #eeeeee;
@@ -158,9 +160,7 @@
             } else {
                 var loginForm = document.getElementById("formLogin");
 
-                // Submit the form
                 loginForm.submit();
-                // window.location.href = "{{ url('profile') }}";
             }
         }
     </script>

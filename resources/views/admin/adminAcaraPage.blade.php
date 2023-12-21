@@ -374,8 +374,8 @@
                     <button type="submit" class="btn btn-primary" data-bs-dismiss="modal" type="submit">Save changes</button>
                 </div>
             </div>
-        </form>
-    </div>
+            </form>
+        </div>
     </div>
 
     {{-- Modal Hapus Event --}}
@@ -480,6 +480,7 @@
         editEventModal.addEventListener('show.bs.modal', function (event) {
             var button = event.relatedTarget;
             var acaraId = button.getAttribute('data-acara-id');
+            console.log(acaraId);
 
             fetch('adminac/' + acaraId)
                 .then(response => response.json())

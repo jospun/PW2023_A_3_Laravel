@@ -100,7 +100,7 @@
                 <h1 class="mt-3" style="font-weight: bolder">{{ $ac->nama_acara }}</h1>
                 <h4>{{ $ac->deskripsi }}</h4>
             </div>
-            <div id="souvenirCarousel" class="carousel slide m-0 mt-2" data-bs-ride="carousel" style="border: 1px solid margin-top:0">
+            <div id="souvenirCarousel" class="carousel slide m-0 mt-2" data-bs-ride="carousel" style="border: 1px solid; margin-top:0;">
                 <div class="carousel-inner" role="listbox">
                     <?php $first = true; ?>
                     <div class="row">

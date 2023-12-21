@@ -30,7 +30,8 @@
 
     <link href="{{ asset('images/style.css') }}" rel="stylesheet">
 
-    <title>PP</title>
+    <title>CAJ</title>
+    <link rel="icon" href="images\Export.png" type="image/x-icon">
 
     <style>
         /* Media untuk menghilangkan button dan baru memunculkannya ketika layar mengecil

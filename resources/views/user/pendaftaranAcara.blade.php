@@ -5,7 +5,7 @@
     <div class="column-boxEvent bg-white m-2 mt-4">
         <div class="eventTitle">{{$acara->nama_acara}}</div>
         <div class="img-forEvent">
-            <img src="{{$acara->poster}}" alt="Gambar">
+            <img src="{{ asset($acara->poster) }}" alt="Gambar">
         </div>
         <div class="desc-forEvent">
             <div class="desc-performerTitle ml-5 mb-3">Deskripsi</div>
@@ -21,7 +21,7 @@
                     @foreach($performer as $perf)
                     <div class="desc-performerColumn">
                         <div class="desc-performerRow" style="display: flex;">
-                            <div class="desc-performerImg"><img src="{{ $perf->foto }}" alt="Gambar"></div>
+                            <div class="desc-performerImg"><img src="{{ asset($perf->foto) }}" alt="Gambar"></div>
                             <div class="desc-performerDisplayer">
                                 {{ $perf->nama }}
                             </div>

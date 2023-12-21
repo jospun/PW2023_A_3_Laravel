@@ -47,7 +47,7 @@ Route::post('actionLogin', [AuthController::class, 'Login'])->name('login');
 
 Route::get('/register', function () {
     return view('registerPage');
-});
+})->name('register');
 
 Route::post('register/action', [AuthController::class, 'Register'])->name('register');
 Route::get('register/verify/{verify_key}', [AuthController::class, 'verify'])->name('verify');
@@ -66,7 +66,7 @@ Route::get('/profile', function () {
 //     return view('user/pendaftaranAcara');
 // });
 
-Route::get('/acara/{id}', [AcaraController::class, 'show']);
+Route::get('/acara/{id}', [AcaraController::class, 'showAcara']);
 
 Route::get('/souvenir', function () {
     return view('user/souvenirPage');
@@ -109,7 +109,6 @@ Route::get('nav2', [AcaraController::class, 'showNavUser']);
 Route::get('profile',[PendaftaranController::class, 'showPendaftarbyUser']);
 Route::get('profile/{id}',[PendaftaranController::class, 'show']);
 
-
 Route::get('adminsv', [AcaraController::class, 'showInSouvenir']);
 Route::post('adminsv', [SouvenirController::class, 'store'])->name('adminsv.store');
 Route::get('adminsv/{id}', [SouvenirController::class, 'show']);
@@ -118,7 +117,6 @@ Route::delete('adminsv/{id}', [SouvenirController::class, 'destroy'])->name('adm
 
 Route::get('admings', [AcaraController::class, 'showGuest']);
 Route::post('admings', [GueststarController::class, 'store'])->name('admings.store');
-
 Route::delete('admings/{id}', [GueststarController::class, 'destroy'])->name('admings.destroy');
 
 Route::put('profile', [AuthController::class, 'update'])->name('user.update');

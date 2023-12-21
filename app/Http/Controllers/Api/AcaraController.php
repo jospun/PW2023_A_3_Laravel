@@ -119,7 +119,28 @@ class AcaraController extends Controller
     /**
      * Display the specified resource.
      */
+
     public function show($id)
+    {
+        try{
+            $acara = Acara::find($id);
+
+            return response()->json([
+                'message' => 'Fetch Acara Success',
+                'data' => $acara
+            ], 200);
+
+            // return view('acara.show', compact('acara'));
+        } catch(\Exception $e){
+            return response()->json([
+                'message' => 'Fetch Acara Failed',
+                'data' => $e->getMessage(),
+            ], 400);
+
+            // return redirect()->route('acara.index')->with('error', 'Acara tidak ditemukan');
+        }
+    }
+    public function showAcara($id)
     {
         try{
             $acara = Acara::find($id);
