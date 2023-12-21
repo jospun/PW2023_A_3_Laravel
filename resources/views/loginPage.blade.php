@@ -158,9 +158,7 @@
             } else {
                 var loginForm = document.getElementById("formLogin");
 
-                // Submit the form
                 loginForm.submit();
-                // window.location.href = "{{ url('profile') }}";
             }
         }
     </script>
