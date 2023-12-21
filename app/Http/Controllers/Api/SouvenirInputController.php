@@ -45,8 +45,6 @@ class SouvenirinputController extends Controller
             ], 400);
         }
 
-        
-
         $transaksi = Transaksi::create([
             'id_user' => auth()->user()->id,
             'status' => 'Sudah Membayar',
@@ -70,6 +68,7 @@ class SouvenirinputController extends Controller
             'subtotal' => $request->jumlah * $souve->harga,
         ]);
 
+        toastr()->success('Transaksi Berhasil ditambahkan!');
         return back()->with('success', 'Transaksi Berhasil ditambahkan');
     }
 

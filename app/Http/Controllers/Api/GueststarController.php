@@ -75,6 +75,7 @@ class GueststarController extends Controller
             //     'data'    => $gueststar  
             // ], 201);
 
+            toastr()->success('Berhasil menambahkan Guest!');
             return back()->with('success', 'Guest Berhasil ditambahkan');
         } catch (\Exception $e) {
             // return response()->json([
@@ -83,6 +84,7 @@ class GueststarController extends Controller
             //     'data'    => $e->getMessage(),
             // ], 409);
 
+            toastr()->error('Gagal menambahkan Guest!');
             return back()->with('error', 'Guest gagal ditambahkan');
         }
     }
@@ -142,6 +144,7 @@ class GueststarController extends Controller
             //     'data'    => $gueststar  
             // ], 201);
 
+            toastr()->success('Berhasil mengupdate Gueststar!');
             return redirect()->route('gueststar.index')->with('success', 'Gueststar Berhasil Diupdate!');
         } catch (\Exception $e) {
             // return response()->json([
@@ -150,6 +153,7 @@ class GueststarController extends Controller
             //     'data'    => $e->getMessage(),
             // ], 409);
 
+            toastr()->error('Gagal mengupdate Gueststar!');
             return redirect()->route('gueststar.index')->with('error', 'Gueststar Gagal Diupdate!');
         }
     }
@@ -175,6 +179,7 @@ class GueststarController extends Controller
             //     'data'    => $gueststar  
             // ], 201);
 
+            toastr()->success('Berhasil menghapus Gueststar!');
             return back()->with('success', 'Guest Berhasil dihapus');
         } catch (\Exception $e) {
             // return response()->json([
@@ -183,6 +188,7 @@ class GueststarController extends Controller
             //     'data'    => $e->getMessage(),
             // ], 409);
 
+            toastr()->error('Berhasil menghapus Guest!');
             return back()->with('error', 'Guest gagal dihapus');
         }
     }

@@ -68,7 +68,7 @@ class AuthController extends Controller
             return response()->json(['error' => $e->getMessage()], 500);
         }
 
-
+        toastr()->success('Link verifikasi telah dikirim ke email anda. Silahkan cek email anda untuk mengaktifkan akun.');
         Session::flash('message', 'Link verifikasi telah dikirim ke email anda. Silahkan cek email anda untuk mengaktifkan akun.');
 
         return redirect('register');
@@ -129,7 +129,8 @@ class AuthController extends Controller
             return redirect('/home');
         } else {
             Auth::logout();
-            Session::flash('error', 'Akun Anda belum diverifikasi. Silakan cek email Anda.');
+            // Session::flash('error', 'Akun Anda belum diverifikasi. Silakan cek email Anda.');
+            toastr()->error('Akun Anda belum diverifikasi. Silakan cek email Anda!');
             return redirect('/login');
         }
 
@@ -154,6 +155,7 @@ class AuthController extends Controller
                 //     'message' => 'failed',
                 //     'data' => 'User tidak ditemukan'
                 // ]);
+                toastr()->error('User tidak ditemukan!');
                 return back()->with('failed', 'User tidak ditemukan');
             }
 
@@ -171,18 +173,17 @@ class AuthController extends Controller
                 'gambar' => $destinationPath,
             ]);
 
-
-
             $user->save();
 
-
-
+            toastr()->success('User berhasil diupdate!');
             return back()->with('success', 'User Berhasil diupdate');
         } catch (\Exception $e) {
             // return response()->json([
             //     'message' => 'failed',
             //     'data' => $e->getMessage()
             // ]);
+
+            toastr()->error('User gagal diupdate!');
             return back()->with('failed', 'User Gagal diupdate');
         }
     }
@@ -205,8 +206,11 @@ class AuthController extends Controller
             Auth::logout();
             $user->delete();
 
+            toastr()->success('Berhasil menghapus akun!');
             return redirect('/');
         } else {
+
+            toastr()->error('User gagal dipassword!');
             return back()->with('error', 'Salah Password');
         }
     }

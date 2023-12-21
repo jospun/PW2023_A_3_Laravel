@@ -32,6 +32,8 @@ class UserController extends Controller
                 //     'message' => 'failed',
                 //     'data' => 'User tidak ditemukan'
                 // ]);
+
+                toastr()->error('User tidak ditemukan!');
                 return back()->with('failed', 'User tidak ditemukan');
             }
 
@@ -43,6 +45,7 @@ class UserController extends Controller
             //     'data' => $e->getMessage()
             // ]);
 
+            toastr()->error('User gagal dihilangkan!');
             return back()->with('failed', 'User Gagal dihilangkan');
         }
     }
@@ -69,6 +72,7 @@ class UserController extends Controller
 
             $user->save();
 
+            toastr()->success('User Berhasil diupdate!');
             return back()->with('success', 'User Berhasil diupdate');
         }catch(\Exception $e){
             // return response()->json([
