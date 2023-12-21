@@ -106,7 +106,11 @@
                     <div class="row">
                     @forelse($souvenirFilter as $souve)
                         <div class="col-lg-3 col-md-4 col-6">
+                            @auth
                             <div class="card" data-bs-toggle="modal" data-bs-target="#myModal" data-souvenir-id = {{ $souve->id }}>
+                            @else
+                            <div class="card" >
+                            @endauth
                                 <div class="card-img">
                                     <img id="gambar" src="{{ asset($souve->gambar)}}" class="img-fluid" >
                                 </div>
