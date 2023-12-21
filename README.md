@@ -11,8 +11,8 @@
 <ul>
     <li> Login User
         <ul>
-            <li>Username: </li>
-            <li>Password: </li>
+            <li>Username: joshuapuniwan03@gmail.com</li>
+            <li>Password: 123</li>
         </ul>
     </li>
     <li> Login Admin
