@@ -175,7 +175,6 @@ class GueststarController extends Controller
             //     'data'    => $gueststar  
             // ], 201);
 
-            
             return back()->with('success', 'Guest Berhasil dihapus');
         } catch (\Exception $e) {
             // return response()->json([

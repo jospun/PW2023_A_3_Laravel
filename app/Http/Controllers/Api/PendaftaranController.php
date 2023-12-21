@@ -121,6 +121,7 @@ class PendaftaranController extends Controller
             //     'message' => 'Pendaftaran Berhasil Ditambahkan',
             //     'data' => $pendaftaran
             // ], 200);
+
             return back()->with('success', 'Pendaftaran Berhasil ditambahkan');
 
             // return redirect()->back()->with('success', 'Pendaftaran Berhasil Ditambahkan');
@@ -131,6 +132,7 @@ class PendaftaranController extends Controller
                 'data' => $e->getMessage(),
             ], 400);
 
+            toastr()->error('Pendaftaran gagal ditambahkan!');
             // return redirect()->back()->with('error', 'Pendaftaran Gagal Ditambahkan');
         }
     }
@@ -196,7 +198,6 @@ class PendaftaranController extends Controller
             //     'data' => $pendaftaran
             // ], 200);
 
-
             return redirect()->back()->with('success', 'Pendaftaran Berhasil Diupdate');
         } catch(\Exception $e){
             // return response()->json([
@@ -227,7 +228,6 @@ class PendaftaranController extends Controller
             print($pendaftaran->status);
             $pendaftaran->status = "Lunas";
             $pendaftaran->save();
-
             return back()->with('success', 'Pendaftaran Berhasil diverifikasi');
         } catch(\Exception $e){
             // return response()->json([

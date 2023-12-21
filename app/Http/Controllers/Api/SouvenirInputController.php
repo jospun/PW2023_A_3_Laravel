@@ -68,6 +68,7 @@ class SouvenirinputController extends Controller
             'subtotal' => $request->jumlah * $souve->harga,
         ]);
 
+        toastr()->success('Transaksi Berhasil ditambahkan!');
         return back()->with('success', 'Transaksi Berhasil ditambahkan');
     }
 

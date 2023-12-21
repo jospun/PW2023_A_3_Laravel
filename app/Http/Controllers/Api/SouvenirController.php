@@ -179,6 +179,7 @@ class SouvenirController extends Controller
             //     'data'    => $e->getMessage(),
             // ], 500);
 
+
             return redirect()->route('souvenir.index')->with('failed', 'Souvenir gagal diupdate');
         }
     }
