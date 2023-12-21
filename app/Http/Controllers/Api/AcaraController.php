@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use App\Models\Acara;
+use App\Models\User;
 use App\Models\Gueststar;
 use Carbon\Carbon;  
 
@@ -77,6 +78,11 @@ class AcaraController extends Controller
                 'biaya' => 'required',
                 'poster' => 'required|mimes:jpg,jpeg,png,mov,mp4',
             ]);
+
+            $user = User::find(Auth::user()->id);
+            if (!$user) {
+                return redirect()->route('register');
+            }
 
             if($validator->fails()){
                 return response()->json([
